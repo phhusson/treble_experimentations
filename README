@@ -1,5 +1,6 @@
 Conventions for commit messages:
 
+[UGLY] Please make this patch disappear as soon as possible
 [master] tag means that the commit should be dropped in a future rebase
 [device] tag means this change is device-specific workaround
 ::device name:: will try to describe which devices are concerned by this change
