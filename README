@@ -4,3 +4,5 @@ Conventions for commit messages:
 [master] tag means that the commit should be dropped in a future rebase
 [device] tag means this change is device-specific workaround
 ::device name:: will try to describe which devices are concerned by this change
+
+[userfriendly] This commit is NOT used for hardware support, but to make the rom more user friendly
