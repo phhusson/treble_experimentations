@@ -1,0 +1,3 @@
+Copy su subfolder somewhere in AOSP source tree (I put it in /vendor/phh/su) and apply the SELinux patch
+This has been tested only for userdebug for the moment
+The su binary will be actually called phh-su

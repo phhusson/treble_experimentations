@@ -1,0 +1,180 @@
+diff --git a/build/make/target/product/treble_common.mk b/build/make/target/product/treble_common.mk
+index 5add16b9b..a184cb0dc 100644
+--- a/build/make/target/product/treble_common.mk
++++ b/build/make/target/product/treble_common.mk
+@@ -194,6 +194,8 @@ PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
+ #   and wpa_supplicant.conf) is not here. They are in vendor.img
+ PRODUCT_PACKAGES += \
+     wificond \
++    phh-su \
++
+ 
+ # Audio:
+ USE_XML_AUDIO_POLICY_CONF := 1
+diff --git a/system/sepolicy/private/file_contexts b/system/sepolicy/private/file_contexts
+index 4485b953..55cdde91 100644
+--- a/system/sepolicy/private/file_contexts
++++ b/system/sepolicy/private/file_contexts
+@@ -266,6 +266,7 @@
+ /system/etc/selinux/plat_sepolicy.cil       u:object_r:sepolicy_file:s0
+ /system/etc/selinux/plat_and_mapping_sepolicy\.cil\.sha256 u:object_r:sepolicy_file:s0
+ /system/bin/vr_hwc               u:object_r:vr_hwc_exec:s0
++/system/bin/phh-su                   u:object_r:su_exec:s0
+ 
+ #############################
+ # Vendor files
+diff --git a/system/sepolicy/private/su.te b/system/sepolicy/private/su.te
+index d42bf614..baf02067 100644
+--- a/system/sepolicy/private/su.te
++++ b/system/sepolicy/private/su.te
+@@ -1,20 +1,43 @@
+-userdebug_or_eng(`
+-  typeattribute su coredomain;
++#userdebug_or_eng(`
++#  typeattribute su coredomain;
++#
++#  domain_auto_trans(shell, su_exec, su)
++#  # Allow dumpstate to call su on userdebug / eng builds to collect
++#  # additional information.
++#  domain_auto_trans(dumpstate, su_exec, su)
++#
++#  # Make sure that dumpstate runs the same from the "su" domain as
++#  # from the "init" domain.
++#  domain_auto_trans(su, dumpstate_exec, dumpstate)
++#
++#  # Put the incident command into its domain so it is the same on user, userdebug and eng.
++#  domain_auto_trans(su, incident_exec, incident)
++#
++## su is also permissive to permit setenforce.
++#  permissive su;
++#
++#  app_domain(su)
++#')
+ 
+-  domain_auto_trans(shell, su_exec, su)
+-  # Allow dumpstate to call su on userdebug / eng builds to collect
+-  # additional information.
+-  domain_auto_trans(dumpstate, su_exec, su)
++typeattribute su coredomain;
+ 
+-  # Make sure that dumpstate runs the same from the "su" domain as
+-  # from the "init" domain.
+-  domain_auto_trans(su, dumpstate_exec, dumpstate)
++domain_auto_trans(init, su_exec, su)
++domain_auto_trans(shell, su_exec, su)
++domain_auto_trans(su, dumpstate_exec, dumpstate)
++domain_auto_trans(su, incident_exec, incident)
++permissive su;
+ 
+-  # Put the incident command into its domain so it is the same on user, userdebug and eng.
+-  domain_auto_trans(su, incident_exec, incident)
++#TODO: Don't switch unconditionally to unsecure domain
++domain_auto_trans(platform_app, su_exec, su)
++domain_auto_trans(untrusted_app, su_exec, su)
++domain_auto_trans(untrusted_app_25, su_exec, su)
++domain_auto_trans(untrusted_v2_app, su_exec, su)
++domain_auto_trans(system_app, su_exec, su)
++domain_auto_trans(priv_app, su_exec, su)
+ 
+-# su is also permissive to permit setenforce.
+-  permissive su;
++#Allow (me.phh.superuser) app to answer to su daemon
++allow untrusted_app_25 device:sock_file {open write read};
++typeattribute device mlstrustedobject;
+ 
+-  app_domain(su)
+-')
++
++app_domain(su)
+diff --git a/system/sepolicy/public/domain.te b/system/sepolicy/public/domain.te
+index d2b370a2..05e67128 100644
+--- a/system/sepolicy/public/domain.te
++++ b/system/sepolicy/public/domain.te
+@@ -626,45 +626,45 @@ full_treble_only(`
+   }, netd);
+ 
+   # Vendor domains are not permitted to initiate create/open sockets owned by core domains
+-  neverallow {
+-    domain
+-    -coredomain
+-    -appdomain # appdomain restrictions below
+-    -socket_between_core_and_vendor_violators
+-  } {
+-    coredomain_socket
+-    core_data_file_type
+-    unlabeled # used only by core domains
+-  }:sock_file ~{ append getattr ioctl read write };
+-  neverallow {
+-    appdomain
+-    -coredomain
+-  } {
+-    coredomain_socket
+-    unlabeled # used only by core domains
+-    core_data_file_type
+-    -app_data_file
+-    -pdx_endpoint_socket_type # used by VR layer
+-    -pdx_channel_socket_type # used by VR layer
+-  }:sock_file ~{ append getattr ioctl read write };
++  #neverallow {
++  #  domain
++  #  -coredomain
++  #  -appdomain # appdomain restrictions below
++  #  -socket_between_core_and_vendor_violators
++  #} {
++  #  coredomain_socket
++  #  core_data_file_type
++  #  unlabeled # used only by core domains
++  #}:sock_file ~{ append getattr ioctl read write };
++  #neverallow {
++  #  appdomain
++  #  -coredomain
++  #} {
++  #  coredomain_socket
++  #  unlabeled # used only by core domains
++  #  core_data_file_type
++  #  -app_data_file
++  #  -pdx_endpoint_socket_type # used by VR layer
++  #  -pdx_channel_socket_type # used by VR layer
++  #}:sock_file ~{ append getattr ioctl read write };
+   neverallow {
+     pdx_endpoint_socket_type
+     pdx_channel_socket_type
+   } unlabeled:service_manager list; #TODO: b/62658302
+ 
+   # Core domains are not permitted to create/open sockets owned by vendor domains
+-  neverallow {
+-    coredomain
+-    -init
+-    -ueventd
+-    -socket_between_core_and_vendor_violators
+-  } {
+-    file_type
+-    dev_type
+-    -coredomain_socket
+-    -core_data_file_type
+-    -unlabeled
+-  }:sock_file ~{ append getattr ioctl read write };
++  #neverallow {
++  #  coredomain
++  #  -init
++  #  -ueventd
++  #  -socket_between_core_and_vendor_violators
++  #} {
++  #  file_type
++  #  dev_type
++  #  -coredomain_socket
++  #  -core_data_file_type
++  #  -unlabeled
++  #}:sock_file ~{ append getattr ioctl read write };
+ ')
+ 
+ # On TREBLE devices, a limited set of files in /vendor are accessible to
+@@ -812,7 +812,7 @@ neverallow * { file_type fs_type dev_type }:{ lnk_file fifo_file sock_file } mou
+ # Nobody should be able to execute su on user builds.
+ # On userdebug/eng builds, only dumpstate, shell, and
+ # su itself execute su.
+-neverallow { domain userdebug_or_eng(`-dumpstate -shell -su') } su_exec:file no_x_file_perms;
++# neverallow { domain userdebug_or_eng(`-dumpstate -shell -su') } su_exec:file no_x_file_perms;
+ 
+ # Do not allow the introduction of new execmod rules. Text relocations
+ # and modification of executable pages are unsafe.
