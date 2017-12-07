@@ -1,0 +1,19 @@
+This experiment tries to make a partition table inside a partition using a loopback device.
+This makes it possible to sub-partition a "system" partition into "system" and "vendor"
+and even "oem" "odm" "factory", or whatever can be useful.
+
+Steps:
+- Apply platform_system_core.diff to system/core
+- In your fstab, add a line for the host partition, with fs_type = loop (other parameters will be ignored)
+- Reference /dev/block/loop0p{1,2,3,..} in later lines of the fstab
+- Create a gpt image of the size of your host-image
+
+Example:
+/dev/block/bootdevice/by-name/system            /system_gpt            loop    defaults defaults
+/dev/block/loop0p1			     /system ext4 ro,barrier=1	wait
+/dev/block/loop0p2			     /vendor ext4 ro,barrier=1	wait
+
+TODO:
+- Check this works for early partitions (tested on /oem, partition defined in /vendor/etc/fstab.qcom)
+- Fix SELinux
+- Fix name enumeration

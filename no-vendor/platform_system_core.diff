@@ -1,0 +1,78 @@
+diff --git a/fs_mgr/fs_mgr.cpp b/fs_mgr/fs_mgr.cpp
+index 16755b7..773e8ce 100644
+--- a/fs_mgr/fs_mgr.cpp
++++ b/fs_mgr/fs_mgr.cpp
+@@ -56,6 +56,9 @@
+ #include "fs_mgr_priv.h"
+ #include "fs_mgr_priv_dm_ioctl.h"
+ 
++using android::base::StringPrintf;
++using android::base::unique_fd;
++
+ #define KEY_LOC_PROP   "ro.crypto.keyfile.userdata"
+ #define KEY_IN_FOOTER  "footer"
+ 
+@@ -819,6 +822,51 @@ int fs_mgr_mount_all(struct fstab *fstab, int mount_mode)
+             continue;
+         }
+ 
++       /* Setup loopback with partscan */
++        if (!strcmp(fstab->recs[i].fs_type, "loop")) {
++               unique_fd ctl_fd(open("/dev/loop-control", O_RDWR | O_CLOEXEC));
++               if (ctl_fd.get() == -1) {
++                       PLOG(ERROR) << "Failed to open loop-control";
++                       continue;
++               }
++
++               int num = ioctl(ctl_fd.get(), LOOP_CTL_GET_FREE);
++               if (num == -1) {
++                       PLOG(ERROR) << "Failed LOOP_CTL_GET_FREE";
++                       continue;
++               }
++
++               std::string out_device = StringPrintf("/dev/block/loop%d", num);
++
++               unique_fd target_fd(open(fstab->recs[i].blk_device, O_RDWR | O_CLOEXEC));
++               if (target_fd.get() == -1) {
++                       PLOG(ERROR) << "Failed to open target";
++                       continue;
++               }
++               unique_fd device_fd(open(out_device.c_str(), O_RDWR | O_CLOEXEC));
++               if (device_fd.get() == -1) {
++                       PLOG(ERROR) << "Failed to open " << out_device;
++                       continue;
++               }
++
++               if (ioctl(device_fd.get(), LOOP_SET_FD, target_fd.get()) == -1) {
++                       PLOG(ERROR) << "Failed to LOOP_SET_FD";
++                       continue;
++               }
++
++               struct loop_info64 li;
++               memset(&li, 0, sizeof(li));
++
++               li.lo_flags |= LO_FLAGS_PARTSCAN;
++
++               if (ioctl(device_fd.get(), LOOP_SET_STATUS64, &li) < 0) {
++                       PLOG(ERROR) << "Error setting loopback status";
++                       continue;
++               }
++
++               continue;
++       }
++
+         /* Skip mounting the root partition, as it will already have been mounted */
+         if (!strcmp(fstab->recs[i].mount_point, "/")) {
+             if ((fstab->recs[i].fs_mgr_flags & MS_RDONLY) != 0) {
+diff --git a/init/init.cpp b/init/init.cpp
+index e17f9da..b841206 100755
+--- a/init/init.cpp
++++ b/init/init.cpp
+@@ -554,6 +554,7 @@ static selinux_enforcing_status selinux_status_from_cmdline() {
+ 
+ static bool selinux_is_enforcing(void)
+ {
++return false;
+     if (ALLOW_PERMISSIVE_SELINUX) {
+         return selinux_status_from_cmdline() == SELINUX_ENFORCING;
+     }
