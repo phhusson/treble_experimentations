@@ -1,0 +1,23 @@
+diff --git a/public/init.te b/public/init.te
+index 6d43ef4..4cafc93 100644
+--- a/public/init.te
++++ b/public/init.te
+@@ -29,6 +29,7 @@ allow init tmpfs:{ chr_file blk_file } relabelfrom;
+ allow init tmpfs:blk_file getattr;
+ allow init block_device:{ dir blk_file lnk_file } relabelto;
+ allow init dm_device:{ chr_file blk_file } relabelto;
++allow init loop_control_device:chr_file { write ioctl };
+ allow init kernel:fd use;
+ # restorecon for early mount device symlinks
+ allow init tmpfs:lnk_file { getattr read relabelfrom };
+diff --git a/public/kernel.te b/public/kernel.te
+index 9537c0d..82952bd 100644
+--- a/public/kernel.te
++++ b/public/kernel.te
+@@ -101,3 +101,6 @@ neverallow kernel *:file { entrypoint execute_no_trans };
+ # Instead of adding dac_{read_search,override}, fix the unix permissions
+ # on files being accessed.
+ neverallow kernel self:capability { dac_override dac_read_search };
++
++#Used by loop0 when doing gpt over partition
++allow kernel {tmpfs system_block_device}:blk_file read;

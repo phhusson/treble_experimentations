@@ -1,5 +1,5 @@
 diff --git a/fs_mgr/fs_mgr.cpp b/fs_mgr/fs_mgr.cpp
-index 16755b7..773e8ce 100644
+index 16755b7..8f27c8f 100644
 --- a/fs_mgr/fs_mgr.cpp
 +++ b/fs_mgr/fs_mgr.cpp
 @@ -56,6 +56,9 @@
@@ -12,67 +12,185 @@ index 16755b7..773e8ce 100644
  #define KEY_LOC_PROP   "ro.crypto.keyfile.userdata"
  #define KEY_IN_FOOTER  "footer"
  
-@@ -819,6 +822,51 @@ int fs_mgr_mount_all(struct fstab *fstab, int mount_mode)
+@@ -819,6 +822,11 @@ int fs_mgr_mount_all(struct fstab *fstab, int mount_mode)
              continue;
          }
  
-+       /* Setup loopback with partscan */
++	/* Setup loopback with partscan */
 +        if (!strcmp(fstab->recs[i].fs_type, "loop")) {
-+               unique_fd ctl_fd(open("/dev/loop-control", O_RDWR | O_CLOEXEC));
-+               if (ctl_fd.get() == -1) {
-+                       PLOG(ERROR) << "Failed to open loop-control";
-+                       continue;
-+               }
-+
-+               int num = ioctl(ctl_fd.get(), LOOP_CTL_GET_FREE);
-+               if (num == -1) {
-+                       PLOG(ERROR) << "Failed LOOP_CTL_GET_FREE";
-+                       continue;
-+               }
-+
-+               std::string out_device = StringPrintf("/dev/block/loop%d", num);
-+
-+               unique_fd target_fd(open(fstab->recs[i].blk_device, O_RDWR | O_CLOEXEC));
-+               if (target_fd.get() == -1) {
-+                       PLOG(ERROR) << "Failed to open target";
-+                       continue;
-+               }
-+               unique_fd device_fd(open(out_device.c_str(), O_RDWR | O_CLOEXEC));
-+               if (device_fd.get() == -1) {
-+                       PLOG(ERROR) << "Failed to open " << out_device;
-+                       continue;
-+               }
-+
-+               if (ioctl(device_fd.get(), LOOP_SET_FD, target_fd.get()) == -1) {
-+                       PLOG(ERROR) << "Failed to LOOP_SET_FD";
-+                       continue;
-+               }
-+
-+               struct loop_info64 li;
-+               memset(&li, 0, sizeof(li));
-+
-+               li.lo_flags |= LO_FLAGS_PARTSCAN;
-+
-+               if (ioctl(device_fd.get(), LOOP_SET_STATUS64, &li) < 0) {
-+                       PLOG(ERROR) << "Error setting loopback status";
-+                       continue;
-+               }
-+
-+               continue;
-+       }
++		continue;
++	}
 +
          /* Skip mounting the root partition, as it will already have been mounted */
          if (!strcmp(fstab->recs[i].mount_point, "/")) {
              if ((fstab->recs[i].fs_mgr_flags & MS_RDONLY) != 0) {
-diff --git a/init/init.cpp b/init/init.cpp
-index e17f9da..b841206 100755
---- a/init/init.cpp
-+++ b/init/init.cpp
-@@ -554,6 +554,7 @@ static selinux_enforcing_status selinux_status_from_cmdline() {
- 
- static bool selinux_is_enforcing(void)
- {
-+return false;
-     if (ALLOW_PERMISSIVE_SELINUX) {
-         return selinux_status_from_cmdline() == SELINUX_ENFORCING;
+@@ -997,6 +1005,51 @@ int fs_mgr_do_mount_one(struct fstab_rec *rec)
+         return FS_MGR_DOMNT_FAILED;
      }
+ 
++	/* Setup loopback with partscan */
++        if (!strcmp(rec->fs_type, "loop")) {
++		unique_fd ctl_fd(open("/dev/loop-control", O_RDWR | O_CLOEXEC));
++		if (ctl_fd.get() == -1) {
++			PLOG(ERROR) << "Failed to open loop-control";
++        return 0;
++		}
++
++		int num = ioctl(ctl_fd.get(), LOOP_CTL_GET_FREE);
++		if (num == -1) {
++			PLOG(ERROR) << "Failed LOOP_CTL_GET_FREE";
++        return 0;
++		}
++
++		std::string out_device = StringPrintf("/dev/block/loop%d", num);
++
++		unique_fd target_fd(open(rec->blk_device, O_RDONLY | O_CLOEXEC));
++		if (target_fd.get() == -1) {
++			PLOG(ERROR) << "Failed to open target";
++        return 0;
++		}
++		unique_fd device_fd(open(out_device.c_str(), O_RDWR | O_CLOEXEC));
++		if (device_fd.get() == -1) {
++			PLOG(ERROR) << "Failed to open " << out_device;
++        return 0;
++		}
++
++		if (ioctl(device_fd.get(), LOOP_SET_FD, target_fd.get()) == -1) {
++			PLOG(ERROR) << "Failed to LOOP_SET_FD";
++        return 0;
++		}
++
++		struct loop_info64 li;
++		memset(&li, 0, sizeof(li));
++
++		li.lo_flags |= LO_FLAGS_PARTSCAN | LO_FLAGS_READ_ONLY;
++
++		if (ioctl(device_fd.get(), LOOP_SET_STATUS64, &li) < 0) {
++			PLOG(ERROR) << "Error setting loopback status";
++        return 0;
++		}
++
++		return 0;
++	}
++
+     int ret = __mount(rec->blk_device, rec->mount_point, rec);
+     if (ret) {
+       ret = (errno == EBUSY) ? FS_MGR_DOMNT_BUSY : FS_MGR_DOMNT_FAILED;
+diff --git a/fs_mgr/fs_mgr_fstab.cpp b/fs_mgr/fs_mgr_fstab.cpp
+index 7d09d01..a2c399e 100644
+--- a/fs_mgr/fs_mgr_fstab.cpp
++++ b/fs_mgr/fs_mgr_fstab.cpp
+@@ -389,7 +389,7 @@ static std::string read_fstab_from_dt() {
+ 
+         // skip if its not 'vendor', 'odm' or 'system'
+         if (strcmp(dp->d_name, "odm") && strcmp(dp->d_name, "system") &&
+-            strcmp(dp->d_name, "vendor")) {
++            strcmp(dp->d_name, "vendor") && strcmp(dp->d_name, "loop")) {
+             continue;
+         }
+ 
+diff --git a/init/devices.cpp b/init/devices.cpp
+index a1a8a2d..a80fdc2 100644
+--- a/init/devices.cpp
++++ b/init/devices.cpp
+@@ -576,6 +576,9 @@ char** get_block_device_symlinks(struct uevent* uevent) {
+     } else if (!find_vbd_device_prefix(uevent->path, buf, sizeof(buf))) {
+         device = buf;
+         type = "vbd";
++    } else if (strstr(uevent->path, "loop")) {
++	device = "loop";
++        type = "loop";
+     } else {
+         return NULL;
+     }
+diff --git a/init/init_first_stage.cpp b/init/init_first_stage.cpp
+index bcc8d1b..52bf2d5 100644
+--- a/init/init_first_stage.cpp
++++ b/init/init_first_stage.cpp
+@@ -24,6 +24,7 @@
+ #include <string>
+ #include <vector>
+ 
++#include <selinux/android.h>
+ #include <android-base/file.h>
+ #include <android-base/logging.h>
+ #include <android-base/strings.h>
+@@ -111,7 +112,7 @@ FirstStageMount::FirstStageMount()
+         LOG(ERROR) << "Failed to read fstab from device tree";
+         return;
+     }
+-    for (auto mount_point : {"/system", "/vendor", "/odm"}) {
++    for (auto mount_point : {"/system", "/vendor", "/odm", "/loop"}) {
+         fstab_rec* fstab_rec =
+             fs_mgr_get_entry_for_mount_point(device_tree_fstab_.get(), mount_point);
+         if (fstab_rec != nullptr) {
+@@ -132,9 +133,14 @@ bool FirstStageMount::DoFirstStageMount() {
+     // Nothing to mount.
+     if (mount_fstab_recs_.empty()) return true;
+ 
+-    if (!InitDevices()) return false;
++InitDevices();
++MountPartitions();
++InitDevices();
++MountPartitions();
+ 
+-    if (!MountPartitions()) return false;
++//    if (!InitDevices()) return false;
++
++  //  if (!MountPartitions()) return false;
+ 
+     return true;
+ }
+@@ -171,6 +177,21 @@ void FirstStageMount::InitRequiredDevices() {
+         });
+     }
+ 
++	{
++        const std::string dm_path = "/devices/virtual/misc/loop-control";
++        device_init(("/sys" + dm_path).c_str(), [&dm_path](uevent* uevent) -> coldboot_action_t {
++            if (uevent->path && uevent->path == dm_path) return COLDBOOT_STOP;
++            return COLDBOOT_CONTINUE;  // dm_path not found, continue to find it.
++        });
++}
++	{
++        const std::string dm_path = "/devices/virtual/block/loop0";
++        device_init(("/sys" + dm_path).c_str(), [&dm_path](uevent* uevent) -> coldboot_action_t {
++            if (uevent->path && uevent->path == dm_path) return COLDBOOT_STOP;
++            return COLDBOOT_CONTINUE;  // dm_path not found, continue to find it.
++        });
++}
++
+     device_init(nullptr,
+                 [this](uevent* uevent) -> coldboot_action_t { return ColdbootCallback(uevent); });
+ 
+@@ -187,6 +208,11 @@ coldboot_action_t FirstStageMount::ColdbootCallback(uevent* uevent) {
+     if (strncmp(uevent->subsystem, "block", 5)) {
+         return COLDBOOT_CONTINUE;
+     }
++//UGLY
++//This is needed because with the partition name, only one partition called "system" will be called
++//But we actually need two, the one where we have our gpt, and the one inside the gpt
++//TODO: Fix this properly
++return COLDBOOT_CREATE;
+ 
+     if (uevent->partition_name) {
+         // Matches partition name to create device nodes.
+@@ -223,14 +249,16 @@ void FirstStageMount::InitVerityDevice(const std::string& verity_device) {
+ }
+ 
+ bool FirstStageMount::MountPartitions() {
++//We want to try all partitions. Some might not be available,
++//and will become available by mounting the other
+     for (auto fstab_rec : mount_fstab_recs_) {
+         if (!SetUpDmVerity(fstab_rec)) {
+             PLOG(ERROR) << "Failed to setup verity for '" << fstab_rec->mount_point << "'";
+-            return false;
++		continue;
+         }
+         if (fs_mgr_do_mount_one(fstab_rec)) {
+             PLOG(ERROR) << "Failed to mount '" << fstab_rec->mount_point << "'";
+-            return false;
++		continue;
+         }
+     }
+     return true;

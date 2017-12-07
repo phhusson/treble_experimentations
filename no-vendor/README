@@ -4,16 +4,42 @@ and even "oem" "odm" "factory", or whatever can be useful.
 
 Steps:
 - Apply platform_system_core.diff to system/core
-- In your fstab, add a line for the host partition, with fs_type = loop (other parameters will be ignored)
-- Reference /dev/block/loop0p{1,2,3,..} in later lines of the fstab
-- Create a gpt image of the size of your host-image
+- Apply platform_system_sepolicy.diff to system/policy #No neverallow harmed, so certifiable!
+- Create your new system partition:
+$ bash buildSystemGpt.sh system /where/is/your/original/system.img vendor /where/is/your/vendor.img
+- Flash the generated sytem-gpt as "system" partition (like fastboot flash system system-gpt)
+- Change dts, example:
 
-Example:
-/dev/block/bootdevice/by-name/system            /system_gpt            loop    defaults defaults
-/dev/block/loop0p1			     /system ext4 ro,barrier=1	wait
-/dev/block/loop0p2			     /vendor ext4 ro,barrier=1	wait
-
-TODO:
-- Check this works for early partitions (tested on /oem, partition defined in /vendor/etc/fstab.qcom)
-- Fix SELinux
-- Fix name enumeration
+>   firmware: firmware {
+>           android {
+>                   compatible = "android,firmware";
+>                   fstab {
+>                           compatible = "android,fstab";
+>                           loop {
+>                                   compatible = "android,loop";
+>                                   dev = "/dev/block/platform/soc/7824900.sdhci/by-name/system";
+>                                   type = "loop";
+>                                   mnt_flags = "default";
+>                                   fsmgr_flags = "default";
+>                                   status = "ok";
+>                           };
+>                           vendor {
+>                                   compatible = "android,vendor";
+>                                   dev = "/dev/block/loop/loop/by-name/vendor";
+>                                   type = "ext4";
+>                                   mnt_flags = "ro,barrier=1";
+>                                   fsmgr_flags = "wait";
+>                                   status = "ok";
+>                           };
+>                           system {
+>                                   compatible = "android,system";
+>                                   dev = "/dev/block/loop/loop/by-name/system";
+>                                   type = "ext4";
+>                                   mnt_flags = "ro,barrier=1";
+>                                   fsmgr_flags = "wait";
+>                                   status = "ok";
+>                           };
+>
+>                   };
+>           };
+>   };
