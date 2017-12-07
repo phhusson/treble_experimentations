@@ -43,3 +43,13 @@ $ bash buildSystemGpt.sh system /where/is/your/original/system.img vendor /where
 >                   };
 >           };
 >   };
+
+Notes:
+- example here lists only system/vendor, but it applies for any partition, like future odm/oem/factory partitions
+- The changes are quite horrible at the moment, but it's okay for google certification
+- This has been tested on an A-only device, with AOSP 8.1 system.img, CAF 8.0 vendor.img
+- platform_system_core.diff will change boot.img
+- platform_system_sepolicy.diff will change vendor.img
+
+TODO:
+- recovery support not implemented yet
