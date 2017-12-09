@@ -14,10 +14,17 @@ fi
 repo sync -j 4
 
 . build/envsetup.sh
-lunch aosp_arm64_a-userdebug
-make BUILD_NUMBER=$rom_fp -j8
-cp out/target/product/generic_arm64_a/system.img release/$rom_version/system-arm64-aonly.img
 
-lunch aosp_arm64_ab-userdebug
-make BUILD_NUMBER=$rom_fp -j8
-cp out/target/product/generic_arm64_ab/system.img release/$rom_version/system-arm64-ab.img
+buildVariant() {
+	lunch $1
+	make BUILD_NUMBER=$rom_fp -j8
+	cp out/target/product/generic_arm64_a/system.img release/$rom_version/system-${2}.img
+}
+
+buildVariant aosp_arm64_a-userdebug arm64-aonly
+buildVariant aosp_arm64_a_gapps-userdebug arm64-aonly-gapps
+buildVariant aosp_arm64_a_foss-userdebug arm64-aonly-foss
+
+buildVariant aosp_arm64_ab-userdebug arm64-ab
+buildVariant aosp_arm64_ab_gapps-userdebug arm64-ab-gapps
+buildVariant aosp_arm64_ab_foss-userdebug arm64-ab-foss
