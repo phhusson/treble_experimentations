@@ -2,7 +2,7 @@
 
 rom_version="$(date +%Y%m%j.%H%M)"
 mkdir -p release/$rom_version/
-rom_fp="$(date +%Y%m%j)"
+rom_fp="$(date +%y%m%d)"
 set -e
 
 repo init -u https://android.googlesource.com/platform/manifest -b android-vts-8.0_r4
