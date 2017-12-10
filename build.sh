@@ -5,11 +5,11 @@ mkdir -p release/$rom_version/
 rom_fp="$(date +%Y%m%j)"
 set -e
 
-repo init -u https://android.googlesource.com/platform/manifest -b android-vts-8.0_r4
+repo init -u https://android.googlesource.com/platform/manifest -b android-8.1.0_r1
 if [ -d .repo/local_manifests ] ;then
-	( cd .repo/local_manifests; git pull)
+	( cd .repo/local_manifests; git fetch origin android-8.1; git checkout android-8.1)
 else
-	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests
+	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b android-8.1
 fi
 repo sync -j 4
 
@@ -22,9 +22,4 @@ buildVariant() {
 }
 
 buildVariant aosp_arm64_a-userdebug arm64-aonly
-buildVariant aosp_arm64_a_gapps-userdebug arm64-aonly-gapps
-buildVariant aosp_arm64_a_foss-userdebug arm64-aonly-foss
-
 buildVariant aosp_arm64_ab-userdebug arm64-ab
-buildVariant aosp_arm64_ab_gapps-userdebug arm64-ab-gapps
-buildVariant aosp_arm64_ab_foss-userdebug arm64-ab-foss
