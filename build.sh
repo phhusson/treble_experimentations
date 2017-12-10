@@ -22,9 +22,9 @@ buildVariant() {
 }
 
 buildVariant aosp_arm64_a-userdebug arm64-aonly
-buildVariant aosp_arm64_a_gapps-userdebug arm64-aonly-gapps
-buildVariant aosp_arm64_a_foss-userdebug arm64-aonly-foss
+buildVariant aosp_arm64_a_g-userdebug arm64-aonly-gapps
+buildVariant aosp_arm64_a_f-userdebug arm64-aonly-foss
 
 buildVariant aosp_arm64_ab-userdebug arm64-ab
-buildVariant aosp_arm64_ab_gapps-userdebug arm64-ab-gapps
-buildVariant aosp_arm64_ab_foss-userdebug arm64-ab-foss
+buildVariant aosp_arm64_ab_g-userdebug arm64-ab-gapps
+buildVariant aosp_arm64_ab_f-userdebug arm64-ab-foss
