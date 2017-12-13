@@ -5,6 +5,7 @@ if [ ! -d "$1" -o ! -f "$1/manifest.xml" ];then
 	exit 1
 fi
 
+rm -f broken
 for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$1/manifest.xml" |grep -vE '^android\.hardware\.');do
 	interface="$(
 		xmlstarlet sel  \
@@ -20,6 +21,16 @@ for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$1/manifest.xml" |grep -
 	prefix="$namespace2::$class"
 
 	lib="$(echo "$1"/lib64/${HAL}@${version}.so)"
+	if [ ! -f "$lib" -a -n "$2" ];then
+		lib="$(echo "$2"/lib64/${HAL}@${version}.so)"
+	fi
+	if [ ! -f "$lib" -a -n "$2" ];then
+		lib="$(echo "$2"/system/lib64/${HAL}@${version}.so)"
+	fi
+	if [ ! -f "$lib" ];then
+		echo "Failed to find ${HAL}@${version}.so" >> broken
+		continue
+	fi
 	nm -DC $lib |grep -F "T $prefix" | \
 		sed -E "s/^.*$prefix:://g" | \
 		grep -vE -e '\bping\b' -e '\binterfaceChain\b' -e '\binterfaceDescriptor\b' \
