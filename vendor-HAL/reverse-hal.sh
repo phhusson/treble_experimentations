@@ -2,6 +2,7 @@
 
 if [ ! -d "$1" -o ! -f "$1/manifest.xml" ];then
 	echo "Usage: $0 <vendor-folder>"
+	exit 1
 fi
 
 for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$1/manifest.xml" |grep -vE '^android\.hardware\.');do
