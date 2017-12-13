@@ -1,0 +1,4 @@
+getSupported(int)
+getVsyncEvent(int) generates (int, vec<unsigned char>)
+getHardwareEffect(int, int, int) generates (int, vec<unsigned char>)
+setHardwareEffect(int, int, vec<unsigned char>)

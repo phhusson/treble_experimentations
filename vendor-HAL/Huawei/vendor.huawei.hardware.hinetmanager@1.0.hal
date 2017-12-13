@@ -1,0 +1,2 @@
+recvMapconMsg(vec<unsigned char>, int)
+setResponseFunctionsHuawei(android::sp<vendor::huawei::hardware::hinetmanager::V1_0::IHinetmanagerResponse> const&)

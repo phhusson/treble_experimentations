@@ -1,0 +1,1 @@
+openDevice(android::hardware::audio::V2_0::IDevicesFactory::Device) generates (android::hardware::audio::V2_0::Result, android::sp<android::hardware::audio::V2_0::IDevice> const&)

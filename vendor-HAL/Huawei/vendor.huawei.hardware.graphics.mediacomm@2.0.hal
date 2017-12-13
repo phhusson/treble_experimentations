@@ -1,0 +1,5 @@
+createClient(string)
+destroyClient(int)
+release(int)
+request(int, vendor::huawei::hardware::graphics::mediacomm::V2_0::IMediaComm::mdc_copybit const&)
+doCopybit(int, vendor::huawei::hardware::graphics::mediacomm::V2_0::IMediaComm::mdc_copybit const&)

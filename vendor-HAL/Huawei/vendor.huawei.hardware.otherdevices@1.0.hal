@@ -1,0 +1,2 @@
+huaweiTouchkeySupportTest(vendor::huawei::hardware::otherdevices::V1_0::TouchkeyTestType)
+huaweiTouchkeyCapacitanceTest(vendor::huawei::hardware::otherdevices::V1_0::TouchkeyTestType) generates (int, string)

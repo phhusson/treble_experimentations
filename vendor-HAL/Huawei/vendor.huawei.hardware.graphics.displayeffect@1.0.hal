@@ -1,0 +1,7 @@
+getSupported(int)
+registerCallback(android::sp<vendor::huawei::hardware::graphics::displayeffect::V1_0::IDisplayEffectCallback> const&)
+getHardwareEffect(int, int) generates (bool, vec<int>)
+setHardwareEffect(int, int, int, vec<int>)
+getData(int, int) generates (bool, vec<int>)
+setData(int, int) generates (bool, vec<int>)
+setScene(int)
