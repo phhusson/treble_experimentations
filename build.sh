@@ -1,8 +1,7 @@
 #!/bin/bash
 
-rom_version="$(date +%Y%m%j.%H%M)"
-mkdir -p release/$rom_version/
 rom_fp="$(date +%y%m%d)"
+mkdir -p release/$rom_fp/
 set -e
 
 repo init -u https://android.googlesource.com/platform/manifest -b android-vts-8.0_r4
@@ -12,19 +11,19 @@ else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests
 fi
 repo sync -j 4
+(cd device/phh/treble; bash generate.sh)
 
 . build/envsetup.sh
 
 buildVariant() {
 	lunch $1
 	make BUILD_NUMBER=$rom_fp -j8
-	cp out/target/product/generic_arm64_a/system.img release/$rom_version/system-${2}.img
+	cp out/target/product/generic_arm64_a/system.img release/$rom_fp/system-${2}.img
 }
 
-buildVariant aosp_arm64_a-userdebug arm64-aonly
-buildVariant aosp_arm64_a_g-userdebug arm64-aonly-gapps
-buildVariant aosp_arm64_a_f-userdebug arm64-aonly-foss
+buildVariant treble_arm64_av-userdebug arm64-aonly-vanilla
+buildVariant treble_arm64_ag-userdebug arm64-aonly-gapps
+#buildVariant treble_arm64_af-userdebug arm64-aonly-foss
 
-buildVariant aosp_arm64_ab-userdebug arm64-ab
-buildVariant aosp_arm64_ab_g-userdebug arm64-ab-gapps
-buildVariant aosp_arm64_ab_f-userdebug arm64-ab-foss
+buildVariant treble_arm64_abv-userdebug arm64-ab-vanilla
+buildVariant treble_arm64_abg-userdebug arm64-ab-gapps
