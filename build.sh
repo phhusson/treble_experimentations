@@ -21,6 +21,7 @@ buildVariant() {
 	cp out/target/product/generic_arm64_a/system.img release/$rom_fp/system-${2}.img
 }
 
+repo manifest -r > release/$rom_fp/manifest.xml
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
 
