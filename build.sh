@@ -11,7 +11,7 @@ else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests
 fi
 repo sync -j 4
-(cd device/phh/treble; bash generate.sh)
+(cd device/phh/treble; git clean -fdx; bash generate.sh)
 
 . build/envsetup.sh
 
