@@ -19,7 +19,7 @@ buildVariant() {
 	lunch $1
 	make BUILD_NUMBER=$rom_fp installclean
 	make BUILD_NUMBER=$rom_fp -j8 systemimage
-	cp out/target/product/generic_arm64_a/system.img release/$rom_fp/system-${2}.img
+	cp $OUT/system.img release/$rom_fp/system-${2}.img
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
