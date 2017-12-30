@@ -17,7 +17,8 @@ repo sync -j 4
 
 buildVariant() {
 	lunch $1
-	make BUILD_NUMBER=$rom_fp -j8 installclean systemimage
+	make BUILD_NUMBER=$rom_fp installclean
+	make BUILD_NUMBER=$rom_fp -j8 systemimage
 	cp out/target/product/generic_arm64_a/system.img release/$rom_fp/system-${2}.img
 }
 
