@@ -4,11 +4,19 @@ rom_fp="$(date +%y%m%d)"
 mkdir -p release/$rom_fp/
 set -e
 
-repo init -u https://android.googlesource.com/platform/manifest -b android-vts-8.0_r4
+aosp="android-vts-8.0_r4"
+phh="master"
+
+if [ "$1" == "8.1" ] ;then
+	aosp="android-8.1.0_r7"
+	phh="android-8.1"
+fi
+
+repo init -u https://android.googlesource.com/platform/manifest -b $aosp
 if [ -d .repo/local_manifests ] ;then
-	( cd .repo/local_manifests; git pull)
+	( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
 else
-	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests
+	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $phh
 fi
 repo sync -j 4
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
