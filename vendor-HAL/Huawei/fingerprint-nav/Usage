@@ -1,0 +1,2 @@
+Usage, as su, with classes.dex in /data/local/tmp/out.dex:
+CLASSPATH=/data/local/tmp/out.dex app_process /data/local/tmp/ Test
