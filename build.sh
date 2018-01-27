@@ -8,7 +8,7 @@ aosp="android-vts-8.0_r4"
 phh="master"
 
 if [ "$1" == "8.1" ] ;then
-	aosp="android-8.1.0_r7"
+	aosp="android-8.1.0_r9"
 	phh="android-8.1"
 fi
 
