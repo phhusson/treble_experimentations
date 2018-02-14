@@ -1,0 +1,7 @@
+000000000001ec10 T vendor::mediatek::hardware::imsa::V1_0::BpHwImsaIndication::readEvent(vec<signed char>, int, int)
+000000000001ea74 T vendor::mediatek::hardware::imsa::V1_0::BpHwImsaIndication::BpHwImsaIndication(android::sp<android::hardware::IBinder> const&)
+000000000001e8dc T vendor::mediatek::hardware::imsa::V1_0::BpHwImsaIndication::BpHwImsaIndication(android::sp<android::hardware::IBinder> const&)
+writeBytes(vec<signed char>)
+writeEvent(int, int, vec<signed char>)
+setResponseFunctions(android::sp<vendor::mediatek::hardware::imsa::V1_0::IImsaIndication> const&)
+writeInt(int)

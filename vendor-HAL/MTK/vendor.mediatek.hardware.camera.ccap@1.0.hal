@@ -1,0 +1,4 @@
+intf_ccap_init()
+intf_ccap_const(android::hardware::hidl_memory const&)
+intf_ccap_adb_op()
+intf_ccap_atci_op(android::hardware::hidl_memory const&, android::hardware::hidl_memory const&, int)

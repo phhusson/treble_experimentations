@@ -1,0 +1,6 @@
+initialize(android::sp<android::hardware::bluetooth::V1_0::IBluetoothHciCallbacks> const&)
+sendAclData(vec<unsigned char>)
+sendScoData(vec<unsigned char>)
+sendHciCommand(vec<unsigned char>)
+close()
+FWAssert(unsigned short)

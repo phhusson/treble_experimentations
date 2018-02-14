@@ -1,0 +1,1 @@
+thhClientInvoke(android::hardware::hidl_array<android::hardware::hidl_string, 8ul> const&) generates (vendor::microtrust::hardware::thh::V2_0::ErrorCode, vec<unsigned char>)

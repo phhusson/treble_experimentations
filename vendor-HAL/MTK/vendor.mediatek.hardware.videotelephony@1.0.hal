@@ -1,0 +1,3 @@
+configureFmqMode(unsigned short)
+configureFmqSyncRead() generates (bool, android::hardware::MQDescriptor<unsigned char, (android::hardware::MQFlavor)1> const&)
+configureFmqSyncWrite() generates (bool, android::hardware::MQDescriptor<unsigned char, (android::hardware::MQFlavor)1> const&)
