@@ -8,7 +8,7 @@ aosp="android-vts-8.0_r4"
 phh="master"
 
 if [ "$1" == "8.1" ] ;then
-	aosp="android-8.1.0_r9"
+	aosp="android-8.1.0_r14"
 	phh="android-8.1"
 fi
 
@@ -18,7 +18,7 @@ if [ -d .repo/local_manifests ] ;then
 else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $phh
 fi
-repo sync -j 4
+repo sync -j 1
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
 
 . build/envsetup.sh
