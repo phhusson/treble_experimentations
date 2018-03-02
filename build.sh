@@ -27,6 +27,7 @@ buildVariant() {
 	lunch $1
 	make BUILD_NUMBER=$rom_fp installclean
 	make BUILD_NUMBER=$rom_fp -j8 systemimage
+	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
 	cp $OUT/system.img release/$rom_fp/system-${2}.img
 }
 
