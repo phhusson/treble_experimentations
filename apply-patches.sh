@@ -24,11 +24,16 @@ for project in $(cd $patches/patches; echo *);do
 
 		if git apply --check $patch;then
 			git am $patch
+		elif patch -f -p1 --dry-run < $patch > /dev/null;then
+			#This will fail
+			git am $patch || true
+			patch -f -p1 < $patch
+			git add -u
+			git am --continue
 		else
 			echo "Failed applying $patch"
 		fi
 	done
 	popd
 done
-
 
