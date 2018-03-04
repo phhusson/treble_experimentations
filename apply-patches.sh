@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+
+finish() {
+	rm -Rf $patches
+}
+trap finish EXIT
+
+patches="$(mktemp -d)"
+unzip "$1" -d $patches
+
+for project in $(cd $patches/patches; echo *);do
+	p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"
+	[ "$p" == build ] && p=build/make
+	repo sync -l --force-sync $p
+	pushd $p
+	git clean -fdx; git reset --hard
+	for patch in $patches/patches/$project/*.patch;do
+		#Check if patch is already applied
+		if patch -f -p1 --dry-run -R < $patch > /dev/null;then
+			continue
+		fi
+
+		if git apply --check $patch;then
+			git am $patch
+		else
+			echo "Failed applying $patch"
+		fi
+	done
+	popd
+done
+
+
