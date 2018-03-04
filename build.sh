@@ -37,5 +37,8 @@ buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
 
 buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
 buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
+
+buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
+
 bash $(dirname "$0")/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
