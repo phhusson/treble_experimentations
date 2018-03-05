@@ -4,7 +4,7 @@ rom_fp="$(date +%y%m%d)"
 mkdir -p release/$rom_fp/
 set -e
 
-if [ "$#" -ne 4 ];then
+if [ "$#" -ne 3 ];then
 	echo "Usage: $0 <android-8.1> <carbon|lineage> <patch to release patches.zip>"
 	exit 0
 fi
@@ -14,7 +14,7 @@ patches=$3
 
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
-elif [ "$rom" == "lineage" ];tehn
+elif [ "$rom" == "lineage" ];then
 	repo init -u https://github.com/LineageOS/android.git -b lineage-15.1
 fi
 
