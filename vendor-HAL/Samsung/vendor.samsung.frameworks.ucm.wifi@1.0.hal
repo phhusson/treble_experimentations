@@ -1,0 +1,2 @@
+getCertificateChain(string) generates (vendor::samsung::frameworks::ucm::wifi::V1_0::IUCMKeystore::UCMKeystoreStatusCode, vec<unsigned char>)
+sign(string, vec<unsigned char>) generates (vendor::samsung::frameworks::ucm::wifi::V1_0::IUCMKeystore::UCMKeystoreStatusCode, vec<unsigned char>)

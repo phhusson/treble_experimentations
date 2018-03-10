@@ -1,0 +1,7 @@
+setCallback(android::sp<android::hardware::camera::provider::V2_4::ICameraProviderCallback> const&)
+getVendorTags() generates (android::hardware::camera::common::V1_0::Status, vec<android::hardware::camera::common::V1_0::VendorTagSection>)
+getCameraIdList() generates (android::hardware::camera::common::V1_0::Status, vec<android::hardware::hidl_string>)
+getSecCameraIdList() generates (android::hardware::camera::common::V1_0::Status, vec<android::hardware::hidl_string>)
+isSetTorchModeSupported() generates (android::hardware::camera::common::V1_0::Status, bool)
+getCameraDeviceInterface_V1_x(string) generates (android::hardware::camera::common::V1_0::Status, android::sp<android::hardware::camera::device::V1_0::ICameraDevice> const&)
+getCameraDeviceInterface_V3_x(string) generates (android::hardware::camera::common::V1_0::Status, android::sp<android::hardware::camera::device::V3_2::ICameraDevice> const&)

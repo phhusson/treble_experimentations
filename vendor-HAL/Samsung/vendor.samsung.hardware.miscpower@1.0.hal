@@ -1,0 +1,4 @@
+setFeature(android::hardware::power::V1_0::Feature, bool)
+setInteractive(bool)
+getPlatformLowPowerStats() generates (vec<android::hardware::power::V1_0::PowerStatePlatformSleepState>, android::hardware::power::V1_0::Status)
+powerHint(android::hardware::power::V1_0::PowerHint, int)
