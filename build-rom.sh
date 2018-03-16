@@ -27,6 +27,7 @@ else
 fi
 #We don't want to replace from AOSP since we'll be applying patches by hand
 rm -f .repo/local_manifests/replace.xml
+rm -f .repo/local_manifests/opengapps.xml
 
 repo sync -c -j 4 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh $rom)
