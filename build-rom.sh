@@ -5,7 +5,7 @@ mkdir -p release/$rom_fp/
 set -e
 
 if [ "$#" -ne 3 ];then
-	echo "Usage: $0 <android-8.1> <carbon|lineage> <patch to release patches.zip>"
+	echo "Usage: $0 <android-8.1> <carbon|lineage|rr> <patch to release patches.zip>"
 	exit 0
 fi
 localManifestBranch=$1
@@ -16,6 +16,8 @@ if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
 elif [ "$rom" == "lineage" ];then
 	repo init -u https://github.com/LineageOS/android.git -b lineage-15.1
+elif [ "$rom" == "rr" ];then
+	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
 fi
 
 if [ -d .repo/local_manifests ] ;then
