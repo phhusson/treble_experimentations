@@ -2,7 +2,7 @@
 
 if [ -z "$REPO_REMOTE" ];then
 	rm -Rf patches patches.zip
-	TOP=$PWD repo forall -c "bash $0"
+	TOP=$PWD repo forall -c "bash $(readlink -f -- $0)"
 	zip -r patches.zip patches
 	rm -Rf patches
 	exit $?
