@@ -2,13 +2,7 @@
 
 set -e
 
-finish() {
-	rm -Rf $patches
-}
-trap finish EXIT
-
-patches="$(mktemp -d)"
-unzip "$1" -d $patches
+patches="$(readlink -f -- $1)"
 
 for project in $(cd $patches/patches; echo *);do
 	p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"

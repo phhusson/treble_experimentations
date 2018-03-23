@@ -4,13 +4,12 @@ rom_fp="$(date +%y%m%d)"
 mkdir -p release/$rom_fp/
 set -e
 
-if [ "$#" -ne 3 ];then
-	echo "Usage: $0 <android-8.1> <carbon|lineage|rr> <patch to release patches.zip>"
+if [ "$#" -ne 2 ];then
+	echo "Usage: $0 <android-8.1> <carbon|lineage|rr>"
 	exit 0
 fi
 localManifestBranch=$1
 rom=$2
-patches=$3
 
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
@@ -25,6 +24,13 @@ if [ -d .repo/local_manifests ] ;then
 else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $localManifestBranch
 fi
+
+if [ -d patches ];then
+    ( cd patches; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
+else
+    git clone https://github.com/phhusson/treble_patches patches -b $localManifestBranch
+fi
+
 #We don't want to replace from AOSP since we'll be applying patches by hand
 rm -f .repo/local_manifests/replace.xml
 rm -f .repo/local_manifests/opengapps.xml
@@ -32,7 +38,7 @@ rm -f .repo/local_manifests/opengapps.xml
 repo sync -c -j 4 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh $rom)
 
-bash "$(dirname "$0")/apply-patches.sh" $patches
+bash "$(dirname "$0")/apply-patches.sh" patches
 
 . build/envsetup.sh
 
