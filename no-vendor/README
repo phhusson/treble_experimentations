@@ -19,8 +19,8 @@ $ bash buildSystemGpt.sh system /where/is/your/original/system.img vendor /where
 >                                   compatible = "android,loop";
 >                                   dev = "/dev/block/platform/soc/7824900.sdhci/by-name/system";
 >                                   type = "loop";
->                                   mnt_flags = "default";
->                                   fsmgr_flags = "default";
+>                                   mnt_flags = "defaults";
+>                                   fsmgr_flags = "defaults";
 >                                   status = "ok";
 >                           };
 >                           vendor {
