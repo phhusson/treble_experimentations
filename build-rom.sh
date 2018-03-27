@@ -4,13 +4,18 @@ rom_fp="$(date +%y%m%d)"
 mkdir -p release/$rom_fp/
 set -e
 
-if [ "$#" -ne 2 ];then
-	echo "Usage: $0 <android-8.1> <carbon|lineage|rr>"
+if [ "$#" -le 1 ];then
+	echo "Usage: $0 <android-8.1> <carbon|lineage|rr> '# of jobs'"
 	exit 0
 fi
 localManifestBranch=$1
 rom=$2
-
+if [[ -n "$3" ]]
+   then
+	jobs=$3
+   else
+	jobs=$(nproc)
+fi
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
 elif [ "$rom" == "lineage" ];then
@@ -35,7 +40,7 @@ fi
 rm -f .repo/local_manifests/replace.xml
 rm -f .repo/local_manifests/opengapps.xml
 
-repo sync -c -j 4 --force-sync
+repo sync -c -j$jobs --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh $rom)
 
 bash "$(dirname "$0")/apply-patches.sh" patches
@@ -45,7 +50,7 @@ bash "$(dirname "$0")/apply-patches.sh" patches
 buildVariant() {
 	lunch $1
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp installclean
-	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp -j8 systemimage
+	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp -j$jobs systemimage
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp vndk-test-sepolicy
 	cp $OUT/system.img release/$rom_fp/system-${2}.img
 }
