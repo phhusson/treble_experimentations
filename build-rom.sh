@@ -10,12 +10,17 @@ if [ "$#" -le 1 ];then
 fi
 localManifestBranch=$1
 rom=$2
-if [[ -n "$3" ]]
-   then
+
+if [[ -n "$3" ]];then
 	jobs=$3
-   else
-	jobs=$(nproc)
+else
+    if [[ $(uname -a) = "Darwin" ]];then
+        jobs=$(sysctl -n hw.ncpu)
+    elif [[ $(uname -a) = "Linux" ]];then
+        jobs=$(nproc)
+    fi
 fi
+
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
 elif [ "$rom" == "lineage" ];then
