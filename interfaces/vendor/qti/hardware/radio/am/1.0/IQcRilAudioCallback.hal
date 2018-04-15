@@ -1,0 +1,6 @@
+package vendor.qti.hardware.radio.am@1.0;
+
+interface IQcRilAudioCallback {
+	getParameters(string str) generates (string result);
+	setParameters(string str) generates (int32_t success);
+};

@@ -1,0 +1,8 @@
+package vendor.qti.hardware.radio.am@1.0;
+
+import vendor.qti.hardware.radio.am@1.0::IQcRilAudioCallback;
+
+interface IQcRilAudio {
+	oneway setCallback(IQcRilAudioCallback iQcRilAudioCallback);
+	oneway setError(int32_t error);
+};
