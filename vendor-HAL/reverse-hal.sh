@@ -43,7 +43,8 @@ for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$1/manifest.xml" |grep -
 				-e '\bgetHashChain\b' -e "^$class\(android::sp<android::hardware::IBinder> const&\)" | \
 			sed -E 's/(, )?std::__1::function<void \((.*)\)>\).*/\) generates \(\2\)/g' | \
 			sed -E 's/android::hardware::hidl_string const\&/string/g' | \
-			sed -E 's/android::hardware::hidl_vec<([^>]*)> const\&/vec<\1>/g' \
+			sed -E 's/android::hardware::hidl_vec<([^>]*)> const\&/vec<\1>/g' | \
+			grep -vE '^_hidl_' \
 			> $HAL@$version.hal
 	done
 done
