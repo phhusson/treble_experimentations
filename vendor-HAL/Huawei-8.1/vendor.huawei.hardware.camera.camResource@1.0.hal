@@ -1,0 +1,7 @@
+jpegencode(vendor::huawei::hardware::camera::camResource::V1_0::HwJpegEncoderConfig const&) generates (unsigned long, int)
+jpegOpenClient(unsigned int, unsigned int)
+jpegCloseClient()
+getCopybitOutUsage(unsigned int)
+getCopybitDefaultOutFormat()
+isCopybitSupportedOutFormat(int)
+copybit(vendor::huawei::hardware::camera::camResource::V1_0::HwCopybitParam const&)

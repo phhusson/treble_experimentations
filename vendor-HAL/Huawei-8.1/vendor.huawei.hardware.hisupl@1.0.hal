@@ -1,0 +1,3 @@
+setCallback(android::sp<vendor::huawei::hardware::hisupl::V1_0::ISuplclienttoserverCallbacks> const&)
+suplCommServiceSend2server(vendor::huawei::hardware::hisupl::V1_0::client2server const&)
+suplPlatformServiceSend2server(vendor::huawei::hardware::hisupl::V1_0::client2server const&)

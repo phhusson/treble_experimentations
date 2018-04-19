@@ -1,0 +1,6 @@
+LockDevice()
+UnLockDevice()
+Alloc_InBuffer(int) generates (vendor::huawei::hardware::jpegdec::V1_0::JPEG_Error, android::hardware::hidl_handle const&)
+Alloc_OutBuffer(int, int, int) generates (vendor::huawei::hardware::jpegdec::V1_0::JPEG_Error, android::hardware::hidl_handle const&)
+GetDecodeStatus() generates (vendor::huawei::hardware::jpegdec::V1_0::JPEG_Error, bool)
+DoDecode(vendor::huawei::hardware::jpegdec::V1_0::jpeg_decompress_hidl_t const&, android::hardware::hidl_handle const&, android::hardware::hidl_handle const&, vendor::huawei::hardware::jpegdec::V1_0::hwdecode_region_info const&, int, int)

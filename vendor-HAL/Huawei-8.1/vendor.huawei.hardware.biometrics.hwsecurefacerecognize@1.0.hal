@@ -1,0 +1,1 @@
+sendCameraImage(vec<vendor::huawei::hardware::biometrics::hwsecurefacerecognize::V1_0::ImageStream>)

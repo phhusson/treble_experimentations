@@ -1,0 +1,6 @@
+HWsetLight(vendor::huawei::hardware::light::V2_0::HWType, android::hardware::light::V2_0::LightState const&)
+getSupportedTypes() generates (vec<android::hardware::light::V2_0::Type>)
+HWgetSupportedTypes() generates (vec<vendor::huawei::hardware::light::V2_0::HWType>)
+HWsetLightBrightness(int, int)
+HWsetLedAlwaysonStatus(int, int)
+setLight(android::hardware::light::V2_0::Type, android::hardware::light::V2_0::LightState const&)

@@ -1,0 +1,7 @@
+startClean()
+getMaxTimeCost()
+getMinTimeCost()
+getUndiscardInfo()
+getNotificationLevel()
+getPercentageCompelete()
+stopClean()

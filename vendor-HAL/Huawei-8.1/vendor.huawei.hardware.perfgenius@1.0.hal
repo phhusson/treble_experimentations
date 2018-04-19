@@ -1,0 +1,6 @@
+addListener(android::sp<android::hidl::base::V1_0::IBase> const&)
+perfRelease(long)
+perfRequest(unsigned int, vec<vendor::huawei::hardware::perfgenius::V1_0::IPerfGenius::PerfRequest>)
+perfGetConfig(vec<int>) generates (int, vec<int>)
+perfSetConfig(vec<int>, vec<int>)
+perfEvent(int, string, vec<int>)

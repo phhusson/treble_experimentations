@@ -1,0 +1,8 @@
+powerCycle()
+prediscover()
+controlGranted()
+coreInitialized(vec<unsigned char>)
+open(android::sp<android::hardware::nfc::V1_0::INfcClientCallback> const&)
+close()
+write(vec<unsigned char>)
+halNfcCtl(unsigned int, vec<unsigned char>) generates (android::hardware::nfc::V1_0::NfcStatus, unsigned int, vec<unsigned char>)

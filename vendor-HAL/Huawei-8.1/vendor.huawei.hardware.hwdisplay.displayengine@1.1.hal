@@ -1,0 +1,5 @@
+getSupported(int)
+getVsyncEvent(int) generates (int, vec<unsigned char>)
+registerCallback(android::sp<vendor::huawei::hardware::hwdisplay::displayengine::V1_1::IDisplayEngineCallback> const&)
+getHardwareEffect(int, int, int) generates (int, vec<unsigned char>)
+setHardwareEffect(int, int, vec<unsigned char>)

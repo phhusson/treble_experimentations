@@ -1,0 +1,1 @@
+HWKdsReq(vendor::huawei::hardware::kds::V1_0::KdsHukReqInfo const&, vendor::huawei::hardware::kds::V1_0::KdsHukData const&) generates (int, vendor::huawei::hardware::kds::V1_0::KdsHukData const&)

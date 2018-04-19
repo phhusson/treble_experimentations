@@ -1,0 +1,3 @@
+regChrReceiver(int, android::sp<vendor::huawei::hardware::modemchr::V1_0::IModemchrResponse> const&)
+sendChrRequest(int, vec<unsigned char>, int)
+unregChrReceiver(int)

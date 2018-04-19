@@ -1,0 +1,6 @@
+setAmplitude(unsigned char)
+setHWVibrator(vendor::huawei::hardware::hwvibrator::V1_0::Type)
+supportsAmplitudeControl()
+on(unsigned int)
+off()
+perform(android::hardware::vibrator::V1_0::Effect, android::hardware::vibrator::V1_0::EffectStrength) generates (android::hardware::vibrator::V1_0::Status, unsigned int)

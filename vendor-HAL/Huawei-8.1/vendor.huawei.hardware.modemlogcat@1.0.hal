@@ -1,0 +1,4 @@
+receiveAtMsgFromApk(vec<unsigned char>, int)
+receiveOmMsgFromApk(vec<unsigned char>, int)
+registerMsgCallback(android::sp<vendor::huawei::hardware::modemlogcat::V1_0::IMsgCallback> const&, android::sp<vendor::huawei::hardware::modemlogcat::V1_0::IMsgCallback> const&, android::sp<vendor::huawei::hardware::modemlogcat::V1_0::IMsgCallback> const&)
+receiveAtModemMsgFromApk(vec<unsigned char>, int)

@@ -1,0 +1,6 @@
+cancelBufferByID(unsigned int, int)
+dequeueBufferByID(unsigned int) generates (int, vendor::huawei::hardware::graphics::gpucommon::V1_0::AnwBuffer_gpu const&)
+releaseBufferByID(unsigned int)
+createBufferQueueID(android::sp<android::hidl::base::V1_0::IBase> const&, unsigned int, unsigned int, android::hardware::graphics::common::V1_0::PixelFormat, unsigned int) generates (bool, unsigned int)
+checkBufferQueueByID(unsigned int)
+disconnectBufferQueueByID(unsigned int, bool)
