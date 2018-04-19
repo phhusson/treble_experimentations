@@ -1,0 +1,5 @@
+ClientDiedNotifier(int)
+killall()
+powerOn(android::sp<android::hidl::base::V1_0::IBase> const&)
+getState()
+powerOff()

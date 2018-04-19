@@ -1,0 +1,4 @@
+getRtcTime()
+cancelAlarm()
+getAlarm()
+setAlarm(long)

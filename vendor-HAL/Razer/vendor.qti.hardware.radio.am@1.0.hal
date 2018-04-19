@@ -1,0 +1,8 @@
+setCallback(android::sp<vendor::qti::hardware::radio::am::V1_0::IQcRilAudioCallback> const&)
+setError(vendor::qti::hardware::radio::am::V1_0::AudioError)
+000000000001f294 T vendor::qti::hardware::radio::am::V1_0::BpHwQcRilAudioCallback::getParameters(string) generates (string)
+000000000001f378 T vendor::qti::hardware::radio::am::V1_0::BpHwQcRilAudioCallback::setParameters(string)
+000000000001e9a4 T vendor::qti::hardware::radio::am::V1_0::BpHwQcRilAudioCallback::_hidl_getParameters(android::hardware::IInterface*, android::hardware::details::HidlInstrumentor*, string) generates (string)
+000000000001edcc T vendor::qti::hardware::radio::am::V1_0::BpHwQcRilAudioCallback::_hidl_setParameters(android::hardware::IInterface*, android::hardware::details::HidlInstrumentor*, string)
+000000000001e804 T vendor::qti::hardware::radio::am::V1_0::BpHwQcRilAudioCallback::BpHwQcRilAudioCallback(android::sp<android::hardware::IBinder> const&)
+000000000001e668 T vendor::qti::hardware::radio::am::V1_0::BpHwQcRilAudioCallback::BpHwQcRilAudioCallback(android::sp<android::hardware::IBinder> const&)

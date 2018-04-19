@@ -1,0 +1,2 @@
+setPowerProfile(vendor::razer::power::V1_0::power_profile const&)
+resetPowerProfile()

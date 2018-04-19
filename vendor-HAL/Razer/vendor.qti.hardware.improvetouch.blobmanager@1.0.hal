@@ -1,0 +1,7 @@
+unsubscribe()
+enableWakeup()
+disableWakeup()
+registerCallback(android::sp<vendor::qti::hardware::improvetouch::blobmanager::V1_0::IBlobCallBack> const&)
+stopBlobDetection()
+startBlobDetection()
+subscribe()
