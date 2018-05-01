@@ -14,9 +14,9 @@ rom=$2
 if [[ -n "$3" ]];then
 	jobs=$3
 else
-    if [[ $(uname -a) = "Darwin" ]];then
+    if [[ $(uname -s) = "Darwin" ]];then
         jobs=$(sysctl -n hw.ncpu)
-    elif [[ $(uname -a) = "Linux" ]];then
+    elif [[ $(uname -s) = "Linux" ]];then
         jobs=$(nproc)
     fi
 fi
