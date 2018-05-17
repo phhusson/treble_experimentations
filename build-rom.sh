@@ -46,6 +46,7 @@ rm -f .repo/local_manifests/replace.xml
 rm -f .repo/local_manifests/opengapps.xml
 
 repo sync -c -j$jobs --force-sync
+rm -f device/*/sepolicy/common/private/genfs_contexts
 (cd device/phh/treble; git clean -fdx; bash generate.sh $rom)
 
 bash "$(dirname "$0")/apply-patches.sh" patches
