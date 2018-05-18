@@ -65,3 +65,4 @@ repo manifest -r > release/$rom_fp/manifest.xml
 buildVariant treble_arm64_avN-userdebug arm64-aonly
 buildVariant treble_arm64_bvN-userdebug arm64-ab
 buildVariant treble_arm_avN-userdebug arm-aonly
+buildVariant treble_arm_aoS-userdebug arm-aonly
