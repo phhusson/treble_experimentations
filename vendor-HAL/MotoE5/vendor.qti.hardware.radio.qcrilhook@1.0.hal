@@ -1,0 +1,8 @@
+setCallback(android::sp<vendor::qti::hardware::radio::qcrilhook::V1_0::IQtiOemHookResponse> const&, android::sp<vendor::qti::hardware::radio::qcrilhook::V1_0::IQtiOemHookIndication> const&)
+oemHookRawRequest(int, vec<unsigned char>)
+0002366d T vendor::qti::hardware::radio::qcrilhook::V1_0::BpHwQtiOemHookResponse::oemHookRawResponse(int, vendor::qti::hardware::radio::qcrilhook::V1_0::RadioError, vec<unsigned char>)
+00023575 T vendor::qti::hardware::radio::qcrilhook::V1_0::BpHwQtiOemHookResponse::BpHwQtiOemHookResponse(android::sp<android::hardware::IBinder> const&)
+00023491 T vendor::qti::hardware::radio::qcrilhook::V1_0::BpHwQtiOemHookResponse::BpHwQtiOemHookResponse(android::sp<android::hardware::IBinder> const&)
+0001ded5 T vendor::qti::hardware::radio::qcrilhook::V1_0::BpHwQtiOemHookIndication::oemHookRawIndication(vec<unsigned char>)
+0001ddd1 T vendor::qti::hardware::radio::qcrilhook::V1_0::BpHwQtiOemHookIndication::BpHwQtiOemHookIndication(android::sp<android::hardware::IBinder> const&)
+0001dce1 T vendor::qti::hardware::radio::qcrilhook::V1_0::BpHwQtiOemHookIndication::BpHwQtiOemHookIndication(android::sp<android::hardware::IBinder> const&)

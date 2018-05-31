@@ -1,0 +1,3 @@
+startSession()
+finishSession()
+addFile(android::hardware::hidl_memory const&, string, unsigned int)

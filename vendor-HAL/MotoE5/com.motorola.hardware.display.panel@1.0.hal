@@ -1,0 +1,4 @@
+registerVideoCallback(android::sp<com::motorola::hardware::display::panel::V1_0::IVideoCallback> const&)
+setMode(com::motorola::hardware::display::panel::V1_0::PanelMode)
+setColor(com::motorola::hardware::display::panel::V1_0::PanelColor)
+setValue(com::motorola::hardware::display::panel::V1_0::VideoState, int)
