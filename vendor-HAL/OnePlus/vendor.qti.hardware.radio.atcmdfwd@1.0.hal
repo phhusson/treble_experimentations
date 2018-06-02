@@ -1,0 +1,1 @@
+processAtCmd(vendor::qti::hardware::radio::atcmdfwd::V1_0::AtCmd const&) generates (vendor::qti::hardware::radio::atcmdfwd::V1_0::AtCmdResponse const&)

@@ -1,0 +1,1 @@
+setFtmMode(bool) generates (android::hardware::wifi::V1_0::WifiStatus const&)

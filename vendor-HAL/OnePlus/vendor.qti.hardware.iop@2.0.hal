@@ -1,0 +1,4 @@
+uxEngine_events(int, int, string, int)
+uxEngine_trigger(int) generates (string)
+iopStop()
+iopStart(int, string, string)
