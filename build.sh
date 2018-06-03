@@ -4,13 +4,8 @@ rom_fp="$(date +%y%m%d)"
 mkdir -p release/$rom_fp/
 set -e
 
-aosp="android-vts-8.0_r4"
-phh="master"
-
-if [ "$1" == "8.1" ] ;then
-	aosp="android-8.1.0_r29"
-	phh="android-8.1"
-fi
+aosp="android-8.1.0_r29"
+phh="android-8.1"
 
 repo init -u https://android.googlesource.com/platform/manifest -b $aosp
 if [ -d .repo/local_manifests ] ;then
