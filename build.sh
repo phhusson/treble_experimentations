@@ -28,7 +28,7 @@ buildVariant() {
 	make BUILD_NUMBER=$rom_fp installclean
 	make BUILD_NUMBER=$rom_fp -j8 systemimage
 	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
-	xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
+	xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz &
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
@@ -43,3 +43,6 @@ buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
+
+#Wait for background "xz"
+while wait;do true;done
