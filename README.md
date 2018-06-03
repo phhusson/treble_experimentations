@@ -9,6 +9,17 @@ For example:
     mkdir Lineage; cd Lineage
     bash ../treble_experimentations/build-rom.sh android-8.1 lineage
 
+## More flexible build script
+
+(this has been tested much less)
+
+  bash ../treble_experimentations/build-dakkar.sh rr \
+    arm-aonly-gapps-su \
+    arm64-ab-go-nosu
+
+The script should provide a help message if you pass something it
+doesn't understand
+
 # Conventions for commit messages:
 
 * `[UGLY]` Please make this patch disappear as soon as possible
