@@ -1,2 +1,0 @@
-service sudaemon /system/bin/phh-su --daemon
-    class main
