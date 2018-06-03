@@ -11,6 +11,11 @@ fi
 localManifestBranch=$1
 rom=$2
 
+if [ -z "$USER" ];then
+	export USER="$(id -un)"
+fi
+export LC_ALL=C
+
 if [[ -n "$3" ]];then
 	jobs=$3
 else
