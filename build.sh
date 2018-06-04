@@ -9,7 +9,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-8.1.0_r29"
+aosp="android-8.1.0_r30"
 phh="android-8.1"
 
 repo init -u https://android.googlesource.com/platform/manifest -b $aosp
