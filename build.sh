@@ -38,7 +38,7 @@ cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
-buildVariant treble_arm64_asS-userdebug arm64-aonly-floss-su
+buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
 
 buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
 buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
