@@ -46,4 +46,3 @@ buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
-buildVariant treble_arm_afS-userdebug arm-aonly-floss-su
