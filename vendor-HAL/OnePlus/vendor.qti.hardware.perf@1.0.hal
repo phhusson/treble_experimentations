@@ -1,0 +1,5 @@
+perfLockCmd(int, int)
+perfProfile(int, int, int)
+perfLockAcquire(int, unsigned int, vec<int>, int)
+perfLockRelease(int, int)
+perfHint(unsigned int, string, int, int, int)

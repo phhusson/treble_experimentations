@@ -1,0 +1,2 @@
+isExternalConnected() generates (vendor::qti::hardware::qdutils_disp::V1_0::IQdutilsDisp::output const&)
+setSecondaryDisplayStatus(vendor::qti::hardware::qdutils_disp::V1_0::IQdutilsDisp::input const&) generates (vendor::qti::hardware::qdutils_disp::V1_0::IQdutilsDisp::output const&)
