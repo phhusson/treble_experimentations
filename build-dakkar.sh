@@ -31,6 +31,13 @@ ROM types:
   carbon
   lineage
   rr
+  pixel
+  crdroid
+  mokee
+  aicp
+  aokp
+  slim
+  aex
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -88,6 +95,59 @@ function get_rom_type() {
                 treble_generate="rr"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
+            pixel)
+                mainrepo="https://github.com/PixelExperience/manifest"
+                mainbranch="oreo-mr1"
+                localManifestBranch="android-8.1"
+                treble_generate="pixel"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            crdroid)
+                mainrepo="https://github.com/crdroidandroid/android"
+                mainbranch="8.1"
+                localManifestBranch="android-8.1"
+                treble_generate="crdroid"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            mokee)
+                mainrepo="https://github.com/MoKee/android.git"
+                mainbranch="mko-mr1"
+                localManifestBranch="android-8.1"
+                treble_generate="mokee"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            aicp)
+                mainrepo="https://github.com/AICP/platform_manifest.git"
+                mainbranch="o8.1"
+                localManifestBranch="android-8.1"
+                treble_generate="aicp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            aokp)
+                mainrepo="https://github.com/AOKP/platform_manifest.git"
+                mainbranch="oreo"
+                localManifestBranch="android-8.1"
+                treble_generate="aokp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            aex)
+                mainrepo="https://github.com/AospExtended/manifest.git"
+                mainbranch="8.1.x"
+                localManifestBranch="android-8.1"
+                treble_generate="aex"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+	    slim)
+                mainrepo="git://github.com/SlimRoms/platform_manifest.git "
+                mainbranch="or8.1"
+                localManifestBranch="android-8.1"
+                treble_generate="slim"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+
+
+
+
         esac
         shift
     done
