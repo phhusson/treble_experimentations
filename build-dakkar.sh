@@ -83,7 +83,7 @@ function get_rom_type() {
                 ;;
             lineage)
                 mainrepo="https://github.com/LineageOS/android.git"
-                mainbranch="lineage-5.1"
+                mainbranch="lineage-15.1"
                 localManifestBranch="android-8.1"
                 treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
