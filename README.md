@@ -20,6 +20,23 @@ For example:
 The script should provide a help message if you pass something it
 doesn't understand
 
+# Using Docker
+
+clone this repository, then:
+
+    docker build -t treble docker/
+    
+    docker container create --name treble treble
+    
+    docker run -ti \
+        -v $(pwd):/treble \
+        -v $(pwd)/../treble_output:/treble_output \
+        treble \
+        -w /treble_output \
+        /bin/bash /treble/build-dakkar.sh rr \
+        arm-aonly-gapps-su \
+        arm64-ab-go-nosu
+
 # Conventions for commit messages:
 
 * `[UGLY]` Please make this patch disappear as soon as possible
