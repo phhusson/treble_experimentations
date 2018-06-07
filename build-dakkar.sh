@@ -290,6 +290,11 @@ function build_variant() {
     cp "$OUT"/system.img release/"$rom_fp"/system-"$2".img
 }
 
+function jack_env() {
+    RAM=$(free | awk '/^Mem:/{ printf("%0.f", $2/(1024^2) - 1)}')
+    export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx "$RAM"G
+}
+
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -305,6 +310,7 @@ init_local_manifest
 init_patches
 sync_repo
 patch_things
+jack_env
 
 . build/envsetup.sh
 
