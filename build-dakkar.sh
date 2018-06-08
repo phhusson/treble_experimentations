@@ -291,7 +291,7 @@ function build_variant() {
 }
 
 function jack_env() {
-    RAM=$(free | awk '/^Mem:/{ printf("%0.f", $2/(1024^2) - 1)}')
+    RAM=$(free | awk '/^Mem:/{ printf("%0.f", $2/(1024^2) - 1)}') #here's where the calc happens
     export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx "$RAM"G"
 }
 
