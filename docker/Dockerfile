@@ -6,6 +6,7 @@ ENV USER root
 RUN dpkg --add-architecture i386
 RUN apt update && apt install -y \
 	build-essential \
+        imagemagick \
 	xorriso \
 	locales \
 	openjdk-8-jdk \
