@@ -13,6 +13,7 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
+read -p "Do you want to sync? " choice 
 
 function help() {
     cat <<EOF
@@ -291,8 +292,10 @@ function build_variant() {
 }
 
 function jack_env() {
-    RAM=$(free | awk '/^Mem:/{ printf("%0.f", $2/(1024^2) - 1)}') #here's where the calc happens
-    export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx "$RAM"G"
+    RAM=$(free | awk '/^Mem:/{ printf("%0.f", $2/(1024^2))}') #calculating how much RAM (wow, such ram)
+    if [[ "$RAM" -lt 16 ]];then #if we're poor guys with less than 16gb
+	export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx"$((RAM -1))"G"
+    fi
 }
 
 parse_options "$@"
@@ -304,11 +307,13 @@ if [[ -z "$mainrepo" || ${#variant_codes[*]} -eq 0 ]]; then
     exit 1
 fi
 
+if [[ $choice == *"y"* ]];then
 init_release
 init_main_repo
 init_local_manifest
 init_patches
 sync_repo
+fi
 patch_things
 jack_env
 
