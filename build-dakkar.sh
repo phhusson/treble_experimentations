@@ -162,7 +162,7 @@ function get_rom_type() {
                 ;;
 	    du)
                 mainrepo="git://github.com/DirtyUnicorns/android_manifest "
-                mainbranch="or8.1"
+                mainbranch="o8x"
                 localManifestBranch="android-8.1"
                 treble_generate="du"
                 extra_make_options="WITHOUT_CHECK_API=true"
