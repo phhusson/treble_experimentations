@@ -267,7 +267,9 @@ function patch_things() {
         rm -f device/*/sepolicy/common/private/genfs_contexts
         (
             cd device/phh/treble
+    if [[ $choice == *"y"* ]];then
             git clean -fdx
+    fi
             bash generate.sh "$treble_generate"
         )
         bash "$(dirname "$0")/apply-patches.sh" patches
