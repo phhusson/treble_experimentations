@@ -147,70 +147,70 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    slim)
-                mainrepo="git://github.com/SlimRoms/platform_manifest.git "
+                mainrepo="https://github.com/SlimRoms/platform_manifest.git"
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    aosip)
-                mainrepo="git://github.com/AOSiP/platform_manifest.git "
+                mainrepo="https://github.com/AOSiP/platform_manifest.git"
                 mainbranch="oreo-mr1"
                 localManifestBranch="android-8.1"
                 treble_generate="aosip"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    du)
-                mainrepo="git://github.com/DirtyUnicorns/android_manifest "
+                mainrepo="https://github.com/DirtyUnicorns/android_manifest"
                 mainbranch="o8x"
                 localManifestBranch="android-8.1"
                 treble_generate="du"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    xenonhd)
-                mainrepo="git://github.com/TeamHorizon/platform_manifest.git "
+                mainrepo="https://github.com/TeamHorizon/platform_manifest.git"
                 mainbranch="o"
                 localManifestBranch="android-8.1"
                 treble_generate="xenonhd"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    aquarios)
-                mainrepo="git://github.com/AquariOS/manifest.git "
+                mainrepo="https://github.com/AquariOS/manifest.git"
                 mainbranch="a8.1.0"
                 localManifestBranch="android-8.1"
                 treble_generate="aquarios"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    bootleggers)
-                mainrepo="git://github.com/BootleggersROM/manifest.git "
+                mainrepo="https://github.com/BootleggersROM/manifest.git"
                 mainbranch="oreo.1"
                 localManifestBranch="android-8.1"
                 treble_generate="bootleggers"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    cosmicos)
-                mainrepo="git://github.com/Cosmic-OS/platform_manifest.git "
+                mainrepo="https://github.com/Cosmic-OS/platform_manifest.git"
                 mainbranch="pulsar-release"
                 localManifestBranch="android-8.1"
                 treble_generate="cosmicos"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    dotos)
-                mainrepo="git://github.com/DotOS/manifest.git "
+                mainrepo="https://github.com/DotOS/manifest.git"
                 mainbranch="dot-o"
                 localManifestBranch="android-8.1"
                 treble_generate="dotos"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    firehound)
-                mainrepo="git://github.com/FireHound/platform_manifest.git "
+                mainrepo="https://github.com/FireHound/platform_manifest.git"
                 mainbranch="o8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="firehound"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    omni)
-                mainrepo="git://github.com/omnirom/android.git "
+                mainrepo="https://github.com/omnirom/android.git"
                 mainbranch="android-8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="omni"
