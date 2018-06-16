@@ -100,14 +100,14 @@ function get_rom_type() {
                 mainrepo="https://github.com/PixelExperience/manifest"
                 mainbranch="oreo-mr1"
                 localManifestBranch="android-8.1"
-                treble_generate="pixel"
+                treble_generate=""
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             crdroid)
                 mainrepo="https://github.com/crdroidandroid/android"
                 mainbranch="8.1"
                 localManifestBranch="android-8.1"
-                treble_generate="crdroid"
+                treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             mokee)
