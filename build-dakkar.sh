@@ -300,6 +300,12 @@ function jack_env() {
     fi
 }
 
+function get_mk() {
+    if [[ -z "$treble_generate" ]];then
+    wget https://raw.githubusercontent.com/phhusson/rom_makefiles/master/"$treble_generate".mk -P device/phh/treble/
+    fi
+}
+
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -315,6 +321,7 @@ init_main_repo
 init_local_manifest
 init_patches
 sync_repo
+get_mk
 fi
 patch_things
 jack_env
