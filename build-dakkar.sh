@@ -4,6 +4,7 @@ set -e
 ## set defaults
 
 rom_fp="$(date +%y%m%d)"
+curpath=$PWD
 
 myname="$(basename "$0")"
 if [[ $(uname -s) = "Darwin" ]];then
@@ -13,7 +14,7 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
-read -p "Do you want to sync? " choice 
+read -p "[Phhusson magic-wand] Do you want to sync the whole jazz? " choice 
 
 function help() {
     cat <<EOF
@@ -100,14 +101,14 @@ function get_rom_type() {
                 mainrepo="https://github.com/PixelExperience/manifest"
                 mainbranch="oreo-mr1"
                 localManifestBranch="android-8.1"
-                treble_generate="pixel"
+                treble_generate=""
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             crdroid)
                 mainrepo="https://github.com/crdroidandroid/android"
                 mainbranch="8.1"
                 localManifestBranch="android-8.1"
-                treble_generate="crdroid"
+                treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             mokee)
@@ -300,6 +301,14 @@ function jack_env() {
     fi
 }
 
+function save_the_dev() {
+    cd device/phh/treble
+    git stash   
+    git stash apply
+    cd $curpath
+    sync_repo
+}
+
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -314,7 +323,7 @@ init_release
 init_main_repo
 init_local_manifest
 init_patches
-sync_repo
+save_the_dev
 fi
 patch_things
 jack_env
