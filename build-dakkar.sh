@@ -304,9 +304,12 @@ function jack_env() {
 function save_the_dev() {
     cd device/phh/treble
     git stash   
-    git stash apply
     cd $curpath
     sync_repo
+    cd device/phh/treble
+    git stash apply
+    cd $curpath
+    
 }
 
 parse_options "$@"
