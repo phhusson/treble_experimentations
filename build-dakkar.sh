@@ -304,17 +304,16 @@ function jack_env() {
 function save_the_dev() {
     if [ -d device/phh/treble ];then
 	    cd device/phh/treble
-	    git stash -u   
+        if git stash -u | grep -q 'No local changes to save';then
+	   stashstatus=blank
+	fi   
 	    cd $curpath
-	    sync_repo
-	    cd device/phh/treble
-	    git stash apply
-	    cd $curpath
+	    
     fi
 }
 
 function restore_the_dev() {
-	if [ -d device/phh/trble ];then
+	if [ -d device/phh/trble ] && [ -z "$stashstatus" ];then
 		cd device/phh/treble
 		git stash apply
 		cd $curpath
@@ -335,7 +334,7 @@ init_release
 init_main_repo
 init_local_manifest
 init_patches
-save_the_dev
+save_the_dev 
 sync_repo
 restore_the_dev
 fi
