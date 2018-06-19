@@ -14,6 +14,10 @@ fi
 
 ## handle command line arguments
 read -p "[Phhusson magic-wand] Do you want to sync the whole jazz? " choice 
+read -p "[Phhusson magic-wand] Do you have a reference path? " refchoice
+if [[ $refchoice == *"y"* ]];then 
+read -p "[Phhusson magic-wand] Insert your path including the home path, eg. /home/user/dirtoreference " refpath
+fi
 
 function help() {
     cat <<EOF
@@ -224,6 +228,10 @@ function init_main_repo() {
     repo init -u "$mainrepo" -b "$mainbranch"
 }
 
+function init_main_repo_ref() {
+    repo init -u "$mainrepo" -b "$mainbranch" --reference=$refpath
+}
+
 function clone_or_checkout() {
     local dir="$1"
     local repo="$2"
@@ -310,7 +318,7 @@ function save_the_dev() {
 }
 
 function restore_the_dev() {
-	if [ -d device/phh/trble ] && [ -z "$stashstatus" ];then
+	if [ -d device/phh/treble ] && [ -z "$stashstatus" ];then
 		cd device/phh/treble
 		git stash apply
 	fi
@@ -327,7 +335,11 @@ fi
 
 if [[ $choice == *"y"* ]];then
 init_release
+if [[ -z "$refpath" ]];then
 init_main_repo
+else 
+init_main_repo_ref
+fi
 init_local_manifest
 init_patches
 save_the_dev 
