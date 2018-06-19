@@ -303,8 +303,8 @@ function jack_env() {
 function save_the_dev() {
     if [ -d device/phh/treble ];then
 	    cd device/phh/treble
-        if git stash -u | grep -q 'No local changes to save';then
-	   stashstatus=blank
+        if ! git stash -u;then
+	   stashstatus=empty
 	fi   
 	    cd $curpath
 	    
