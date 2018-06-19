@@ -302,14 +302,23 @@ function jack_env() {
 }
 
 function save_the_dev() {
-    cd device/phh/treble
-    git stash   
-    cd $curpath
-    sync_repo
-    cd device/phh/treble
-    git stash apply
-    cd $curpath
-    
+    if [ -d device/phh/treble ];then
+	    cd device/phh/treble
+	    git stash -u   
+	    cd $curpath
+	    sync_repo
+	    cd device/phh/treble
+	    git stash apply
+	    cd $curpath
+    fi
+}
+
+function restore_the_dev() {
+	if [ -d device/phh/trble ];then
+		cd device/phh/treble
+		git stash apply
+		cd $curpath
+	fi
 }
 
 parse_options "$@"
@@ -327,6 +336,8 @@ init_main_repo
 init_local_manifest
 init_patches
 save_the_dev
+sync_repo
+restore_the_dev
 fi
 patch_things
 jack_env
