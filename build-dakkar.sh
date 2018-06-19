@@ -4,7 +4,6 @@ set -e
 ## set defaults
 
 rom_fp="$(date +%y%m%d)"
-curpath=$PWD
 
 myname="$(basename "$0")"
 if [[ $(uname -s) = "Darwin" ]];then
@@ -306,7 +305,6 @@ function save_the_dev() {
         if ! git stash -u;then
 	   stashstatus=empty
 	fi   
-	    cd $curpath
 	    
     fi
 }
@@ -315,7 +313,6 @@ function restore_the_dev() {
 	if [ -d device/phh/trble ] && [ -z "$stashstatus" ];then
 		cd device/phh/treble
 		git stash apply
-		cd $curpath
 	fi
 }
 
