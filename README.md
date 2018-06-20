@@ -39,8 +39,8 @@ clone this repository, then:
     docker run -ti \
         -v $(pwd):/treble \
         -v $(pwd)/../treble_output:/treble_output \
-        treble \
         -w /treble_output \
+        treble \
         /bin/bash /treble/build-dakkar.sh rr \
         arm-aonly-gapps-su \
         arm64-ab-go-nosu
