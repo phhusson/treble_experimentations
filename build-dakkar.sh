@@ -140,14 +140,14 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    slim)
-                mainrepo="git://github.com/SlimRoms/platform_manifest.git "
+                mainrepo="git://github.com/SlimRoms/platform_manifest.git"
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             posp)
-                mainrepo="https://github.com/PotatoProject/manifest.git "
+                mainrepo="https://github.com/PotatoProject/manifest.git"
                 mainbranch="aligot-release"
                 localManifestBranch="android-8.1"
                 treble_generate="posp"
