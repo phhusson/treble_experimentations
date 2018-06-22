@@ -39,7 +39,7 @@ ROM types:
   aokp
   slim
   aex
-  posp
+  potato
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -146,11 +146,11 @@ function get_rom_type() {
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-            posp)
+            potato)
                 mainrepo="https://github.com/PotatoProject/manifest.git"
                 mainbranch="aligot-release"
                 localManifestBranch="android-8.1"
-                treble_generate="posp"
+                treble_generate="potato"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;            
 	        
