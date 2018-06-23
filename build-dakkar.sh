@@ -32,6 +32,7 @@ ROM types:
   carbon
   lineage
   rr
+  aquarios
   pixel
   crdroid
   mokee
@@ -94,6 +95,13 @@ function get_rom_type() {
                 mainbranch="oreo"
                 localManifestBranch="android-8.1"
                 treble_generate="rr"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            aquarios)
+                mainrepo="https://github.com/AquariOS/manifest.git"
+                mainbranch="a8.1.0-caf"
+                localManifestBranch="android-8.1"
+                treble_generate="aquarios"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             pixel)
