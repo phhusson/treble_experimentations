@@ -32,6 +32,8 @@ else
     fi
 fi
 
+#We don't want to replace from AOSP since we'll be applying patches by hand
+rm -f .repo/local_manifests/replace.xml
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
 elif [ "$rom" == "lineage" ];then
