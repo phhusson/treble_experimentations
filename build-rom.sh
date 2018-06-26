@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rom_fp="$(date +%y%m%d)"
+originFolder="$(dirname "$0")"
 mkdir -p release/$rom_fp/
 set -e
 
@@ -10,6 +11,11 @@ if [ "$#" -le 1 ];then
 fi
 localManifestBranch=$1
 rom=$2
+
+if [ "$release" == true ];then
+    [ -z "$version" ] && exit 1
+    [ ! -f "$originFolder/release/config.ini" ] && exit 1
+fi
 
 if [ -z "$USER" ];then
 	export USER="$(id -un)"
@@ -48,7 +54,6 @@ fi
 
 #We don't want to replace from AOSP since we'll be applying patches by hand
 rm -f .repo/local_manifests/replace.xml
-rm -f .repo/local_manifests/opengapps.xml
 
 repo sync -c -j$jobs --force-sync
 rm -f device/*/sepolicy/common/private/genfs_contexts
@@ -67,7 +72,23 @@ buildVariant() {
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
-buildVariant treble_arm64_avN-userdebug arm64-aonly
-buildVariant treble_arm64_bvN-userdebug arm64-ab
-buildVariant treble_arm_avN-userdebug arm-aonly
+buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
+buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
+buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
+buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
+buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 buildVariant treble_arm_aoS-userdebug arm-aonly-gapps
+
+if [ "$release" == true ];then
+    (
+        rm -Rf venv
+        pip install virtualenv
+        export PATH=$PATH:~/.local/bin/
+        virtualenv -p /usr/bin/python3 venv
+        source venv/bin/activate
+        pip install -r $originFolder/release/requirements.txt
+
+        python $originFolder/release/push.py "${rom^}" "$version" release/$rom_fp/
+        rm -Rf venv
+    )
+fi
