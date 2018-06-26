@@ -46,10 +46,16 @@ else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $localManifestBranch
 fi
 
-if [ -d patches ];then
-    ( cd patches; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
+if [ -z "$local_patches" ];then
+    if [ -d patches ];then
+        ( cd patches; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
+    else
+        git clone https://github.com/phhusson/treble_patches patches -b $localManifestBranch
+    fi
 else
-    git clone https://github.com/phhusson/treble_patches patches -b $localManifestBranch
+    rm -Rf patches
+    mkdir patches
+    unzip  "$local_patches" -d patches
 fi
 
 #We don't want to replace from AOSP since we'll be applying patches by hand
