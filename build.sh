@@ -21,6 +21,7 @@ fi
 if [ "$release" == true ];then
     rm -Rf venv
     pip install virtualenv
+    export PATH=$PATH:~/.local/bin/
     virtualenv -p /usr/bin/python3 venv
     source venv/bin/activate
     pip install -r $originFolder/release/requirements.txt
