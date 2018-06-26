@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rom_fp="$(date +%y%m%d)"
+originFolder="$(dirname "$0")"
 mkdir -p release/$rom_fp/
 set -e
 
@@ -11,6 +12,19 @@ export LC_ALL=C
 
 aosp="android-8.1.0_r30"
 phh="android-8.1"
+
+if [ "$release" == true ];then
+    [ -z "$version" ] && exit 1
+    [ ! -f "$originFolder/release/config.ini" ] && exit 1
+fi
+
+if [ "$release" == true ];then
+    rm -Rf venv
+    pip install virtualenv
+    virtualenv -p /usr/bin/python3 venv
+    source venv/bin/activate
+    pip install -r $originFolder/release/requirements.txt
+fi
 
 repo init -u https://android.googlesource.com/platform/manifest -b $aosp
 if [ -d .repo/local_manifests ] ;then
@@ -33,7 +47,7 @@ buildVariant() {
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
-bash $(dirname "$0")/list-patches.sh
+bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
@@ -46,3 +60,8 @@ buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
+
+if [ "$release" == true ];then
+    python $originFolder/release/push.py AOSP "$version" release/$rom_fp/
+    rm -Rf venv
+fi
