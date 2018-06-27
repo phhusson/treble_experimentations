@@ -99,7 +99,7 @@ function get_rom_type() {
                 ;;
             aquarios)
                 mainrepo="https://github.com/AquariOS/manifest.git"
-                mainbranch="a8.1.0-caf"
+                mainbranch="a8.1.0-caf-gsi"
                 localManifestBranch="android-8.1"
                 treble_generate="aquarios"
                 extra_make_options="WITHOUT_CHECK_API=true"
