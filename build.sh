@@ -10,7 +10,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-8.1.0_r30"
+aosp="android-8.1.0_r36"
 phh="android-8.1"
 
 if [ "$release" == true ];then
