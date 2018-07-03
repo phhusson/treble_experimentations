@@ -39,6 +39,7 @@ ROM types:
   aokp
   slim
   aex
+  xenonhd
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -145,7 +146,13 @@ function get_rom_type() {
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-
+	    xenonhd)
+                mainrepo="https://github.com/TeamHorizon/platform_manifest.git"
+                mainbranch="o"
+                localManifestBranch="android-8.1"
+                treble_generate="xenonhd"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
 
 
 
