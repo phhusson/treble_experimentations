@@ -33,6 +33,7 @@ ROM types:
   lineage
   rr
   aquarios
+  dirtyunicorns
   pixel
   crdroid
   mokee
@@ -102,6 +103,13 @@ function get_rom_type() {
                 mainbranch="a8.1.0-caf-gsi"
                 localManifestBranch="android-8.1"
                 treble_generate="aquarios"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            dirtyunicorns)
+                mainrepo="https://github.com/DirtyUnicorns/android_manifest.git"
+                mainbranch="o8x"
+                localManifestBranch="android-8.1"
+                treble_generate="du"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             pixel)
@@ -297,7 +305,6 @@ function build_variant() {
     lunch "$1"
     make $extra_make_options BUILD_NUMBER="$rom_fp" installclean
     make $extra_make_options BUILD_NUMBER="$rom_fp" -j "$jobs" systemimage
-    make $extra_make_options BUILD_NUMBER="$rom_fp" vndk-test-sepolicy
     cp "$OUT"/system.img release/"$rom_fp"/system-"$2".img
 }
 

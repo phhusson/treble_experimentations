@@ -6,7 +6,7 @@ mkdir -p release/$rom_fp/
 set -e
 
 if [ "$#" -le 1 ];then
-	echo "Usage: $0 <android-8.1> <carbon|lineage|rr|aquarios> '# of jobs'"
+	echo "Usage: $0 <android-8.1> <carbon|lineage|rr|aquarios|dirtyunicorns> '# of jobs'"
 	exit 0
 fi
 localManifestBranch=$1
@@ -42,6 +42,8 @@ elif [ "$rom" == "rr" ];then
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
 elif [ "$rom" == "aquarios" ];then
 	repo init -u https://github.com/AquariOS/manifest.git -b a8.1.0-caf-gsi
+elif [ "$rom" == "dirtyunicorns" ];then
+	repo init -u https://github.com/DirtyUnicorns/android_manifest.git -b o8x
 fi
 
 if [ -d .repo/local_manifests ] ;then
@@ -79,7 +81,6 @@ buildVariant() {
 	lunch $1
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp installclean
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp -j$jobs systemimage
-	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp vndk-test-sepolicy
 	cp $OUT/system.img release/$rom_fp/system-${2}.img
 }
 
