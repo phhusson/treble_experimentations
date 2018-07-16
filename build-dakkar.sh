@@ -39,6 +39,7 @@ ROM types:
   aokp
   slim
   aex
+  tipsy
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -143,6 +144,13 @@ function get_rom_type() {
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="slim"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+	    tipsy)
+                mainrepo="https://github.com/TipsyOs/platform_manifest.git "
+                mainbranch="8.1"
+                localManifestBranch="android-8.1"
+                treble_generate="tipsy"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 
