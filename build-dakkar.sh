@@ -13,7 +13,11 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
-read -p "Do you want to sync? " choice 
+read -p "[Phhusson magic-wand] Do you want to sync the whole jazz? " choice 
+read -p "[Phhusson magic-wand] Do you have a reference path? " refchoice
+if [[ $refchoice == *"y"* ]];then 
+read -p "[Phhusson magic-wand] Insert your path including the home path, eg. /home/user/dirtoreference " refpath
+fi
 
 function help() {
     cat <<EOF
@@ -100,14 +104,13 @@ function get_rom_type() {
                 mainrepo="https://github.com/PixelExperience/manifest"
                 mainbranch="oreo-mr1"
                 localManifestBranch="android-8.1"
-                treble_generate="pixel"
-                extra_make_options="WITHOUT_CHECK_API=true"
+                treble_generate=""
                 ;;
             crdroid)
                 mainrepo="https://github.com/crdroidandroid/android"
                 mainbranch="8.1"
                 localManifestBranch="android-8.1"
-                treble_generate="crdroid"
+                treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             mokee)
@@ -225,6 +228,10 @@ function init_main_repo() {
     repo init -u "$mainrepo" -b "$mainbranch"
 }
 
+function init_main_repo_ref() {
+    repo init -u "$mainrepo" -b "$mainbranch" --reference=$refpath
+}
+
 function clone_or_checkout() {
     local dir="$1"
     local repo="$2"
@@ -300,6 +307,23 @@ function jack_env() {
     fi
 }
 
+function save_the_dev() {
+    if [ -d device/phh/treble ];then
+	    cd device/phh/treble
+        if ! git stash -u;then
+	   stashstatus=empty
+	fi   
+	    
+    fi
+}
+
+function restore_the_dev() {
+	if [ -d device/phh/treble ] && [ -z "$stashstatus" ];then
+		cd device/phh/treble
+		git stash apply
+	fi
+}
+
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -311,10 +335,16 @@ fi
 
 if [[ $choice == *"y"* ]];then
 init_release
+if [[ -z "$refpath" ]];then
 init_main_repo
+else 
+init_main_repo_ref
+fi
 init_local_manifest
 init_patches
+save_the_dev 
 sync_repo
+restore_the_dev
 fi
 patch_things
 jack_env
