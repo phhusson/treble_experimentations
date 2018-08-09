@@ -312,6 +312,15 @@ if [[ -z "$mainrepo" || ${#variant_codes[*]} -eq 0 ]]; then
     exit 1
 fi
 
+# Use a python2 virtualenv if system python is python3
+python=$(python -V | awk '{print $2}' | head -c2)
+if [[ $python == "3." ]]; then
+    if [ ! -d .venv ]; then
+        virtualenv2 .venv
+    fi
+    . .venv/bin/activate
+fi
+
 init_release
 if [[ $choice == *"y"* ]];then
 init_main_repo
