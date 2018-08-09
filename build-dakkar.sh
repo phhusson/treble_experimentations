@@ -312,8 +312,8 @@ if [[ -z "$mainrepo" || ${#variant_codes[*]} -eq 0 ]]; then
     exit 1
 fi
 
-if [[ $choice == *"y"* ]];then
 init_release
+if [[ $choice == *"y"* ]];then
 init_main_repo
 init_local_manifest
 init_patches
