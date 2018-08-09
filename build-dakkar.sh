@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ -z "$USER" ];then
+    export USER="$(id -un)"
+fi
+export LC_ALL=C
+
 ## set defaults
 
 rom_fp="$(date +%y%m%d)"
@@ -13,7 +18,7 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
-read -p "Do you want to sync? " choice 
+read -p "Do you want to sync? " choice
 
 function help() {
     cat <<EOF
@@ -49,6 +54,7 @@ Variants are dash-joined combinations of (in order):
   * "vanilla" to not include GApps
   * "gapps" to include opengapps
   * "go" to include gapps go
+  * "floss" to include floss
 * SU selection ("su" or "nosu")
 
 for example:
@@ -145,10 +151,6 @@ function get_rom_type() {
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-
-
-
-
         esac
         shift
     done
@@ -178,6 +180,7 @@ declare -A gapps_selection_map
 gapps_selection_map[vanilla]=v
 gapps_selection_map[gapps]=g
 gapps_selection_map[go]=o
+gapps_selection_map[floss]=f
 
 declare -A su_selection_map
 su_selection_map[su]=S
@@ -228,7 +231,7 @@ function init_main_repo() {
 function clone_or_checkout() {
     local dir="$1"
     local repo="$2"
-    
+
     if [[ -d "$dir" ]];then
         (
             cd "$dir"
@@ -248,7 +251,7 @@ function init_local_manifest() {
 function init_patches() {
     if [[ -n "$treble_generate" ]]; then
         clone_or_checkout patches treble_patches
-       
+
         # We don't want to replace from AOSP since we'll be applying
         # patches by hand
         rm -f .repo/local_manifests/replace.xml
@@ -309,8 +312,17 @@ if [[ -z "$mainrepo" || ${#variant_codes[*]} -eq 0 ]]; then
     exit 1
 fi
 
-if [[ $choice == *"y"* ]];then
+# Use a python2 virtualenv if system python is python3
+python=$(python -V | awk '{print $2}' | head -c2)
+if [[ $python == "3." ]]; then
+    if [ ! -d .venv ]; then
+        virtualenv2 .venv
+    fi
+    . .venv/bin/activate
+fi
+
 init_release
+if [[ $choice == *"y"* ]];then
 init_main_repo
 init_local_manifest
 init_patches
