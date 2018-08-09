@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ -z "$USER" ];then
+    export USER="$(id -un)"
+fi
+export LC_ALL=C
+
 ## set defaults
 
 rom_fp="$(date +%y%m%d)"
