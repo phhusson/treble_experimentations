@@ -54,6 +54,7 @@ Variants are dash-joined combinations of (in order):
   * "vanilla" to not include GApps
   * "gapps" to include opengapps
   * "go" to include gapps go
+  * "floss" to include floss
 * SU selection ("su" or "nosu")
 
 for example:
@@ -183,6 +184,7 @@ declare -A gapps_selection_map
 gapps_selection_map[vanilla]=v
 gapps_selection_map[gapps]=g
 gapps_selection_map[go]=o
+gapps_selection_map[floss]=f
 
 declare -A su_selection_map
 su_selection_map[su]=S
