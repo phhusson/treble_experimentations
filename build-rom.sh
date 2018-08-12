@@ -41,7 +41,7 @@ elif [ "$rom" == "lineage" ];then
 elif [ "$rom" == "rr" ];then
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
 elif [ "$rom" == "aquarios" ];then
-	repo init -u https://github.com/AquariOS/manifest.git -b a8.1.0-caf-gsi
+	repo init -u https://github.com/AquariOS/manifest.git -b a8.1.0-caf
 elif [ "$rom" == "dirtyunicorns" ];then
 	repo init -u https://github.com/DirtyUnicorns/android_manifest.git -b o8x
 fi
