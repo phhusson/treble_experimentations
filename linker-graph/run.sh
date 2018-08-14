@@ -6,7 +6,10 @@ parse() {
     if echo "$1" |grep -qE "$ndk";then
         return
     fi
-    adb pull "$1" > /dev/null 2>/dev/null
+    if [ -f "$(basename "$1")" ];then
+        return
+    fi
+    adb wait-for-device pull "$1" > /dev/null 2>/dev/null
     for so in $(LC_ALL=C readelf -d "$(basename "$1")"  |sed -nE 's/.*NEEDED.*\[([^]]*)\].*/\1/p');do
         if [[ $1 =~ /lib64/ ]];then
             lib=lib64
@@ -15,7 +18,7 @@ parse() {
         fi
         found=false
         for path in /odm/$lib /vendor/$lib /system/$lib/vndk-sp-26 /system/$lib;do
-            if adb pull "$path"/"$so"  > /dev/null 2>/dev/null;then
+            if adb wait-for-device pull "$path"/"$so"  > /dev/null 2>/dev/null;then
                 parse "$path"/"$so" "${2}\t"
                 found=true
                 break
