@@ -290,10 +290,16 @@ function patch_things() {
 
 function build_variant() {
     lunch "$1"
+    if [[ $2 =~ ^arm64-aonly-(gapps|floss) ]];then
+        sed -i.bak -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+    fi
     make $extra_make_options BUILD_NUMBER="$rom_fp" installclean
     make $extra_make_options BUILD_NUMBER="$rom_fp" -j "$jobs" systemimage
     make $extra_make_options BUILD_NUMBER="$rom_fp" vndk-test-sepolicy
     cp "$OUT"/system.img release/"$rom_fp"/system-"$2".img
+    if [[ -f device/phh/treble/phhgsi_arm64_a/BoardConfig.mk.bak ]];then
+        mv device/phh/treble/phhgsi_arm64_a/BoardConfig.mk.bak device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+    fi
 }
 
 function jack_env() {

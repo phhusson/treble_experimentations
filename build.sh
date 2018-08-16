@@ -33,10 +33,16 @@ repo sync -c -j 1 --force-sync
 
 buildVariant() {
 	lunch $1
+	if [[ $2 =~ ^arm64-aonly-(gapps|floss) ]];then
+		sed -i.bak -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+	fi
 	make BUILD_NUMBER=$rom_fp installclean
 	make BUILD_NUMBER=$rom_fp -j8 systemimage
 	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
 	xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
+	if [[ -f device/phh/treble/phhgsi_arm64_a/BoardConfig.mk.bak ]];then
+		mv device/phh/treble/phhgsi_arm64_a/BoardConfig.mk.bak device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+	fi
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
