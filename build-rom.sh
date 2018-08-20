@@ -67,8 +67,6 @@ repo sync -c -j$jobs --force-sync
 rm -f device/*/sepolicy/common/private/genfs_contexts
 (cd device/phh/treble; git clean -fdx; bash generate.sh $rom)
 
-sed -i -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
-
 if [ -f vendor/rr/prebuilt/common/Android.mk ];then
     sed -i \
         -e 's/LOCAL_MODULE := Wallpapers/LOCAL_MODULE := WallpapersRR/g' \
@@ -81,10 +79,16 @@ bash "$(dirname "$0")/apply-patches.sh" patches
 
 buildVariant() {
 	lunch $1
+	if [[ $2 =~ ^arm64-aonly-(gapps|floss) ]];then
+		sed -i.bak -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+	fi
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp installclean
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp -j$jobs systemimage
 	make WITHOUT_CHECK_API=true BUILD_NUMBER=$rom_fp vndk-test-sepolicy
 	xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
+	if [[ -f device/phh/treble/phhgsi_arm64_a/BoardConfig.mk.bak ]];then
+		mv device/phh/treble/phhgsi_arm64_a/BoardConfig.mk.bak device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+	fi
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
