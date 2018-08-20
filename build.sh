@@ -69,7 +69,7 @@ if [ "$release" == true ];then
         pip install -r $originFolder/release/requirements.txt
 
         name="AOSP 8.1"
-        [ "$1" == "android-9.0" ] && name="AOSP 8.0"
+        [ "$1" == "android-9.0" ] && name="AOSP 9.0"
         python $originFolder/release/push.py "$name" "$version" release/$rom_fp/
         rm -Rf venv
     )
