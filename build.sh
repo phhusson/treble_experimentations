@@ -13,6 +13,11 @@ export LC_ALL=C
 aosp="android-8.1.0_r43"
 phh="android-8.1"
 
+if [ "$1" == "android-9.0" ];then
+    aosp="android-9.0.0_r1"
+    phh="android-9.0"
+fi
+
 if [ "$release" == true ];then
     [ -z "$version" ] && exit 1
     [ ! -f "$originFolder/release/config.ini" ] && exit 1
@@ -44,15 +49,15 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
-buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
-buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
+[ "$1" != "android-9.0" ] && buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
+[ "$1" != "android-9.0" ] && buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
 
 buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
-buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
-buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
+[ "$1" != "android-9.0" ] && buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
+[ "$1" != "android-9.0" ] && buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
-buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
+[ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
 
 if [ "$release" == true ];then
     (
@@ -63,7 +68,9 @@ if [ "$release" == true ];then
         source venv/bin/activate
         pip install -r $originFolder/release/requirements.txt
 
-        python $originFolder/release/push.py AOSP "$version" release/$rom_fp/
+        name="AOSP 8.1"
+        [ "$1" == "android-9.0" ] && name="AOSP 8.0"
+        python $originFolder/release/push.py "$name" "$version" release/$rom_fp/
         rm -Rf venv
     )
 fi
