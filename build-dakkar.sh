@@ -61,10 +61,14 @@ Variants are dash-joined combinations of (in order):
   * "go" to include gapps go
   * "floss" to include floss
 * SU selection ("su" or "nosu")
+* Build variant selection (optional)
+  * "eng" for eng build
+  * "user" for prod build
+  * "userdebug" for debug build (default)
 
 for example:
 
-* arm-aonly-vanilla-nosu
+* arm-aonly-vanilla-nosu-user
 * arm64-ab-gapps-su
 EOF
 }
@@ -226,6 +230,11 @@ declare -A su_selection_map
 su_selection_map[su]=S
 su_selection_map[nosu]=N
 
+declare -A build_type_selection_map
+build_type_selection_map[eng]=eng
+build_type_selection_map[user]=user
+build_type_selection_map[userdebug]=userdebug
+
 function parse_variant() {
     local -a pieces
     IFS=- pieces=( $1 )
@@ -234,6 +243,7 @@ function parse_variant() {
     local partition_layout=${partition_layout_map[${pieces[1]}]}
     local gapps_selection=${gapps_selection_map[${pieces[2]}]}
     local su_selection=${su_selection_map[${pieces[3]}]}
+    local build_type_selection=${build_type_selection_map[${pieces[4]}]}
 
     if [[ -z "$processor_type" || -z "$partition_layout" || -z "$gapps_selection" || -z "$su_selection" ]]; then
         >&2 echo "Invalid variant '$1'"
@@ -241,7 +251,7 @@ function parse_variant() {
         exit 2
     fi
 
-    echo "treble_${processor_type}_${partition_layout}${gapps_selection}${su_selection}-userdebug"
+    echo "treble_${processor_type}_${partition_layout}${gapps_selection}${su_selection}-${build_type_selection}"
 }
 
 declare -a variant_codes
@@ -249,8 +259,12 @@ declare -a variant_names
 function get_variants() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            *-*-*-*)
+            *-*-*-*-*)
                 variant_codes[${#variant_codes[*]}]=$(parse_variant "$1")
+                variant_names[${#variant_names[*]}]="$1"
+                ;;
+            *-*-*-*)
+                variant_codes[${#variant_codes[*]}]=$(parse_variant "$1-userdebug")
                 variant_names[${#variant_names[*]}]="$1"
                 ;;
         esac
