@@ -18,7 +18,7 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
-read -p "Do you want to sync? " choice
+read -p "Do you want to sync? (y/N) " choice
 
 function help() {
     cat <<EOF
