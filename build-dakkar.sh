@@ -68,21 +68,21 @@ function get_rom_type() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
             aosp80)
-                mainrepo="https://android.googlesource.com/platform/manifest"
+                mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-vts-8.0_r4"
                 localManifestBranch="master"
                 treble_generate=""
                 extra_make_options=""
                 ;;
             aosp81)
-                mainrepo="https://android.googlesource.com/platform/manifest"
+                mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-8.1.0_r30"
                 localManifestBranch="android-8.1"
                 treble_generate=""
                 extra_make_options=""
                 ;;
             carbon)
-                mainrepo="https://github.com/CarbonROM/android"
+                mainrepo="https://github.com/CarbonROM/android.git"
                 mainbranch="cr-6.1"
                 localManifestBranch="android-8.1"
                 treble_generate="carbon"
@@ -103,14 +103,14 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             pixel)
-                mainrepo="https://github.com/PixelExperience/manifest"
+                mainrepo="https://github.com/PixelExperience/manifest.git"
                 mainbranch="oreo-mr1"
                 localManifestBranch="android-8.1"
                 treble_generate="pixel"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             crdroid)
-                mainrepo="https://github.com/crdroidandroid/android"
+                mainrepo="https://github.com/crdroidandroid/android.git"
                 mainbranch="8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="crdroid"
@@ -144,8 +144,8 @@ function get_rom_type() {
                 treble_generate="aex"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-	    slim)
-                mainrepo="git://github.com/SlimRoms/platform_manifest.git "
+            slim)
+                mainrepo="https://github.com/SlimRoms/platform_manifest.git"
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="slim"
