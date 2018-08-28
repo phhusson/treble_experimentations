@@ -34,16 +34,19 @@ ROM types:
 
   aosp80
   aosp81
+  aosp90
   carbon
-  lineage
+  lineage151
+  lineage160
   rr
-  pixel
+  pixel81
+  pixel90
   crdroid
   mokee
   aicp
   aokp
-  slim
   aex
+  slim
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -81,6 +84,13 @@ function get_rom_type() {
                 treble_generate=""
                 extra_make_options=""
                 ;;
+            aosp90)
+                mainrepo="https://android.googlesource.com/platform/manifest.git"
+                mainbranch="android-9.0.0_r1"
+                localManifestBranch="android-9.0"
+                treble_generate=""
+                extra_make_options=""
+                ;;
             carbon)
                 mainrepo="https://github.com/CarbonROM/android.git"
                 mainbranch="cr-6.1"
@@ -88,10 +98,17 @@ function get_rom_type() {
                 treble_generate="carbon"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-            lineage)
+            lineage151)
                 mainrepo="https://github.com/LineageOS/android.git"
                 mainbranch="lineage-15.1"
                 localManifestBranch="android-8.1"
+                treble_generate="lineage"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            lineage160)
+                mainrepo="https://github.com/LineageOS/android.git"
+                mainbranch="lineage-16.0"
+                localManifestBranch="android-9.0"
                 treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
@@ -102,10 +119,17 @@ function get_rom_type() {
                 treble_generate="rr"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-            pixel)
+            pixel81)
                 mainrepo="https://github.com/PixelExperience/manifest.git"
                 mainbranch="oreo-mr1"
                 localManifestBranch="android-8.1"
+                treble_generate="pixel"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            pixe90)
+                mainrepo="https://github.com/PixelExperience-P/manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
                 treble_generate="pixel"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
