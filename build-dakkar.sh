@@ -126,7 +126,7 @@ function get_rom_type() {
                 treble_generate="pixel"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-            pixe90)
+            pixel90)
                 mainrepo="https://github.com/PixelExperience-P/manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
