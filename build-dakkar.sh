@@ -47,6 +47,7 @@ ROM types:
   aokp
   aex
   slim
+  havoc
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -173,6 +174,13 @@ function get_rom_type() {
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="slim"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+	    havoc)
+                mainrepo="https://github.com/Havoc-OS/android_manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
+                treble_generate="havoc"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
         esac
