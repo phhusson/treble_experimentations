@@ -288,6 +288,11 @@ function init_patches() {
         # patches by hand
         rm -f .repo/local_manifests/replace.xml
 
+        # Remove exfat entry from local_manifest if it exists in ROM manifest 
+        if grep -rqF exfat .repo/manifests || grep -qF exfat .repo/manifest.xml;then
+            sed -i -E '/external\/exfat/d' .repo/local_manifests/manifest.xml
+        fi
+
         # should I do this? will it interfere with building non-gapps images?
         # rm -f .repo/local_manifests/opengapps.xml
     fi
