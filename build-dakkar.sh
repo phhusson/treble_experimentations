@@ -36,6 +36,7 @@ ROM types:
   aosp81
   aosp90
   carbon
+  e-0.2
   lineage151
   lineage160
   rr
@@ -97,6 +98,13 @@ function get_rom_type() {
                 mainbranch="cr-6.1"
                 localManifestBranch="android-8.1"
                 treble_generate="carbon"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            e-0.2)
+                mainrepo="https://gitlab.e.foundation/e/os/android/"
+                mainbranch="eelo-0.2"
+                localManifestBranch="android-9.0"
+                treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             lineage151)
