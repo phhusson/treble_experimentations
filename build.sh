@@ -10,11 +10,11 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-8.1.0_r46"
+aosp="android-8.1.0_r48"
 phh="android-8.1"
 
 if [ "$1" == "android-9.0" ];then
-    aosp="android-9.0.0_r8"
+    aosp="android-9.0.0_r9"
     phh="android-9.0"
 fi
 
