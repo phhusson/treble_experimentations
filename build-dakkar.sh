@@ -212,10 +212,6 @@ function parse_options() {
     done
 }
 
-declare -A processor_type_map
-processor_type_map[arm]=arm
-processor_type_map[arm64]=arm64
-
 declare -A partition_layout_map
 partition_layout_map[aonly]=a
 partition_layout_map[ab]=b
@@ -230,20 +226,15 @@ declare -A su_selection_map
 su_selection_map[su]=S
 su_selection_map[nosu]=N
 
-declare -A build_type_selection_map
-build_type_selection_map[eng]=eng
-build_type_selection_map[user]=user
-build_type_selection_map[userdebug]=userdebug
-
 function parse_variant() {
     local -a pieces
     IFS=- pieces=( $1 )
 
-    local processor_type=${processor_type_map[${pieces[0]}]}
+    local processor_type=${pieces[0]}
     local partition_layout=${partition_layout_map[${pieces[1]}]}
     local gapps_selection=${gapps_selection_map[${pieces[2]}]}
     local su_selection=${su_selection_map[${pieces[3]}]}
-    local build_type_selection=${build_type_selection_map[${pieces[4]}]}
+    local build_type_selection=${pieces[4]}
 
     if [[ -z "$processor_type" || -z "$partition_layout" || -z "$gapps_selection" || -z "$su_selection" ]]; then
         >&2 echo "Invalid variant '$1'"
