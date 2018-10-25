@@ -280,7 +280,7 @@ function clone_or_checkout() {
             git checkout origin/"$localManifestBranch"
         )
     else
-        git clone https://github.com/phhusson/"$repo" "$dir" -b "$localManifestBranch"
+        git clone https://github.com/Phh-Treble/"$repo" "$dir" -b "$localManifestBranch"
     fi
 }
 

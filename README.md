@@ -13,7 +13,7 @@ xda-developers threads: https://forum.xda-developers.com/search.php?do=finduser&
 
 For example:
 
-    git clone https://github.com/phhusson/treble_experimentations
+    git clone https://github.com/Phh-Treble/treble_experimentations
     mkdir Lineage; cd Lineage
     bash ../treble_experimentations/build-rom.sh android-8.1 lineage
 
