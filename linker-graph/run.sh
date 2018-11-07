@@ -19,7 +19,7 @@ parse() {
             continue
         fi
         found=false
-        for path in /odm/$lib /vendor/$lib /system/$lib/vndk-sp-26 /system/$lib/vndk-26 /system/$lib;do
+        for path in /odm/$lib /vendor/$lib /system/$lib/vndk-sp-26 /system/$lib;do
             if adb wait-for-device pull "$path"/"$so"  > /dev/null 2>/dev/null;then
                 parse "$path"/"$so" "${2}\t"
                 found=true
