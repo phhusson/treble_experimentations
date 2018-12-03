@@ -59,6 +59,8 @@ buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 [ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
 
+buildVariant treble_a64_avN-userdebug arm32_binder64-aonly-vanilla-nosu
+
 if [ "$release" == true ];then
     (
         rm -Rf venv
