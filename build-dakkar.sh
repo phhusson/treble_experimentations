@@ -147,7 +147,7 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	    tipsy)
-                mainrepo="https://github.com/TipsyOs/platform_manifest.git "
+                mainrepo="https://github.com/TipsyOs/platform_manifest.git"
                 mainbranch="8.1"
                 localManifestBranch="android-8.1"
                 treble_generate="tipsy"
