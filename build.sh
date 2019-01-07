@@ -10,7 +10,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-8.1.0_r48"
+aosp="android-8.1.0_r60"
 phh="android-8.1"
 
 if [ "$1" == "android-9.0" ];then
@@ -58,8 +58,10 @@ buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 [ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
+buildVariant treble_arm_agS-userdebug arm-aonly-gapps-su
 
 buildVariant treble_a64_avN-userdebug arm32_binder64-aonly-vanilla-nosu
+buildVariant treble_a64_agS-userdebug arm32_binder64-aonly-gapps-su
 
 if [ "$release" == true ];then
     (
