@@ -98,7 +98,7 @@ function get_rom_type() {
                 treble_generate=""
                 extra_make_options=""
                 ;;
-			aospa)
+	    aospa)
                 mainrepo="https://github.com/AOSPA/manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
