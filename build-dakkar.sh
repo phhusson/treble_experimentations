@@ -32,10 +32,10 @@ Options:
 
 ROM types:
 
-  aospa
   aosp80
   aosp81
   aosp90
+  aospa
   carbon
   e-0.2
   lineage151
