@@ -36,10 +36,10 @@ fi
 rm -f .repo/local_manifests/replace.xml
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
-elif [ "$rom" == "lineage" ];then
+elif [ "$rom" == "lineage15" ];then
 	repo init -u https://github.com/LineageOS/android.git -b lineage-15.1
 elif [ "$rom" == "rr" ];then
-	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
+	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b pie
 fi
 
 if [ -d .repo/local_manifests ] ;then
@@ -94,6 +94,8 @@ buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
 buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 buildVariant treble_arm_aoS-userdebug arm-aonly-gapps
+buildVariant treble_a64_avN-userdebug arm32_binder64-aonly-vanilla-nosu
+buildVariant treble_a64_agS-userdebug arm32_binder64-aonly-gapps-su
 
 if [ "$release" == true ];then
     (
