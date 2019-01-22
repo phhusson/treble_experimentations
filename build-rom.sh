@@ -38,6 +38,8 @@ if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
 elif [ "$rom" == "lineage15" ];then
 	repo init -u https://github.com/LineageOS/android.git -b lineage-15.1
+elif [ "$rom" == "lineage16" ];then
+	repo init -u https://github.com/LineageOS/android.git -b lineage-16
 elif [ "$rom" == "rr" ];then
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b pie
 fi
