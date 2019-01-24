@@ -4,7 +4,7 @@ MAINTAINER Pierre-Hugues Husson <phh@phh.me>
 ENV DEBIAN_FRONTEND noninteractive
 ENV USER root
 RUN dpkg --add-architecture i386
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
 	build-essential \
         imagemagick \
 	xorriso \
