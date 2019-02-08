@@ -77,6 +77,12 @@ if [ -f vendor/rr/prebuilt/common/Android.mk ];then
         vendor/rr/prebuilt/common/Android.mk
 fi
 
+# Fix soong check when building AEX
+if [ -f vendor/aosp/config/aex_props.mk ];then
+    rm -rf vendor/aosp/build/soong/Android.bp
+    cp aex_soong_kernel.bp vendor/aosp/build/soong/Android.bp
+fi
+
 bash "$(dirname "$0")/apply-patches.sh" patches
 
 . build/envsetup.sh
