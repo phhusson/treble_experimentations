@@ -49,6 +49,7 @@ ROM types:
   aex
   slim
   havoc
+  aosip
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -194,6 +195,12 @@ function get_rom_type() {
                 localManifestBranch="android-9.0"
                 treble_generate="havoc"
                 extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            aosip)
+                mainrepo="https://github.com/AOSiP/platform_manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
+                treble_generate="aosip"
                 ;;
         esac
         shift
