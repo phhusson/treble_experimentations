@@ -54,6 +54,7 @@ Variants are dash-joined combinations of (in order):
 * processor type
   * "arm" for ARM 32 bit
   * "arm64" for ARM 64 bit
+  * "a64" for ARM 32 bit system with 64 bit binder
 * A or A/B partition layout ("aonly" or "ab")
 * GApps selection
   * "vanilla" to not include GApps
@@ -70,6 +71,7 @@ for example:
 
 * arm-aonly-vanilla-nosu-user
 * arm64-ab-gapps-su
+* a64-aonly-go-nosu
 EOF
 }
 
