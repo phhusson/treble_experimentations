@@ -5,6 +5,7 @@ if [ -z "$USER" ];then
     export USER="$(id -un)"
 fi
 export LC_ALL=C
+export GAPPS_SOURCES_PATH=vendor/opengapps/sources/
 
 ## set defaults
 
