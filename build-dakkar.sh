@@ -33,15 +33,11 @@ Options:
 
 ROM types:
 
-  aosp80
-  aosp81
   aosp90
   carbon
   e-0.2
-  lineage151
   lineage160
   rr
-  pixel81
   pixel90
   crdroid
   mokee
@@ -79,20 +75,6 @@ EOF
 function get_rom_type() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            aosp80)
-                mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-vts-8.0_r4"
-                localManifestBranch="master"
-                treble_generate=""
-                extra_make_options=""
-                ;;
-            aosp81)
-                mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-8.1.0_r48"
-                localManifestBranch="android-8.1"
-                treble_generate=""
-                extra_make_options=""
-                ;;
             aosp90)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-9.0.0_r21"
@@ -102,8 +84,8 @@ function get_rom_type() {
                 ;;
             carbon)
                 mainrepo="https://github.com/CarbonROM/android.git"
-                mainbranch="cr-6.1"
-                localManifestBranch="android-8.1"
+                mainbranch="cr-7.0"
+                localManifestBranch="android-9.0"
                 treble_generate="carbon"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
@@ -111,13 +93,6 @@ function get_rom_type() {
                 mainrepo="https://gitlab.e.foundation/e/os/android/"
                 mainbranch="eelo-0.2"
                 localManifestBranch="android-9.0"
-                treble_generate="lineage"
-                extra_make_options="WITHOUT_CHECK_API=true"
-                ;;
-            lineage151)
-                mainrepo="https://github.com/LineageOS/android.git"
-                mainbranch="lineage-15.1"
-                localManifestBranch="android-8.1"
                 treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
@@ -130,16 +105,9 @@ function get_rom_type() {
                 ;;
             rr)
                 mainrepo="https://github.com/ResurrectionRemix/platform_manifest.git"
-                mainbranch="oreo"
-                localManifestBranch="android-8.1"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
                 treble_generate="rr"
-                extra_make_options="WITHOUT_CHECK_API=true"
-                ;;
-            pixel81)
-                mainrepo="https://github.com/PixelExperience/manifest.git"
-                mainbranch="oreo-mr1"
-                localManifestBranch="android-8.1"
-                treble_generate="pixel"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             pixel90)
@@ -151,29 +119,29 @@ function get_rom_type() {
                 ;;
             crdroid)
                 mainrepo="https://github.com/crdroidandroid/android.git"
-                mainbranch="8.1"
-                localManifestBranch="android-8.1"
+                mainbranch="9.0"
+                localManifestBranch="android-9.0"
                 treble_generate="crdroid"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             mokee)
                 mainrepo="https://github.com/MoKee/android.git"
-                mainbranch="mko-mr1"
-                localManifestBranch="android-8.1"
+                mainbranch="mkp"
+                localManifestBranch="android-9.0"
                 treble_generate="mokee"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             aicp)
                 mainrepo="https://github.com/AICP/platform_manifest.git"
-                mainbranch="o8.1"
-                localManifestBranch="android-8.1"
+                mainbranch="p9.0"
+                localManifestBranch="android-9.0"
                 treble_generate="aicp"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             aokp)
                 mainrepo="https://github.com/AOKP/platform_manifest.git"
-                mainbranch="oreo"
-                localManifestBranch="android-8.1"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
                 treble_generate="aokp"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
@@ -186,8 +154,8 @@ function get_rom_type() {
                 ;;
             slim)
                 mainrepo="https://github.com/SlimRoms/platform_manifest.git"
-                mainbranch="or8.1"
-                localManifestBranch="android-8.1"
+                mainbranch="9.0"
+                localManifestBranch="android-9.0"
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
