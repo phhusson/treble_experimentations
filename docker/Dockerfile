@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y \
 	lzop \
 	lzip \
 	lunzip \
+	squashfs-tools \
 	sudo ; \
 	apt-get clean autoclean
 
