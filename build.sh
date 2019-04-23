@@ -63,6 +63,9 @@ buildVariant treble_arm_agS-userdebug arm-aonly-gapps-su
 buildVariant treble_a64_avN-userdebug arm32_binder64-aonly-vanilla-nosu
 buildVariant treble_a64_agS-userdebug arm32_binder64-aonly-gapps-su
 
+buildVariant treble_a64_bvN-userdebug arm32_binder64-ab-vanilla-nosu
+buildVariant treble_a64_bgS-userdebug arm32_binder64-ab-gapps-su
+
 if [ "$release" == true ];then
     (
         rm -Rf venv
