@@ -32,7 +32,7 @@ else
 fi
 repo sync -c -j 1 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
-(cd vendor/foss; git clean -fdx; bash update.sh)
+#(cd vendor/foss; git clean -fdx; bash update.sh)
 
 . build/envsetup.sh
 
@@ -50,11 +50,11 @@ cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
-buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
+#buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
 
 buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
 buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
-buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
+#buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 [ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
