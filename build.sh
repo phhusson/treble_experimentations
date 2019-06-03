@@ -14,7 +14,7 @@ aosp="android-8.1.0_r64"
 phh="android-8.1"
 
 if [ "$1" == "android-9.0" ];then
-    aosp="android-9.0.0_r36"
+    aosp="android-9.0.0_r32"
     phh="android-9.0"
 fi
 
