@@ -51,22 +51,27 @@ cp patches.zip release/$rom_fp/patches.zip
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
 #buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
+rm -Rf out/target/product/phhgsi*
 
 buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
 buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
 #buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
+rm -Rf out/target/product/phhgsi*
 
 buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
 [ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
 buildVariant treble_arm_agS-userdebug arm-aonly-gapps-su
+rm -Rf out/target/product/phhgsi*
 
 buildVariant treble_a64_avN-userdebug arm32_binder64-aonly-vanilla-nosu
 buildVariant treble_a64_agS-userdebug arm32_binder64-aonly-gapps-su
+rm -Rf out/target/product/phhgsi*
 
 if [ "$1" = "android-9.0" ];then
 buildVariant treble_a64_bvN-userdebug arm32_binder64-ab-vanilla-nosu
 buildVariant treble_a64_bgS-userdebug arm32_binder64-ab-gapps-su
 fi
+rm -Rf out/target/product/phhgsi*
 
 if [ "$release" == true ];then
     (
