@@ -32,7 +32,7 @@ else
 fi
 repo sync -c -j 1 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
-#(cd vendor/foss; git clean -fdx; bash update.sh)
+(cd vendor/foss; git clean -fdx; bash update.sh)
 
 . build/envsetup.sh
 
