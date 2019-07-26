@@ -50,6 +50,10 @@ ROM types:
   aex
   slim
   havoc
+  komodo
+  rebellion
+  aquarios
+  aosmp
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -198,7 +202,34 @@ function get_rom_type() {
                 treble_generate="havoc"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-        esac
+	   komodo)
+                mainrepo="https://github.com/KomodOS-Rom/platform_manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
+                treble_generate="komodo"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+	   rebellion)
+	        mainrepo="https://github.com/RebellionOS/manifest.git"
+		mainbranch="pie"
+		localManifestBranch="android-9.0"
+		treble_generate="rebellion"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		;;
+	  aquarios)
+	        mainrepo="https://github.com/aquarios/manifest.git"
+		mainbranch="a9"
+		localManifestBranch="android-9.0"
+		treble_generate="aquarios"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		;;
+	   aosmp)
+	   	mainrepo="https://gitlab.com/AOSmP/android_manifest.git"
+		mainbranch="pie"
+		localManifestBranch="android-9.0"
+		treble_generate="aosmp"
+		extra_make_options="WITHOUT_TREBLE_CHECK_API=true"
+	esac
         shift
     done
 }
