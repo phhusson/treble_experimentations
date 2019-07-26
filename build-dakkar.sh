@@ -53,6 +53,7 @@ ROM types:
   komodo
   rebellion
   aquarios
+  aosmp
 
 Variants are dash-joined combinations of (in order):
 * processor type
