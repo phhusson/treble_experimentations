@@ -387,6 +387,11 @@ function jack_env() {
     fi
 }
 
+function clean_build() {
+    make installclean
+    rm -rf "$OUT"
+}
+
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -420,3 +425,9 @@ jack_env
 for (( idx=0; idx < ${#variant_codes[*]}; idx++ )); do
     build_variant "${variant_codes[$idx]}" "${variant_names[$idx]}"
 done
+
+read -p "Do you want to clean? (y/N) " clean
+
+if [[ $clean == *"y"* ]];then 
+clean_build
+fi
