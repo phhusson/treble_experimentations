@@ -36,6 +36,7 @@ ROM types:
   aosp80
   aosp81
   aosp90
+  aospa
   carbon
   e-0.2
   lineage151
@@ -100,6 +101,13 @@ function get_rom_type() {
             aosp90)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-9.0.0_r21"
+                localManifestBranch="android-9.0"
+                treble_generate=""
+                extra_make_options=""
+                ;;
+	    aospa)
+                mainrepo="https://github.com/AOSPA/manifest.git"
+                mainbranch="pie"
                 localManifestBranch="android-9.0"
                 treble_generate=""
                 extra_make_options=""
