@@ -228,7 +228,7 @@ function get_rom_type() {
 		mainbranch="pie"
 		localManifestBranch="android-9.0"
 		treble_generate="aosmp"
-		extra_make_options="WITHOUT_TREBLE_CHECK_API=true"
+		extra_make_options="WITHOUT_CHECK_API=true"
 	esac
         shift
     done
