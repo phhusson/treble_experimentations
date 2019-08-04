@@ -51,6 +51,7 @@ ROM types:
   mokee
   pixel81
   pixel90
+  potato
   rebellion
   rr
   slim
@@ -151,6 +152,13 @@ function get_rom_type() {
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
                 treble_generate="pixel"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            potato)
+                mainrepo="https://github.com/PotatoProject/manifest.git"
+                mainbranch="baked-release"
+                localManifestBranch="android-9.0"
+                treble_generate="potato"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             crdroid)
