@@ -55,6 +55,8 @@ ROM types:
   rebellion
   rr
   slim
+  xtended
+
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -237,7 +239,14 @@ function get_rom_type() {
 		localManifestBranch="android-9.0"
 		treble_generate="aosmp"
 		extra_make_options="WITHOUT_CHECK_API=true"
-	esac
+	    ;;
+           xtended)
+                mainrepo="https://github.com/Xtended-Pie/manifest.git"
+                mainbranch="xp"
+                localManifestBranch="android-9.0"
+                treble_generate="xtended"
+                extra_make_options="WITHOUT_CHECK_API=true"
+        esac
         shift
     done
 }
