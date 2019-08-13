@@ -87,21 +87,21 @@ function get_rom_type() {
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-vts-8.0_r4"
                 localManifestBranch="master"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 ;;
             aosp81)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-8.1.0_r48"
                 localManifestBranch="android-8.1"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 ;;
             aosp90)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-9.0.0_r21"
                 localManifestBranch="android-9.0"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 ;;
             carbon)
