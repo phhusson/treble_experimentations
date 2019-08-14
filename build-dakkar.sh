@@ -241,7 +241,7 @@ function get_rom_type() {
 		extra_make_options="WITHOUT_CHECK_API=true"
 	    ;;
            xtended)
-                mainrepo="https://github.com/Xtended-Pie/manifest.git"
+                mainrepo="https://github.com/Project-Xtended/manifest.git"
                 mainbranch="xp"
                 localManifestBranch="android-9.0"
                 treble_generate="xtended"
