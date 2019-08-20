@@ -120,7 +120,7 @@ function get_rom_type() {
                 treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-             e-oreo)
+            e-oreo)
                 mainrepo="https://gitlab.e.foundation/e/os/android/"
                 mainbranch="v1-oreo"
                 localManifestBranch="android-8.1"
