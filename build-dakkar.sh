@@ -43,7 +43,8 @@ ROM types:
   aquarios
   carbon
   crdroid
-  e-0.2
+  e-pie
+  e-oreo
   havoc
   komodo
   lineage151
@@ -114,10 +115,17 @@ function get_rom_type() {
                 treble_generate="carbon"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-            e-0.2)
+            e-pie)
                 mainrepo="https://gitlab.e.foundation/e/os/android/"
-                mainbranch="eelo-0.2"
+                mainbranch="v1-pie"
                 localManifestBranch="android-9.0"
+                treble_generate="lineage"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
+            e-oreo)
+                mainrepo="https://gitlab.e.foundation/e/os/android/"
+                mainbranch="v1-oreo"
+                localManifestBranch="android-8.1"
                 treble_generate="lineage"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
