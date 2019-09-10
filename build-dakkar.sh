@@ -36,7 +36,7 @@ ROM types:
   aosp80
   aosp81
   aosp90
-  qbeta
+  aosp10
   carbon
   e-0.2
   lineage151
@@ -105,10 +105,10 @@ function get_rom_type() {
                 treble_generate="aosp"
                 extra_make_options=""
                 ;;
-	    qbeta)
+	    aosp10)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-q-preview-6"
-                localManifestBranch="android-9.0"
+                mainbranch="android-10.0.0_r2"
+                localManifestBranch="android-10"
                 treble_generate="aosp"
                 extra_make_options=""
                 ;;
