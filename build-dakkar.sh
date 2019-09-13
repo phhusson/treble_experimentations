@@ -55,6 +55,8 @@ ROM types:
   rebellion
   aquarios
   aosmp
+  graphene9
+  graphene10
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -108,7 +110,7 @@ function get_rom_type() {
 	    aosp10)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-10.0.0_r2"
-                localManifestBranch="android-10"
+                localManifestBranch="android-10.0"
                 treble_generate="aosp"
                 extra_make_options=""
                 ;;
@@ -236,6 +238,18 @@ function get_rom_type() {
 		mainbranch="pie"
 		localManifestBranch="android-9.0"
 		treble_generate="aosmp"
+		extra_make_options="WITHOUT_CHECK_API=true"
+	   graphene9)
+	   	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
+		mainbranch="pie"
+		localManifestBranch="android-9.0"
+		treble_generate="graphene"
+		extra_make_options="WITHOUT_CHECK_API=true"
+	   graphene10)
+	   	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
+		mainbranch="10"
+		localManifestBranch="android-10.0"
+		treble_generate="graphene"
 		extra_make_options="WITHOUT_CHECK_API=true"
 	esac
         shift
