@@ -234,7 +234,7 @@ function get_rom_type() {
                 mainrepo="https://github.com/SlimRoms/platform_manifest.git"
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
-                treble_generate="slimoreo"
+                treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
                 ;;
