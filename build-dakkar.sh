@@ -291,7 +291,7 @@ function get_rom_type() {
 		mainbranch="10"
 		localManifestBranch="android-10.0"
 		treble_generate="graphene"
-		extra_make_options="WITHOUT_CHECK_API=false"
+		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
 	   
 	esac
