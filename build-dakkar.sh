@@ -57,6 +57,8 @@ ROM types:
   rebellion-pie
   rr-oreo
   slim-oreo
+  graphene9
+  graphene10
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -277,6 +279,21 @@ function get_rom_type() {
                 treble_generate="aosmp"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
+	    graphene9)
+	    	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
+		mainbranch="pie"
+		localManifestBranch="android-9.0"
+		treble_generate="graphene"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		jack_enabled="false"
+	   graphene10)
+	   	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
+		mainbranch="10"
+		localManifestBranch="android-10.0"
+		treble_generate="graphene"
+		extra_make_options="WITHOUT_CHECK_API=false"
+		jack_enabled="false"
+	   
 	esac
         shift
     done
