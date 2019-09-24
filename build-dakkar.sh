@@ -279,6 +279,7 @@ function get_rom_type() {
                 treble_generate="aosmp"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
+                ;;
 	    graphene9)
 	    	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
 		mainbranch="pie"
@@ -286,6 +287,7 @@ function get_rom_type() {
 		treble_generate="graphene"
 		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
+                ;;
 	   graphene10)
 	   	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
 		mainbranch="10"
