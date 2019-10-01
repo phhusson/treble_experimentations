@@ -35,7 +35,9 @@ echo "... also called $machine"
 #scw attach --no-stdin "$name" &
 
 scw exec -w "$name" echo "Good morning, now building"
-machine_ip="$(scw inspect server:phh-treble-3976258d |jq -r '.[0]|.public_ip.address')"
+rm -f ~/.scw-cache.db
+machine_ip="$(scw inspect server:$machine |jq -r '.[0]|.public_ip.address')"
+ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "root@$machine_ip" echo "Tested ssh successfully"
 run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i386 && \
 	apt-get update && \
 	(yes "" | apt-get install -y -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" \
