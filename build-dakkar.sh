@@ -78,7 +78,7 @@ ROM types:
   slim10
   graphene9
   graphene10
-  atom10
+  atom
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -459,11 +459,11 @@ function get_rom_type() {
 		treble_generate="aospa"
 		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
-	   atom10)
+	   atom)
 	   	mainrepo="https://github.com/Atom-OS/frameworks_base.git"
 		mainbranch="android-10.0"
 		localManifestBranch="android-10.0"
-		treble_generate="graphene"
+		treble_generate="atom"
 		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
 	   
