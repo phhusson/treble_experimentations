@@ -41,6 +41,7 @@ ROM types:
   aokp-pie
   aokp10
   aosmp-pie
+  aosmp10
   aospa
   aosp80
   aosp81
@@ -428,6 +429,14 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+            aosmp10)
+                mainrepo="https://gitlab.com/AOSmP/android_manifest.git"
+                mainbranch="ten"
+                localManifestBranch="android-10.0"
+                treble_generate="aosmp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
 	    graphene9)
 	    	mainrepo="https://github.com/GrapheneOS/platform_manifest.git"
 		mainbranch="pie"
@@ -448,6 +457,13 @@ function get_rom_type() {
 		mainbranch="quartz"
 		localManifestBranch="android-10.0"
 		treble_generate="aospa"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		jack_enabled="false"
+	   atom10)
+	   	mainrepo="https://github.com/Atom-OS/frameworks_base.git"
+		mainbranch="android-10.0"
+		localManifestBranch="android-10.0"
+		treble_generate="graphene"
 		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
 	   
