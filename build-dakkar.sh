@@ -56,6 +56,7 @@ ROM types:
   potato-pie
   rebellion-pie
   rr-oreo
+  rr-pie
   slim-oreo
   graphene9
   graphene10
@@ -168,6 +169,14 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
                 ;;
+            rr-pie)
+                mainrepo="https://github.com/ResurrectionRemix/platform_manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
+                treble_generate="rr"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;		
             pixel81)
                 mainrepo="https://github.com/PixelExperience/manifest.git"
                 mainbranch="oreo-mr1"
