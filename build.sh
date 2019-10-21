@@ -51,18 +51,18 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 if [ "$1" = "android-10.0" ];then
-	buildVariant treble_arm64_avS-userdebug quack-arm64-aonly
-	rm -Rf out/target/product/phhgsi*
-	buildVariant treble_arm64_bvS-userdebug quack-arm64-ab
-	rm -Rf out/target/product/phhgsi*
-	buildVariant treble_arm_avS-userdebug quack-arm-aonly
-	rm -Rf out/target/product/phhgsi*
-	buildVariant treble_arm_bvS-userdebug quack-arm-ab
-	rm -Rf out/target/product/phhgsi*
-	buildVariant treble_a64_avS-userdebug quack-arm32_binder64-aonly
-	rm -Rf out/target/product/phhgsi*
-	buildVariant treble_a64_bvS-userdebug quack-arm32_binder64-ab
-	rm -Rf out/target/product/phhgsi*
+	buildVariant treble_arm64_avS-userdebug quack-arm64-aonly-vanilla
+	buildVariant treble_arm64_agS-userdebug quack-arm64-aonly-gapps
+	buildVariant treble_arm64_bvS-userdebug quack-arm64-ab-vanilla
+	buildVariant treble_arm64_bgS-userdebug quack-arm64-ab-gapps
+	buildVariant treble_arm_avS-userdebug quack-arm-aonly-vanilla
+	buildVariant treble_arm_agS-userdebug quack-arm-aonly-gapps
+	buildVariant treble_arm_bvS-userdebug quack-arm-ab-vanilla
+	buildVariant treble_arm_bgS-userdebug quack-arm-ab-gapps
+	buildVariant treble_a64_avS-userdebug quack-arm32_binder64-aonly-vanilla
+	buildVariant treble_a64_agS-userdebug quack-arm32_binder64-aonly-gapps
+	buildVariant treble_a64_bvS-userdebug quack-arm32_binder64-ab-vanilla
+	buildVariant treble_a64_bgS-userdebug quack-arm32_binder64-ab-gapps
 else
 	buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 	buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
