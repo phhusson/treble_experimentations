@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -xe
+
 if [ "$#" -lt 2 ];then
-    echo "Usage: $0 <system folder> <vendor folder> [density]"
+    echo "Usage: $0 <system folder> <vendor folder> [density] [priority]"
     exit 1
 fi
 
@@ -13,6 +15,11 @@ fi
 density=320
 if [ -n "$3" ];then
     density="$3"
+fi
+
+priority=XXXX
+if [ -n "$4" ];then
+    priority="$4"
 fi
 
 if [ ! -f "$framework_res" ];then
@@ -51,8 +58,8 @@ cat > rro/AndroidManifest.xml << EOF
         android:versionName="1.0">
         <overlay android:targetPackage="android"
                 android:requiredSystemPropertyName="ro.vendor.build.fingerprint"
-                android:requiredSystemPropertyValue="+$prefix"
-                android:priority="XXXX"
+                android:requiredSystemPropertyValue="+$prefix*"
+                android:priority="$priority"
                 android:isStatic="true" />
 </manifest>
 EOF
@@ -71,12 +78,6 @@ EOF
 
 mkdir -p rro/res/{values,xml}
 
-# Notch
-cat > rro/res/values/notch.xml <<EOF
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-EOF
-
 get_value() {
     xmlstarlet sel -t -m '//resources/*[not(self::public) and @name="'"$1"'"]' -c . -n "$decompiled"/res/values/*
 }
@@ -84,9 +85,8 @@ get_value() {
 convert_dp() {
     local f="$(mktemp)"
     cat > $f
-    values="$(grep -oE '[0-9.]+di?p' "$f")"
     scale="$(echo "scale=8; $density/160" | bc)"
-    for v in $values;do
+    for v in $(grep -oE '[0-9.]+di?p' "$f");do
         pre="$(echo "$v" |grep -oE '[0-9.]+')"
         post="$(echo "scale=8; $pre * $scale" | bc)"
         post="$(LC_ALL=C printf '%.0f' $post)"
@@ -96,27 +96,50 @@ convert_dp() {
     rm -f "$f"
 }
 
-get_value status_bar_height_portrait |convert_dp >> rro/res/values/notch.xml
-get_value status_bar_height_landscape |convert_dp >> rro/res/values/notch.xml
-get_value config_mainBuiltInDisplayCutout |convert_dp >> rro/res/values/notch.xml
-
-cat >> rro/res/values/notch.xml <<EOF
+prelude() {
+cat > rro/res/values/"$1".xml <<EOF
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+EOF
+}
+postlude() {
+cat >> rro/res/values/"$1".xml <<EOF
 </resources>
 EOF
+}
+
+
+# Notch
+prelude notch
+get_value status_bar_height_portrait |convert_dp >> rro/res/values/notch.xml
+if get_value status_bar_height_landscape |grep height_portrait;then
+    get_value status_bar_height_portrait |convert_dp |sed -e s/status_bar_height_portrait/status_bar_height_landscape/g >> rro/res/values/notch.xml
+else
+    get_value status_bar_height_landscape |convert_dp >> rro/res/values/notch.xml
+fi
+get_value config_mainBuiltInDisplayCutout |convert_dp >> rro/res/values/notch.xml
+postlude notch
 
 cp "$decompiled"/res/xml/power_profile.xml rro/res/xml/
 
 #Auto brightness
-cat > rro/res/values/brightness.xml <<EOF
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-EOF
+prelude brightness
+get_value config_autoBrightnessResetAmbientLuxAfterWarmUp rro/res/values/brightness.xml || true
+get_value config_automatic_brightness_available >> rro/res/values/brightness.xml
 if get_value config_autoBrightnessDisplayValuesNits  >> rro/res/values/brightness.xml;then
     get_value config_screenBrightnessBacklight >> rro/res/values/brightness.xml
+    get_value config_screenBrightnessNits >> rro/res/values/brightness.xml
+    get_value config_autoBrightnessLevels >> rro/res/values/brightness.xml
+    get_value config_screenBrightnessSettingMinimum >> rro/res/values/brightness.xml
+    get_value config_screenBrightnessSettingMaximum >> rro/res/values/brightness.xml
 else
     get_value config_autoBrightnessLevels >> rro/res/values/brightness.xml
     get_value config_autoBrightnessLcdBacklightValues >> rro/res/values/brightness.xml
 fi
-cat >> rro/res/values/brightness.xml <<EOF
-</resources>
-EOF
+postlude brightness
+
+if xmlstarlet sel -t -m '//bool[@name="config_showNavigationBar" and ./text()="true"]' -n "$decompiled"/res/values/*;then
+    prelude navbar
+    get_value config_showNavigationBar >> rro/res/values/navbar.xml
+    postlude navbar
+fi
