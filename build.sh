@@ -16,7 +16,7 @@ phh="android-8.1"
 
 if [ "$1" == "android-9.0" ];then
     manifest_url="https://gitlab.com/aosp-security/manifest"
-    aosp="android-9.0.0_r49-r47"
+    aosp="android-9.0.0_r50-r47"
     phh="android-9.0"
 elif [ "$1" == "android-10.0" ];then
     manifest_url="https://android.googlesource.com/platform/manifest"
