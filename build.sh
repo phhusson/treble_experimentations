@@ -36,6 +36,8 @@ else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $phh
 fi
 repo sync -c -j 1 --force-sync
+
+repo forall -r '.*opengapps.*' -c 'git lfs fetch && git lfs checkout'
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
 (cd vendor/foss; git clean -fdx; bash update.sh)
 
