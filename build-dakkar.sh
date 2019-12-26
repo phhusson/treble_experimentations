@@ -43,6 +43,7 @@ ROM types:
   aosp10
   aquarios
   carbon-oreo
+  copperhead
   crdroid-oreo
   e-pie
   e-oreo
@@ -50,6 +51,7 @@ ROM types:
   komodo-pie
   lineage151
   lineage160
+  lineage170
   mokee-oreo
   pixel81
   pixel90
@@ -160,6 +162,14 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+	   lineage170
+                mainrepo="https://github.com/LineageOS/android.git"
+                mainbranch="lineage-17.0"
+                localManifestBranch="android-10.0.0_r11"
+                treble_generate="lineage"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+		;;
             rr-oreo)
                 mainrepo="https://github.com/ResurrectionRemix/platform_manifest.git"
                 mainbranch="oreo"
@@ -295,6 +305,14 @@ function get_rom_type() {
 		treble_generate="graphene"
 		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
+		;;
+	  cooperhead)
+	  	mairepo="https://github.com/CopperheadOS/platform_manifest.git"
+                mainbranch="9.x"
+                localManifestBranch="android-9.0"
+		treble_generate="cooperhead"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		jack_enabled="false"	  
 	   
 	esac
         shift
