@@ -20,7 +20,7 @@ if [ "$1" == "android-9.0" ];then
     phh="android-9.0"
 elif [ "$1" == "android-10.0" ];then
     manifest_url="https://android.googlesource.com/platform/manifest"
-    aosp="android-10.0.0_r16"
+    aosp="android-10.0.0_r25"
     phh="android-10.0"
 fi
 
