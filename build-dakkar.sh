@@ -19,11 +19,11 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
-if [[ -v choice ]]
+if [[ -v build_dakkar_choice]]
 then
 echo "Using exported choice"
 else
-read -p "Do you want to sync? (y/N) " choice
+read -p "Do you want to sync? (y/N) " build_dakkar_choice
 fi
 function help() {
     cat <<EOF
@@ -425,7 +425,7 @@ function patch_things() {
         rm -f device/*/sepolicy/common/private/genfs_contexts
         (
             cd device/phh/treble
-    if [[ $choice == *"y"* ]];then
+    if [[ $build_dakkar_choice == *"y"* ]];then
             git clean -fdx
     fi
             bash generate.sh "$treble_generate"
@@ -482,7 +482,7 @@ if [[ $python == "3." ]]; then
 fi
 
 init_release
-if [[ $choice == *"y"* ]];then
+if [[ $build_dakkar_choice == *"y"* ]];then
     init_main_repo
     init_local_manifest
     init_patches
