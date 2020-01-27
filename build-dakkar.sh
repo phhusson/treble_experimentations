@@ -19,8 +19,12 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
+if [[ -v choice ]]
+then
+echo "Using exported choice"
+else
 read -p "Do you want to sync? (y/N) " choice
-
+fi
 function help() {
     cat <<EOF
 Syntax:
@@ -114,7 +118,7 @@ function get_rom_type() {
                 ;;
             aosp10)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-10.0.0_r2"
+                mainbranch="android-10.0.0_r25"
                 localManifestBranch="android-10.0"
                 treble_generate=""
                 extra_make_options=""
