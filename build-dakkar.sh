@@ -19,7 +19,7 @@ elif [[ $(uname -s) = "Linux" ]];then
 fi
 
 ## handle command line arguments
-if [[ -v build_dakkar_choice]]
+if [[ -v build_dakkar_choice ]]
 then
 echo "Using exported choice"
 else
