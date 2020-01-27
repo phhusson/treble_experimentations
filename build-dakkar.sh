@@ -495,9 +495,14 @@ if [[ $jack_enabled == "true" ]]; then
     jack_env
 fi
 
-read -p "Do you want to clean? (y/N) " clean
+if [[ -v build_dakkar_clean ]]
+then
+echo "Using exported clean choice"
+else
+read -p "Do you want to clean? (y/N) " build_dakkar_clean
+fi
 
-if [[ $clean == *"y"* ]];then
+if [[ $build_dakkar_clean == *"y"* ]];then
     clean_build
 fi
 
