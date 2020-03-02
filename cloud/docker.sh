@@ -10,6 +10,7 @@ android_version="$1"
 set -ex
 
 cleanup() {
+    bash
 	if [ -n "$name" ];then
         docker kill "$name"
         docker rm "$name"
@@ -18,6 +19,11 @@ cleanup() {
 
 run_script () {
     docker exec "$name" sh -c "$1"
+}
+
+orig_docker="$(which docker)"
+docker() {
+    $orig_docker --tlsverify=false "$@"
 }
 
 trap 'cleanup' ERR
@@ -68,6 +74,8 @@ run_script '
 	git config --global user.email phh@phh.me && \
 	git config --global color.ui auto'
 
+run_script 'curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash ; apt install git-lfs; git lfs install'
+
 run_script 'git clone https://github.com/phhusson/treble_experimentations'
 
 run_script '\
@@ -79,3 +87,4 @@ run_script '\
 run_script "cd build-dir && bash ../treble_experimentations/build.sh $android_version"
 
 docker cp "$name:"/build-dir/release release
+

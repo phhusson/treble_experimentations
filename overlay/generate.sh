@@ -7,7 +7,11 @@ if [ "$#" -lt 2 ];then
     exit 1
 fi
 
-framework_res="$1/framework/framework-res.apk"
+
+framework_res="$1"
+if [ ! -f "$1" ];then
+    framework_res="$1/framework/framework-res.apk"
+fi
 if [ ! -f "$framework_res" ];then
     framework_res="$1/system/framework/framework-res.apk"
 fi
@@ -27,7 +31,10 @@ if [ ! -f "$framework_res" ];then
     exit 1
 fi
 
-props="$2/build.prop"
+props="$2"
+if [ ! -f "$props" ];then
+    props="$2/build.prop"
+fi
 if [ ! -f "$props" ];then
     echo "Wrong vendor folder $2"
     exit 1
@@ -47,9 +54,9 @@ clean_string() {
     tr 'A-Z' 'a-z' | tr ' .-' '_'
 }
 
-prefix="$(sed -nE 's/ro.vendor.build.fingerprint=(.*)/\1/p' "$props" |cut -d : -f 1)"
-brand="$(sed -nE 's/ro.product.vendor.brand=(.*)/\1/p' "$props" |clean_string)"
-model="$(sed -nE 's/ro.product.vendor.model=(.*)/\1/p' "$props" |clean_string)"
+[ -z "$prefix" ] && prefix="$(sed -nE 's/ro.vendor.build.fingerprint=(.*)/\1/p' "$props" |cut -d : -f 1)"
+[ -z "$brand" ] && brand="$(sed -nE 's/ro.product.vendor.brand=(.*)/\1/p' "$props" |clean_string)"
+[ -z "$model" ] && model="$(sed -nE 's/ro.product.vendor.model=(.*)/\1/p' "$props" |clean_string)"
 
 cat > rro/AndroidManifest.xml << EOF
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"

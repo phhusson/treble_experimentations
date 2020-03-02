@@ -1,21 +1,28 @@
 #!/bin/bash
 
-if [ ! -d "$1" -o ! -f "$1/manifest.xml" ];then
+manifest="$1/manifest.xml"
+if [ ! -f "$manifest" ];then
+	manifest="$1/etc/vintf/manifest.xml"
+fi
+if [ ! -d "$1" -o ! -f "$manifest" ];then
 	echo "Usage: $0 <vendor-folder>"
 	exit 1
 fi
 
 rm -f broken
-for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$1/manifest.xml" |grep -vE '^android\.hardware\.');do
+for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$manifest" |grep -vE '^android\.hardware\.');do
 	interface="$(
 		xmlstarlet sel  \
 			-t -m '//hal[./name/text()="'"$HAL"'"]' \
-			-v './interface/name' "$1/manifest.xml")"
+			-v './interface/name' "$manifest")"
 	for version in $(xmlstarlet sel \
 			-t -m '//hal[./name/text()="'"$HAL"'"]' \
-			-v './version' -n "$1/manifest.xml");do
+			-v './version' -n "$manifest");do
 
+	HAL=vendor.samsung.hardware.camera.device
+	version=3.3
 		class="$(echo "$interface" |sed -E 's/^I/BpHw/g')"
+		class=BpHwSecCameraDeviceSession
 		namespace="$(echo $HAL |sed -E 's/\./::/g')"
 		namespace2="$(echo ${namespace}::V"$(echo $version |sed -e 's/\./_/g')")"
 		prefix="$namespace2::$class"
@@ -34,6 +41,7 @@ for HAL in $(xmlstarlet sel -t -m '//hal/name' -v . -n "$1/manifest.xml" |grep -
 			echo "Failed to find ${HAL}@${version}.so" >> broken
 			continue
 		fi
+		echo $prefix
 		nm -DC $lib |grep -F "T $prefix" | \
 			sed -E "s/^.*$prefix:://g" | \
 			grep -vE -e '\bping\b' -e '\binterfaceChain\b' -e '\binterfaceDescriptor\b' \

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$SSH_AGENT_PID" ];then
+	eval $(ssh-agent)
+	ssh-add
+fi
+
 if [ "$#" -ne 1 ];then
 	echo "Usage: $0 <android-9.0|android-8.1>"
 	exit 1
@@ -24,7 +29,7 @@ run_script() {
 trap 'cleanup' ERR
 trap 'cleanup' EXIT
 
-COMMERCIAL_TYPE="GP1-S"
+COMMERCIAL_TYPE="GP1-L"
 suffix="$(echo "$RANDOM" |md5sum |cut -c 1-8)"
 name="phh-treble-$suffix"
 
@@ -78,7 +83,7 @@ run_script 'git clone https://github.com/phhusson/treble_experimentations'
 
 run_script '\
 	mkdir build-dir && \
-	sed -E -i "s/(repo sync.*)-j 1/\1-j24/g" treble_experimentations/build.sh && \
+	sed -E -i "s/(repo sync.*)-j 1/\1-j64/g" treble_experimentations/build.sh && \
 	sed -E -i "s/(make.*)-j8/\1-j24/g" treble_experimentations/build.sh
 	'
 
