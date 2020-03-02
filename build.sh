@@ -42,6 +42,8 @@ repo forall -r '.*opengapps.*' -c 'git lfs fetch && git lfs checkout'
 (cd vendor/foss; git clean -fdx; bash update.sh)
 rm -f vendor/gapps/interfaces/wifi_ext/Android.bp
 
+find -name \*.bp -exec sed -i -e '/java_api_finder/d' '{}' \;
+
 . build/envsetup.sh
 
 buildVariant() {
