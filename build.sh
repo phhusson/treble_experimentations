@@ -63,16 +63,12 @@ if [ "$1" = "android-10.0" ];then
 	buildVariant treble_arm64_bfS-userdebug quack-arm64-ab-floss
 	buildVariant treble_arm64_bvS-userdebug quack-arm64-ab-vanilla
 	buildVariant treble_arm64_bgS-userdebug quack-arm64-ab-gapps
-	buildVariant treble_arm_afS-userdebug quack-arm-aonly-floss
 	buildVariant treble_arm_avS-userdebug quack-arm-aonly-vanilla
 	buildVariant treble_arm_agS-userdebug quack-arm-aonly-gapps
-	buildVariant treble_arm_bfS-userdebug quack-arm-ab-floss
 	buildVariant treble_arm_bvS-userdebug quack-arm-ab-vanilla
 	buildVariant treble_arm_bgS-userdebug quack-arm-ab-gapps
-	buildVariant treble_a64_afS-userdebug quack-arm32_binder64-aonly-floss
 	buildVariant treble_a64_avS-userdebug quack-arm32_binder64-aonly-vanilla
 	buildVariant treble_a64_agS-userdebug quack-arm32_binder64-aonly-gapps
-	buildVariant treble_a64_bfS-userdebug quack-arm32_binder64-ab-floss
 	buildVariant treble_a64_bvS-userdebug quack-arm32_binder64-ab-vanilla
 	buildVariant treble_a64_bgS-userdebug quack-arm32_binder64-ab-gapps
 else
