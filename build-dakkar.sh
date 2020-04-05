@@ -398,9 +398,23 @@ function init_local_manifest() {
     clone_or_checkout .repo/local_manifests treble_manifest
 }
 
+download_patches() {
+	if [[ $localManifestBranch == android-10.0 ]];then
+		githubMatch=v2..
+	elif [[ $localManifestBranch == android-9.0 ]];then
+		githubMatch=v1..
+	else
+		githubMatch=v..
+	fi
+	wantedRelease="$(curl --silent https://api.github.com/repos/phhusson/treble_experimentations/releases |jq -r '.[] | .tag_name' |grep -E "$githubMatch\$" |sort -V | tail -n 1)"
+	wget "https://github.com/phhusson/treble_experimentations/releases/download/$wantedRelease/patches.zip" -O patches.zip
+	rm -Rf patches
+	unzip patches.zip
+}
+
 function init_patches() {
     if [[ -n "$treble_generate" ]]; then
-        clone_or_checkout patches treble_patches
+	download_patches
 
         # We don't want to replace from AOSP since we'll be applying
         # patches by hand
