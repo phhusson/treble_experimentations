@@ -10,3 +10,4 @@ New overlays (fixes battery stats, automatic brightness, ...)
 
 Developer-side:
 - Cleanup of IMS us in hardware overlays @Dunedan
+- Gives more changes for vendor media profile to work @phhusson
