@@ -8,3 +8,5 @@ New overlays (fixes battery stats, automatic brightness, ...)
 - Nokia 6.1 @theimpulson
 - Nokia 8.1/X7 @TechnoStone
 
+Developer-side:
+- Cleanup of IMS us in hardware overlays @Dunedan
