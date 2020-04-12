@@ -410,7 +410,7 @@ download_patches() {
 	wantedRelease="$(curl --silent https://api.github.com/repos/phhusson/treble_experimentations/releases |jq -r '.[] | .tag_name' |grep -E "$githubMatch\$" |sort -V | tail -n 1)"
 	wget "https://github.com/phhusson/treble_experimentations/releases/download/$wantedRelease/patches.zip" -O patches.zip
 	rm -Rf patches
-	unzip patches.zip
+	unzip patches.zip -d patches
 }
 
 function init_patches() {
