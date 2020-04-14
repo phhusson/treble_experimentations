@@ -1,0 +1,51 @@
+AudioManager.setParameters("g_hw_display_rotation", 0/1/2/3)
+AudioManager.setParameters("shutdown", 1)
+AudioManager.setParameters("power_off", on)
+AudioManager.setParameters("power_off", suspend)
+AudioManager.setParameters("cameraFacing", back, front)
+g_effect_dv_adapt_sound=adapt content
+g_knox_microphone_allowed=false
+g_knox_microphone_allowed=true
+l_karaoke_enable=true/false
+l_game_chat_enable=true/false
+l_call_ril_state_connected=true
+l_call_2g_tdma=true
+l_call_2g_tdma=false
+
+l_multi_sound_key=
+uid=
+volume=
+l_dex_key;type=pad;connected=
+l_dex_key;type=stand;connected=
+l_dex_key;path={dex,none}
+l_uhq_bt=this.mUhqBtSampleRate
+screen_state=on
+screen_state=off
+dev_shutdown=true
+g_call_band=swb
+g_call_band=wb
+g_call_band=nb
+g_call_rat_type=
+l_hw_flat_motion_state=1
+l_hw_flat_motion_state=0
+l_hw_proximity_sensor_state=1
+l_hw_proximity_sensor_state=0
+adapt_sound=DhaParam
+l_dual_speaker_calling_package={NORMAL,VOIP,GAME,CALL,GAMEVOIP}
+l_hw_folder_state=0
+l_hw_folder_state=1
+bt_headset_nrec=this.mBtNrec;g_sco_samplerate=this.mBtSampleRate
+l_sound_assistant_lr_switch_enable=true
+l_sound_assistant_lr_switch_enable=false
+g_effect_to_mono_enable={on,off}
+l_effect_upscaler_mode=int
+l_call_nb_quality_enable=true
+l_call_nb_quality_enable=false
+l_all_sound_mute_enable={true,false}
+g_effect_sound_balance_value=int
+l_hmt_state=off
+l_hmt_state=mount
+l_hmt_state=unmount
+l_hmt_state=dock
+l_sound_assistant_lr_switch_enable=true
+l_effect_listenback_key;state=int karaokeListenbackEnabled
