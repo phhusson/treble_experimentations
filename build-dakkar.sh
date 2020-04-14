@@ -38,31 +38,51 @@ Options:
 ROM types:
 
   aex-pie
+  aex10
   aicp-oreo
+  aicp10
   aokp-oreo
+  aokp-pie
+  aokp10
   aosmp-pie
+  aosmp10
+  aospa
   aosp80
   aosp81
   aosp90
   aosp10
   aquarios
   carbon-oreo
+  carbon10
   crdroid-oreo
+  crdroid10
+  bootleggers
   e-pie
   e-oreo
   havoc-pie
+  havoc10
   komodo-pie
+  komodo10
   lineage151
   lineage160
+  lineage170
   mokee-oreo
+  mokee10
   pixel81
   pixel90
+  pixel10
   potato-pie
+  potato10
   rebellion-pie
+  rebellion10
   rr-oreo
+  rr10
   slim-oreo
+  slim-pie
+  slim10
   graphene9
   graphene10
+  atom
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -96,7 +116,7 @@ function get_rom_type() {
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-vts-8.0_r4"
                 localManifestBranch="master"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 jack_enabled="true"
                 ;;
@@ -104,7 +124,7 @@ function get_rom_type() {
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-8.1.0_r48"
                 localManifestBranch="android-8.1"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 jack_enabled="true"
                 ;;
@@ -112,7 +132,7 @@ function get_rom_type() {
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-9.0.0_r21"
                 localManifestBranch="android-9.0"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 jack_enabled="false"
                 ;;
@@ -120,7 +140,7 @@ function get_rom_type() {
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-10.0.0_r33"
                 localManifestBranch="android-10.0"
-                treble_generate=""
+                treble_generate="aosp"
                 extra_make_options=""
                 jack_enabled="false"
                 ;;
@@ -128,6 +148,14 @@ function get_rom_type() {
                 mainrepo="https://github.com/CarbonROM/android.git"
                 mainbranch="cr-6.1"
                 localManifestBranch="android-8.1"
+                treble_generate="carbon"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+            carbon10)
+                mainrepo="https://github.com/CarbonROM/android.git"
+                mainbranch="cr-8.0"
+                localManifestBranch="android-10.0"
                 treble_generate="carbon"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
@@ -164,10 +192,26 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+	    lineage170)
+                mainrepo="https://github.com/LineageOS/android.git"
+                mainbranch="lineage-17.0"
+                localManifestBranch="android-10.0"
+                treble_generate="lineage"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
             rr-oreo)
                 mainrepo="https://github.com/ResurrectionRemix/platform_manifest.git"
                 mainbranch="oreo"
                 localManifestBranch="android-8.1"
+                treble_generate="rr"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+	   rr10)
+                mainrepo="https://github.com/ResurrectionRemix/platform_manifest.git"
+                mainbranch="10"
+                localManifestBranch="android-10.0"
                 treble_generate="rr"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
@@ -188,10 +232,27 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+	   pixel10)
+                mainrepo="https://github.com/PixelExperience/manifest.git"
+                mainbranch="10"
+                localManifestBranch="android-10.0"
+                treble_generate="pixel"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
+
             potato-pie)
                 mainrepo="https://github.com/PotatoProject/manifest.git"
                 mainbranch="baked-release"
                 localManifestBranch="android-9.0"
+                treble_generate="potato"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
+	    potato10)
+                mainrepo="https://github.com/PotatoProject/manifest.git"
+                mainbranch="croquette-release"
+                localManifestBranch="android-10.0"
                 treble_generate="potato"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
@@ -204,10 +265,26 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
                 ;;
+	   crdroid10)
+                mainrepo="https://github.com/crdroidandroid/android.git"
+                mainbranch="10.0"
+                localManifestBranch="android-10.0"
+                treble_generate="crdroid"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
             mokee-oreo)
                 mainrepo="https://github.com/mokee/android.git"
                 mainbranch="mko-mr1"
                 localManifestBranch="android-8.1"
+                treble_generate="mokee"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+	    mokee10)
+                mainrepo="https://github.com/mokee/android.git"
+                mainbranch="mkq"
+                localManifestBranch="android-10.0"
                 treble_generate="mokee"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
@@ -220,10 +297,34 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
                 ;;
+	    aicp10)
+                mainrepo="https://github.com/AICP/platform_manifest.git"
+                mainbranch="q10.0"
+                localManifestBranch="android-10.0"
+                treble_generate="aicp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
             aokp-oreo)
                 mainrepo="https://github.com/AOKP/platform_manifest.git"
                 mainbranch="oreo"
                 localManifestBranch="android-8.1"
+                treble_generate="aokp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+	    aokp-pie)
+                mainrepo="https://github.com/AOKP/platform_manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
+                treble_generate="aokp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+	    aokp10)
+                mainrepo="https://github.com/AOKP/platform_manifest.git"
+                mainbranch="10"
+                localManifestBranch="android-10.0"
                 treble_generate="aokp"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
@@ -236,10 +337,34 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+	    aex10)
+                mainrepo="https://github.com/AospExtended/manifest.git"
+                mainbranch="10.x"
+                localManifestBranch="android-10.0"
+                treble_generate="aex"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
             slim-oreo)
                 mainrepo="https://github.com/SlimRoms/platform_manifest.git"
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
+                treble_generate="slim"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+	    slim-pie)
+                mainrepo="https://github.com/SlimRoms/platform_manifest.git"
+                mainbranch="9.0"
+                localManifestBranch="android-9.0"
+                treble_generate="slim"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="true"
+                ;;
+	    slim10)
+                mainrepo="https://github.com/SlimRoms/platform_manifest.git"
+                mainbranch="10.0"
+                localManifestBranch="android-10.0"
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="true"
@@ -252,10 +377,26 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+            havoc-10)
+                mainrepo="https://github.com/Havoc-OS/android_manifest.git"
+                mainbranch="10"
+                localManifestBranch="android-10.0"
+                treble_generate="havoc"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
             komodo-pie)
                 mainrepo="https://github.com/KomodOS-Rom/platform_manifest.git"
-                mainbranch="pie"
+                mainbranch="pie-gsi"
                 localManifestBranch="android-9.0"
+                treble_generate="komodo"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
+            komodo10)
+                mainrepo="https://github.com/KomodOS-Rom/platform_manifest.git"
+                mainbranch="10"
+                localManifestBranch="android-10.0"
                 treble_generate="komodo"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
@@ -276,10 +417,26 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
                 ;;
+            aquarios10)
+                mainrepo="https://github.com/aquarios/manifest.git"
+                mainbranch="x"
+                localManifestBranch="android-10.0"
+                treble_generate="aquarios"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
             aosmp-pie)
                 mainrepo="https://gitlab.com/AOSmP/android_manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
+                treble_generate="aosmp"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                jack_enabled="false"
+                ;;
+            aosmp10)
+                mainrepo="https://gitlab.com/AOSmP/android_manifest.git"
+                mainbranch="ten"
+                localManifestBranch="android-10.0"
                 treble_generate="aosmp"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 jack_enabled="false"
@@ -297,6 +454,20 @@ function get_rom_type() {
 		mainbranch="10"
 		localManifestBranch="android-10.0"
 		treble_generate="graphene"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		jack_enabled="false"
+	   aospa)
+	   	mainrepo="https://github.com/AOSPA/manifest.git"
+		mainbranch="quartz"
+		localManifestBranch="android-10.0"
+		treble_generate="aospa"
+		extra_make_options="WITHOUT_CHECK_API=true"
+		jack_enabled="false"
+	   atom)
+	   	mainrepo="https://github.com/Atom-OS/frameworks_base.git"
+		mainbranch="android-10.0"
+		localManifestBranch="android-10.0"
+		treble_generate="atom"
 		extra_make_options="WITHOUT_CHECK_API=true"
 		jack_enabled="false"
 	   
