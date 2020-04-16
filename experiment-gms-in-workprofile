@@ -1,0 +1,17 @@
+pm create-user --profileOf 0 --managed Google
+pm create-user --profileOf 0 --managed Facebook
+am start-user 10
+
+adb install --user 10 system/product/app/TrichromeLibrary/TrichromeLibrary.apk
+adb install --user 10 system/product/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk
+adb install --user 10 system/product/priv-app/PrebuiltGmsCoreQt/PrebuiltGmsCoreQt.apk
+adb install --user 10 system/product/priv-app/Phonesky/Phonesky.apk
+pm grant --user 10 com.google.android.gms android.permission.WRITE_SECURE_SETTINGS
+pm grant --user 10 com.google.android.gms android.permission.ACCESS_FINE_LOCATION
+
+pm grant --user 10 com.android.vending android.permission.CLEAR_APP_CACHE
+pm grant --user 10 com.android.vending android.permission.INSTALL_PACKAGES
+
+
+adb install --user 10 system/product/app/Chrome/Chrome.apk
+adb install --user 10 system/product/app/Photos/arm64/Photos.apk
