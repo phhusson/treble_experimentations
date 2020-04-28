@@ -3,7 +3,8 @@ v216:
 - Fix long boot on Oreo vendor for Redmi 6A and Redmi 6 @myst33d
 - Fix ultrasonic fingerprint sensor on Samsung Q vendors @phhusson
 - Fix recent buttons on FLOSS variant @phhusson
-
+- Fix flashlight on S10 lite @mainey
+- Fix double-tap-to-wake on Xiaomi Redmi Go @phhusson
 
 New overlays (fixes battery stats, automatic brightness, ...)
 - Nokia 6.1 @theimpulson
