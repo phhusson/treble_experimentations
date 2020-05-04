@@ -11,5 +11,12 @@ New overlays (fixes battery stats, automatic brightness, ...)
 - Nokia 8.1/X7 @TechnoStone
 
 Developer-side:
-- Cleanup of IMS us in hardware overlays @Dunedan
+- Cleanup of IMS use in hardware overlays @Dunedan
 - Gives more changes for vendor media profile to work @phhusson
+
+Treble settings:
+- Qualcomm devices: Add an option to use vendor media profiles. This may enable higher camera recording resolution @phhusson
+- Qualcomm devices: Add an option to use vendor audio policy. This may fix some audio issues, but might create some others. @phhusson
+- Add an option to disable audio effects. This might fix some audio issues. @phhusson
+- Oppo: Add an option to enable dc diming @phhusson
+- Invert logic for navbar: navbar is enabled by default, but can be disabled @phhusson
