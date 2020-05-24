@@ -60,17 +60,23 @@ if [ "$1" = "android-10.0" ];then
 	buildVariant treble_arm64_afS-userdebug quack-arm64-aonly-floss
 	buildVariant treble_arm64_avS-userdebug quack-arm64-aonly-vanilla
 	buildVariant treble_arm64_agS-userdebug quack-arm64-aonly-gapps
+	buildVariant treble_arm64_aoS-userdebug quack-arm64-aonly-go
 	buildVariant treble_arm64_bfS-userdebug quack-arm64-ab-floss
 	buildVariant treble_arm64_bvS-userdebug quack-arm64-ab-vanilla
 	buildVariant treble_arm64_bgS-userdebug quack-arm64-ab-gapps
+	buildVariant treble_arm64_boS-userdebug quack-arm64-ab-go
 	buildVariant treble_arm_avS-userdebug quack-arm-aonly-vanilla
-	#buildVariant treble_arm_agS-userdebug quack-arm-aonly-gapps
+	buildVariant treble_arm_agS-userdebug quack-arm-aonly-gapps
+	buildVariant treble_arm_aoS-userdebug quack-arm-aonly-go
 	buildVariant treble_arm_bvS-userdebug quack-arm-ab-vanilla
-	#buildVariant treble_arm_bgS-userdebug quack-arm-ab-gapps
+	buildVariant treble_arm_bgS-userdebug quack-arm-ab-gapps
+	buildVariant treble_arm_boS-userdebug quack-arm-ab-go
 	buildVariant treble_a64_avS-userdebug quack-arm32_binder64-aonly-vanilla
-	#buildVariant treble_a64_agS-userdebug quack-arm32_binder64-aonly-gapps
+	buildVariant treble_a64_agS-userdebug quack-arm32_binder64-aonly-gapps
+	buildVariant treble_a64_aoS-userdebug quack-arm32_binder64-aonly-go
 	buildVariant treble_a64_bvS-userdebug quack-arm32_binder64-ab-vanilla
-	#buildVariant treble_a64_bgS-userdebug quack-arm32_binder64-ab-gapps
+	buildVariant treble_a64_bgS-userdebug quack-arm32_binder64-ab-gapps
+	buildVariant treble_a64_boS-userdebug quack-arm32_binder64-ab-go
 else
 	buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 	buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
