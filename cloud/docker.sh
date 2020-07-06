@@ -23,7 +23,7 @@ run_script () {
 
 orig_docker="$(which docker)"
 docker() {
-    $orig_docker --tlsverify=false "$@"
+    $orig_docker "$@"
 }
 
 trap 'cleanup' ERR
