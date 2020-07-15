@@ -72,6 +72,7 @@ buildVariant() {
 	# Pack everything nicely into a tar.xz archive for reducing the size of the resulting images
 	xz -c $OUT/system.img -T0 > release/$rom_fp/system-${2}.img.xz
 }
+
 # Create a manifest
 repo manifest -r > release/$rom_fp/manifest.xml
 # Execute the list-patches script from the cloned treble_experimentations folder
