@@ -64,7 +64,7 @@ rm -f vendor/gapps/interfaces/wifi_ext/Android.bp
 
 # Define the function that will handle the build process
 buildVariant() {
-	# Execute lunch command with the BUILD FLAVOR argument to build the ROM
+	# Execute lunch command with the BUILD FLAVOR argument to prepare for the build
 	lunch $1
 	# Clean the target folder
 	make BUILD_NUMBER=$rom_fp installclean
@@ -78,7 +78,7 @@ buildVariant() {
 
 # Pack the state of every git in the repo into one file to know what commits went into the build
 repo manifest -r > release/$rom_fp/manifest.xml
-# Execute the list-patches script from the cloned treble_experimentations folder
+# Execute the list-patches script from the cloned treble_experimentations folder to fetch the available patches
 bash "$originFolder"/list-patches.sh
 # Take the patches.zip archive and copy it into the output folder
 cp patches.zip release/$rom_fp/patches.zip
