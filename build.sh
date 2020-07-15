@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Holds the name of the subdirectory of the output folder where the built images will go, so that we don't overwrite the older ones.
 rom_fp="$(date +%y%m%d)"
 # Remember the folder in which this script is (treble_experimentations)
 originFolder="$(dirname "$0")"
@@ -8,11 +9,11 @@ mkdir -p release/$rom_fp/
 # If there are errors, exit immediately
 set -e
 
-#Set USER variable if it does not exist
+# Make sure that the USER variable exists, and set it if it doesn't in order to avoid failures.
 if [ -z "$USER" ];then
 	export USER="$(id -un)"
 fi
-# No idea
+# Set English as the language for the build process. Error reports will be generated in English
 export LC_ALL=C
 
 # Set initial repo parameters
@@ -20,7 +21,7 @@ manifest_url="https://android.googlesource.com/platform/manifest"
 aosp="android-8.1.0_r65"
 phh="android-8.1"
 
-# Read the first argument and set the repo arguments accordingly
+# Read the first argument passed when the script was executed and set the repo arguments accordingly
 if [ "$1" == "android-9.0" ];then
     manifest_url="https://gitlab.com/aosp-security/manifest"
     aosp="android-9.0.0_r53-r47"
@@ -31,7 +32,7 @@ elif [ "$1" == "android-10.0" ];then
     phh="android-10.0"
 fi
 
-# Does nothing for us
+# Used for phh's release process. Can be ignored
 if [ "$release" == true ];then
     [ -z "$version" ] && exit 1
     [ ! -f "$originFolder/release/config.ini" ] && exit 1
@@ -39,41 +40,43 @@ fi
 
 # Repo init the selected Android Source Branch
 repo init -u "$manifest_url" -b $aosp
-# Did we clone phh's treble manifests?
+# Check if phh's treble_manifest is already present in the local_manifests
 if [ -d .repo/local_manifests ] ;then
 	( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
-# If not then we will, and we'll place them in the local_manifests folder
+# If it isn't, clone phh's treble_manifest
 else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $phh
 fi
 # Download the source files according to the manifests
 repo sync -c -j 1 --force-sync
 
-# Download GAPPS (Google Apps)
+# Tell git to fetch opengapps, since repo cannot handle LFS (Large File Storage)
 repo forall -r '.*opengapps.*' -c 'git lfs fetch && git lfs checkout'
-# Change directory to treble device and generate the mk flavors
+# Call the generate.sh script in the treble device's folder to generate the build flavors
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
 # Download the FLOSS apps to use in the ROM
 (cd vendor/foss; git clean -fdx; bash update.sh)
-# Remove some GAPPS things
+# For Google Pixel devices : remove wifi_ext from gapps
 rm -f vendor/gapps/interfaces/wifi_ext/Android.bp
 
 # Prepare the build environment
 . build/envsetup.sh
 
-# Define the buildVariant function for later use
+# Define the function that will handle the build process
 buildVariant() {
-	# Execute lunch command with the BUILD FLAVOR argument
+	# Execute lunch command with the BUILD FLAVOR argument to build the ROM
 	lunch $1
-	# Execute make to compile some of the ROM's components
+	# Clean the target folder
 	make BUILD_NUMBER=$rom_fp installclean
+	# Create the system image
 	make BUILD_NUMBER=$rom_fp -j8 systemimage
+	# Perform SELinux policy tests
 	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
-	# Pack everything nicely into a tar.xz archive for reducing the size of the resulting images
+	# Pack everything nicely into an xz archive to reduce the size of the resulting images
 	xz -c $OUT/system.img -T0 > release/$rom_fp/system-${2}.img.xz
 }
 
-# Create a manifest
+# Pack the state of every git in the repo into one file to know what commits went into the build
 repo manifest -r > release/$rom_fp/manifest.xml
 # Execute the list-patches script from the cloned treble_experimentations folder
 bash "$originFolder"/list-patches.sh
@@ -132,7 +135,7 @@ else
 	rm -Rf out/target/product/phhgsi*
 fi
 
-# Does nothing for us
+# Used for phh's release process. Can be ignored
 if [ "$release" == true ];then
     (
         rm -Rf venv
