@@ -118,7 +118,7 @@ function get_rom_type() {
                 ;;
             aosp10)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-10.0.0_r33"
+                mainbranch="android-10.0.0_r40"
                 localManifestBranch="android-10.0"
                 treble_generate=""
                 extra_make_options=""
