@@ -450,6 +450,32 @@ function patch_things() {
     fi
 }
 
+function fix_missings() {
+	if [[ "$localManifestBranch" == *"9"* ]]; then
+	        rm -rf vendor/*/packages/overlays/NoCutout*
+		# fix kernel source missing (on pie)
+		sed 's;.*KERNEL_;//&;' -i vendor/*/build/soong/Android.bp 2>/dev/null || true
+		mkdir -p device/sample/etc
+		cd device/sample/etc/
+		curl "https://android.googlesource.com/device/sample/+/refs/tags/android-9.0.0_r59/etc/apns-full-conf.xml?format=TEXT"| base64 --decode > apns-full-conf.xml
+		cd ../../..
+	fi
+	if [[ "$localManifestBranch" == *"10"* ]]; then
+	        rm -rf vendor/*/packages/overlays/NoCutout*
+		# fix kernel source missing (on Q)
+		sed 's;.*KERNEL_;//&;' -i vendor/*/build/soong/Android.bp 2>/dev/null || true
+		mkdir -p device/sample/etc
+		cd device/sample/etc
+		curl "https://raw.githubusercontent.com/LineageOS/android_vendor_lineage/lineage-17.1/prebuilt/common/etc/apns-conf.xml" > apns-conf.xml
+		cd ../../..
+		mkdir -p device/generic/common/nfc
+		cd device/generic/common/nfc
+		curl "https://android.googlesource.com/device/generic/common/+/refs/tags/android-10.0.0_r40/nfc/libnfc-nci.conf?format=TEXT"| base64 --decode > libnfc-nci.conf
+		cd ../../../..
+		sed -i '/Copies the APN/,/include $(BUILD_PREBUILT)/{/include $(BUILD_PREBUILT)/ s/.*/ /; t; d}' vendor/*/prebuilt/common/Android.mk 2>/dev/null || true
+	fi
+}
+
 function build_variant() {
     lunch "$1"
     make $extra_make_options BUILD_NUMBER="$rom_fp" installclean
@@ -494,6 +520,7 @@ if [[ $build_dakkar_choice == *"y"* ]];then
     init_local_manifest
     init_patches
     sync_repo
+    fix_missings
 fi
 
 patch_things
