@@ -5,9 +5,8 @@
 # calling itself via repo forall.
 #
 # Why is it required?
-# My hypothesis: to gather all the patches applied to make the GSI work,
-# and then later re-apply the patches to other distros
-# (but somebody smarter than me might want to provide some insight here)
+# This script gathers all the patches applied to make the GSI work,
+# and then later re-apply the patches to other distros.
 
 
 # Phase 1: Initial Start
