@@ -68,15 +68,17 @@ if [ "$1" = "android-11.0" ];then
         git clone https://github.com/phhusson/sas-creator
         cd sas-creator
 
+        git clone https://github.com/phhusson/vendor_vndk -b android-10.0
+
         #Those require running as root
         bash run.sh 32
-        xz -c s.img -T0 > release/$rom_fp/system-roar-arm-aonly-vanilla.img.xz
+        xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm-aonly-vanilla.img.xz
 
         bash run.sh 64
-        xz -c s.img -T0 > release/$rom_fp/system-roar-arm64-aonly-vanilla.img.xz
+        xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-aonly-vanilla.img.xz
 
         bash lite-adapter.sh
-        xz -c s.img -T0 > release/$rom_fp/system-roar-arm64-ab-vndklite-vanilla.img.xz
+        xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-ab-vndklite-vanilla.img.xz
     )
 elif [ "$1" = "android-10.0" ];then
 	buildVariant treble_arm64_afS-userdebug quack-arm64-aonly-floss
