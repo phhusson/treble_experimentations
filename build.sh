@@ -60,7 +60,7 @@ repo manifest -r > release/$rom_fp/manifest.xml
 bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
-if [ "$1" = "android-10.0" ];then
+if [ "$1" = "android-11.0" ];then
 	buildVariant treble_arm64_bvS-userdebug roar-arm64-ab-vanilla
 	buildVariant treble_arm_bvS-userdebug roar-arm-ab-vanilla
 	buildVariant treble_a64_bvS-userdebug roar-a64-ab-vanilla
