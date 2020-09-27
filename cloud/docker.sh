@@ -34,9 +34,12 @@ name="phh-treble-$suffix"
 
 echo "Running build on $name"
 
-docker run --name "$name" --rm -d ubuntu:18.04 sleep infinity
+docker run --privileged --name "$name" --rm -d ubuntu:18.04 sleep infinity
 
 docker exec "$name" echo "Good morning, now building"
+
+run_script 'for i in $(seq 0 24);do mknod /dev/loop$i b 7 $i;done'
+
 run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i386 && \
 	apt-get update && \
 	(yes "" | apt-get install -y -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" \
@@ -67,7 +70,13 @@ run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i38
 		python-pip \
 		python3-pip \
 		git \
-       wget )'
+       wget \
+       )'
+
+run_script '
+wget http://fr.archive.ubuntu.com/ubuntu/pool/main/p/python-xattr/python3-xattr_0.9.6-1.1_amd64.deb http://fr.archive.ubuntu.com/ubuntu/pool/universe/p/python-xattr/xattr_0.9.6-1.1_amd64.deb && \
+    dpkg -i xattr_0.9.6-1.1_amd64.deb python3-xattr_0.9.6-1.1_amd64.deb
+'
 
 run_script '
 	git config --global user.name "Pierre-Hugues Husson" && \
