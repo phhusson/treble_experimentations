@@ -1,3 +1,18 @@
+v300.e:
+- Enable VNDK 28 for A-Only variants
+- Add VNDK Lite arm32-binder64 A/B variant
+
+
+v300.d:
+- Fix boot on some Oreo devices (surfaceflinger presentOrValidate)
+- Fix vndk lite variant which was totally non-functional (thanks @SamarV-121)
+- Add a property for devices that boot-crash because of direct sensor reporting (seen on Qin2 Pro, property is persist.sys.phh.disable_sensor_direct_report)
+
+v300.c:
+- Fix OMX (and thus multimedia and browsers) on some Pie vendors
+- Fix promity sensor for some devices
+- Fix brightness control being only 80-100% on Samsung devices
+
 v216:
 - Fix boot on Samsung Galaxy A30 @crazo7924
 - Fix long boot on Oreo vendor for Redmi 6A and Redmi 6 @myst33d
