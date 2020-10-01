@@ -77,8 +77,11 @@ if [ "$1" = "android-11.0" ];then
         bash run.sh 64
         xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-aonly-vanilla.img.xz
 
-        bash lite-adapter.sh
+        bash lite-adapter.sh 64
         xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-ab-vndklite-vanilla.img.xz
+
+        bash lite-adapter.sh 32
+        xz -c s.img -T0 > ../release/$rom_fp/system-roar-a64-ab-vndklite-vanilla.img.xz
     )
 elif [ "$1" = "android-10.0" ];then
 	buildVariant treble_arm64_afS-userdebug quack-arm64-aonly-floss
