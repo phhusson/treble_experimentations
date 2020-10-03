@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	 <string-array name="networkAttributes">
+		<item>wifi,1,1,1,-1,true</item>
+		<item>mobile,0,0,0,-1,true</item>
+		<item>mobile_mms,2,0,4,60000,true</item>
+		<item>mobile_supl,3,0,2,60000,true</item>
+		<item>mobile_dun,4,0,2,60000,true</item>
+		<item>mobile_hipri,5,0,3,60000,true</item>
+		<item>mobile_fota,10,0,2,60000,true</item>
+		<item>mobile_ims,11,0,2,60000,true</item>
+		<item>mobile_cbs,12,0,2,60000,true</item>
+		<item>bluetooth,7,7,2,-1,true</item>
+		<item>mobile_emergency,15,0,5,-1,true</item>
+		<item>ethernet,9,9,9,-1,true</item>
+	</string-array>
+	<bool name="config_dozeAfterScreenOff">true</bool>
+	<bool name="config_dozeAfterScreenOffByDefault">true</bool>
+	<bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+	<bool name="config_dozeAlwaysOnEnabled">true</bool>
+	<bool name="config_enableBurnInProtection">true</bool>
+	<bool name="config_fillMainBuiltInDisplayCutout">true</bool>
+	<bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+	<bool name="config_supportDoubleTapWake">true</bool>
+	<bool name="config_device_vt_available">true</bool>
+	<bool name="config_device_wfc_ims_available">true</bool>
+	<bool name="config_enableNetworkLocationOverlay">true</bool>
+	<bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
+	<bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
+	<bool name="config_useDevInputEventForAudioJack">true</bool>
+	<fraction name="config_autoBrightnessAdjustmentMaxGamma">200.0%</fraction>
+	<fraction name="config_maximumScreenDimRatio">29.999996%</fraction>
+	<integer name="config_burnInProtectionMaxHorizontalOffset">15</integer>
+	<integer name="config_burnInProtectionMaxRadius">-1</integer>
+	<integer name="config_burnInProtectionMaxVerticalOffset">40</integer>
+	<integer name="config_burnInProtectionMinHorizontalOffset">-15</integer>
+	<integer name="config_burnInProtectionMinVerticalOffset">-40</integer>
+	<integer name="config_screenBrightnessDoze">50</integer>
+	<integer name="config_bluetooth_idle_cur_ma">3</integer>
+	<integer name="config_bluetooth_operating_voltage_mv">3700</integer>
+	<integer name="config_bluetooth_rx_cur_ma">20</integer>
+	<integer name="config_bluetooth_tx_cur_ma">33</integer>
+	<integer name="config_brightness_ramp_rate_fast">10000</integer>
+	<integer name="config_brightness_ramp_rate_slow">10000</integer>
+	<integer name="config_screenBrightnessDark">5</integer>
+	<integer name="config_screenBrightnessSettingDefault">88</integer>
+	<integer name="config_screenBrightnessSettingMinimum">1</integer>
+	<integer name="config_shutdownBatteryTemperature">600</integer>
+</resources>
