@@ -1,3 +1,8 @@
+v300.f:
+- Make fingerprint usable in-app
+- Fix boot on some Qualcomm Q vendors
+- Fix A2DP for some Qualcomm Q vendors (requires disable A2DP offload)
+
 v300.e:
 - Enable VNDK 28 for A-Only variants
 - Add VNDK Lite arm32-binder64 A/B variant
