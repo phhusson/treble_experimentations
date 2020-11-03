@@ -61,28 +61,30 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 if [ "$1" = "android-11.0" ];then
-	buildVariant treble_arm64_bvS-userdebug roar-arm64-ab-vanilla
-	buildVariant treble_arm_bvS-userdebug roar-arm-ab-vanilla
-	buildVariant treble_a64_bvS-userdebug roar-a64-ab-vanilla
     (
         git clone https://github.com/phhusson/sas-creator
         cd sas-creator
 
         git clone https://github.com/phhusson/vendor_vndk -b android-10.0
-
-        #Those require running as root
-        bash run.sh 32
-        xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm-aonly-vanilla.img.xz
-
-        bash run.sh 64
-        xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-aonly-vanilla.img.xz
-
-        bash lite-adapter.sh 64
-        xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-ab-vndklite-vanilla.img.xz
-
-        bash lite-adapter.sh 32
-        xz -c s.img -T0 > ../release/$rom_fp/system-roar-a64-ab-vndklite-vanilla.img.xz
     )
+
+    # ARM64 vanilla {ab, a-only, ab vndk lite}
+	buildVariant treble_arm64_bvS-userdebug roar-arm64-ab-vanilla
+    ( cd sas-creator; bash run.sh 64 ; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-aonly-vanilla.img.xz)
+    ( cd sas-creator; bash lite-adapter.sh 64; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-ab-vndklite-vanilla.img.xz )
+
+    # ARM64 floss {ab, a-only, ab vndk lite}
+	buildVariant treble_arm64_bfS-userdebug roar-arm64-ab-floss
+    ( cd sas-creator; bash run.sh 64 ; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-aonly-floss.img.xz)
+    ( cd sas-creator; bash lite-adapter.sh 64; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm64-ab-vndklite-floss.img.xz )
+
+    # ARM32 vanilla {ab, a-only}
+	buildVariant treble_arm_bvS-userdebug roar-arm-ab-vanilla
+    ( cd sas-creator; bash run.sh 32; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm-aonly-vanilla.img.xz )
+
+    # ARM32_binder64 vanilla {ab, ab vndk lite}
+	buildVariant treble_a64_bvS-userdebug roar-a64-ab-vanilla
+    ( cd sas-creator; bash lite-adapter.sh 32; xz -c s.img -T0 > ../release/$rom_fp/system-roar-a64-ab-vndklite-vanilla.img.xz)
 elif [ "$1" = "android-10.0" ];then
 	buildVariant treble_arm64_afS-userdebug quack-arm64-aonly-floss
 	buildVariant treble_arm64_avS-userdebug quack-arm64-aonly-vanilla
