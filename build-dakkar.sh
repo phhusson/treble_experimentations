@@ -45,6 +45,7 @@ ROM types:
   aosp81
   aosp90
   aosp10
+  aosp11
   aquarios
   carbon-oreo
   crdroid-oreo
@@ -120,6 +121,14 @@ function get_rom_type() {
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-10.0.0_r41"
                 localManifestBranch="android-10.0"
+                treble_generate=""
+                extra_make_options=""
+                jack_enabled="false"
+                ;;
+            aosp11)
+                mainrepo="https://android.googlesource.com/platform/manifest.git"
+                mainbranch="android-11.0.0_r15"
+                localManifestBranch="android-11.0"
                 treble_generate=""
                 extra_make_options=""
                 jack_enabled="false"
