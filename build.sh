@@ -24,7 +24,7 @@ elif [ "$1" == "android-10.0" ];then
     phh="android-10.0"
 elif [ "$1" == "android-11.0" ];then
     manifest_url="https://android.googlesource.com/platform/manifest"
-    aosp="android-11.0.0_r15"
+    aosp="android-11.0.0_r20"
     phh="android-11.0"
 fi
 
