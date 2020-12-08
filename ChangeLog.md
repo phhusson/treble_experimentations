@@ -1,3 +1,18 @@
+v300.j:
+- Gapps variants are back!
+- Fix camera on huawei (thanks @DarkJoker360dev )
+- Fix boot on some vndk 26 devices (Include libstdc++.so in vndk-sp for mali EGL)
+- Fix keymaster (encryption) on Galaxy S9(+)
+- Fix boot on some a-only devices (vndk 28?) (Allow init to create /system_ext)
+- December Security Patch Level
+- Fix VoLTE crash on Mediatek Q vendors
+- Extend desktop mode to allow binding input devices to desktop
+- Fix rounded corner setting in treble app
+- Add a toggle in Treble app to workaround backlight scale on some devices
+- /!\ A/B non-lite images are now using Share Duplicate blocks, which means it is no longer trivial to mount / R/W. See https://twitter.com/phhusson/status/1260577424418488324 This greatly reduces size of images from 3GB to 2.2GB
+- Realme C11: Fix backlight control, 3.5mm jack and double tap to wake
+- FLOSS variant now includes SeedVault for backups
+
 v300.f:
 - Make fingerprint usable in-app
 - Fix boot on some Qualcomm Q vendors
