@@ -34,7 +34,7 @@ name="phh-treble-$suffix"
 
 echo "Running build on $name"
 
-docker run --privileged --name "$name" --rm -d ubuntu:18.04 sleep infinity
+docker run --privileged --name "$name" --rm -d ubuntu:20.04 sleep infinity
 
 docker exec "$name" echo "Good morning, now building"
 
@@ -48,13 +48,14 @@ run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i38
 		xorriso \
 		locales \
 		openjdk-8-jdk \
-		python \
+        python-is-python3 \
 		git \
 		m4 \
 		unzip \
 		bison \
 		zip \
 		gperf \
+        libncurses5 \
 		libxml2-utils \
 		zlib1g:i386 \
 		libstdc++6:i386 \
@@ -65,18 +66,14 @@ run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i38
 		lunzip \
 		squashfs-tools \
 		sudo \
-		repo \
 		xmlstarlet \
-		python-pip \
 		python3-pip \
 		git \
        wget \
+       xattr \
        )'
 
-run_script '
-wget http://fr.archive.ubuntu.com/ubuntu/pool/main/p/python-xattr/python3-xattr_0.9.6-1.1_amd64.deb http://fr.archive.ubuntu.com/ubuntu/pool/universe/p/python-xattr/xattr_0.9.6-1.1_amd64.deb && \
-    dpkg -i xattr_0.9.6-1.1_amd64.deb python3-xattr_0.9.6-1.1_amd64.deb
-'
+run_script 'curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/bin/repo; chmod 0755 /usr/bin/repo'
 
 run_script '
 	git config --global user.name "Pierre-Hugues Husson" && \
@@ -89,8 +86,8 @@ run_script 'git clone https://github.com/phhusson/treble_experimentations'
 
 run_script '\
 	mkdir build-dir && \
-	sed -E -i "s/(repo sync.*)-j 1/\1-j128/g" treble_experimentations/build.sh && \
-	sed -E -i "s/(make.*)-j8/\1-j128/g" treble_experimentations/build.sh
+	sed -E -i "s/(repo sync.*)-j 1/\1-j16/g" treble_experimentations/build.sh && \
+	sed -E -i "s/(make.*)-j8/\1-j48/g" treble_experimentations/build.sh
 	'
 
 run_script "cd build-dir && bash ../treble_experimentations/build.sh $android_version"
