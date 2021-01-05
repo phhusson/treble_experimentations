@@ -1,3 +1,22 @@
+v300.k:
+- January security patch
+- Fix hotspot for Mediatek devices
+- Fix various sleep issue on Samsung devices
+- Fix NFC for some devices
+- Extend "Enable Aux cameras" for more devices (On Samsung you'll need both the one in misc and the one in Samsung)
+- Add new styles section in Treble App (thanks @ponces)
+- Add "Disable FUSE" parameter in Treble app. This can bring some storafe performance improvement to some users (thanks @eremitein)
+- Add dark mode icon for Treble app (Thanks @RandomAJL)
+- Fix OBB for Pie and Q vendors
+- Add "Automatically restart RIL" for Mediatek devices loosing radio when out of range
+- Fix boot on Spreadtrum devices (Thanks @PeterCxy)
+- Fix Realme C3 and C2 backlight and jack (Thanks @siddhrsh)
+- Disable annoying notification about Serial port on some devices
+- Fix tethering for some devices
+- Improved IMS situation for Spreadtrum
+- /!\ A/B non-lite images are still using Share Duplicate blocks to decrease image size. **Use vndk-lite variant for R/W /**
+- Fix NFC for some cases
+
 v300.j:
 - Gapps variants are back!
 - Fix camera on huawei (thanks @DarkJoker360dev )
