@@ -41,8 +41,7 @@ else
 		build_target="android-8.1"
 	fi
 	# download manifest with the given version number
-	tmp_manifest_source="/tmp/$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
-	mkdir $tmp_manifest_source
+	tmp_manifest_source=$(mktemp -d)
 	wget "https://github.com/phhusson/treble_experimentations/releases/download/$1/manifest.xml" -O $tmp_manifest_source/manifest.xml
 	sed -i 's/<remote name="aosp" fetch=".." review="https:\/\/android-review.googlesource.com\/"\/>/<remote name="aosp" fetch="https:\/\/android.googlesource.com\/" review="https:\/\/android-review.googlesource.com\/"\/>/' $tmp_manifest_source/manifest.xml
 	(cd $tmp_manifest_source; git init; git add manifest.xml; git commit -m "$1")
