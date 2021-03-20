@@ -1,0 +1,18 @@
+{
+    "treble_arm64_bfS": {
+        "known_releases": [
+            1615134979
+        ],
+        "system_date": 1615134979,
+        "size": 2254979604,
+        "url": "https://github.com/phhusson/treble_experimentations/releases/download/v302/system-roar-arm64-ab-floss.img.xz"
+    },
+    "treble_arm64_bgS": {
+        "known_releases": [
+            1615141409
+        ],
+        "system_date": 1615141409,
+        "size": 2336133664,
+        "url": "https://github.com/phhusson/treble_experimentations/releases/download/v302/system-roar-arm64-ab-gapps.img.xz"
+    }
+}
