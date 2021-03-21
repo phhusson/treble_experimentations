@@ -1,0 +1,13 @@
+com.samsung.sensor.physical_proximity ( stk_stk3a6x Proximity Sensor Wakeup )
+==> Reports 8 far, 0 near
+
+com.samsung.sensor.touch_proximity ( Touch Proximity Sensor)
+- 0 = SCREEN ON FAR
+- 2 = SCREEN ON NEAR
+- 5 = SCREEN ON FAR
+- 4 = SCREEN ON NEAR
+
+com.samsung.sensor.hover_proximity
+- 4-5 = SCREEN OFF NEAR
+- 3-4 = SCREEN ON NEAR
+- 0 = FAR

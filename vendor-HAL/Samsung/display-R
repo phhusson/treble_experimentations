@@ -1,0 +1,35 @@
+Galaxy A71:
+
+service call SurfaceFlinger 1023 i32 0 i32 0
+===> "sRGB"
+service call SurfaceFlinger 1023 i32 0 i32 7
+===> "sRGB"
+service call SurfaceFlinger 1023 i32 1 i32 7
+===> "native"
+service call SurfaceFlinger 1023 i32 0 i32 9
+===> "DISPLAY_P3"
+=====> looks identical to sRGB (though probably matrix converted)
+service call SurfaceFlinger 1023 i32 260 i32 9
+====> DISPLAY_P3 / OEM_HDR (lools like PQ, everything is brigther/crushed)
+service call SurfaceFlinger 1023 i32 261 i32 9
+====> DISPLAY_P3 / OEM_HDR10P (looks identical to sRGB)
+service call SurfaceFlinger 1023 i32 262 i32 9
+====> DISPLAY_P3 / OEM_HDR_NETFLIX (looks identical to sRGB)
+service call SurfaceFlinger 1023 i32 263 i32 9
+====> DISPLAY_P3 / OEM_HDR_AMAZON (looks identical to sRGB)
+service call SurfaceFlinger 1023 i32 264 i32 9
+====> DISPLAY_P3 / OEM_HDR_1000NITS (looks identical to OEM_HDR)
+
+
+
+
+Galaxy S20 FE
+  DISPLAY_P3                         3  DynamicRange: sdr ColorGamut: dcip3 PictureQuality: standard RenderIntent: 0
+  OEM_HDR                            0  DynamicRange: hdr ColorGamut: dcip3 PictureQuality: standard RenderIntent: 260
+  OEM_HDR10P                         4  DynamicRange: hdr ColorGamut: dcip3 PictureQuality: standard RenderIntent: 261
+  OEM_HDR_1000NIT                    8  DynamicRange: hdr ColorGamut: dcip3 PictureQuality: standard RenderIntent: 264
+  OEM_HDR_AMAZON                     6  DynamicRange: hdr ColorGamut: dcip3 PictureQuality: standard RenderIntent: 263
+  OEM_HDR_NETFLIX                    5  DynamicRange: hdr ColorGamut: dcip3 PictureQuality: standard RenderIntent: 262
+  OEM_VIVID                          7  DynamicRange: sdr ColorGamut: srgb PictureQuality: enhanced RenderIntent: 256
+  native                             1  DynamicRange: sdr ColorGamut: native RenderIntent: 0
+  sRGB                               2  DynamicRange: sdr ColorGamut: srgb PictureQuality: standard RenderIntent: 0
