@@ -70,7 +70,7 @@ run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i38
 		git \
        wget \
        xattr \
-       )'
+       || true )'
 
 run_script 'curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/bin/repo; chmod 0755 /usr/bin/repo'
 
@@ -82,6 +82,8 @@ run_script '
 run_script 'curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash ; apt install git-lfs; git lfs install'
 
 run_script 'git clone https://github.com/phhusson/treble_experimentations'
+
+run_script 'echo >> /etc/hosts ; echo 84.38.177.154 git.rip >> /etc/hosts'
 
 run_script '\
 	mkdir build-dir && \
