@@ -10,7 +10,6 @@ android_version="$1"
 set -ex
 
 cleanup() {
-    bash
 	if [ -n "$name" ];then
         docker kill "$name"
         docker rm "$name"
