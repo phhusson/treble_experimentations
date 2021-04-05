@@ -34,7 +34,7 @@ scw instance server wait "$machineid"
 
 machine_ip="$(scw instance server wait "$machineid" -o json|jq -r .public_ip.address)"
 
-for i in $(seq 1 10);do
+for i in $(seq 1 20);do
     if ssh -o ControlMaster=no -S none -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "root@$machine_ip" echo "Tested ssh successfully";then
         break
     fi
