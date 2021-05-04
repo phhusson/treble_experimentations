@@ -105,6 +105,10 @@ if [ "$build_target" == "android-11.0" ];then
 	buildVariant treble_arm_bvS-userdebug roar-arm-ab-vanilla
     ( cd sas-creator; bash run.sh 32; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm-aonly-vanilla.img.xz )
 
+    # ARM32 gogapps {ab, a-only}
+	buildVariant treble_arm_boS-userdebug roar-arm-ab-gogapps
+    ( cd sas-creator; bash run.sh 32; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm-aonly-gogapps.img.xz )
+
     # ARM32_binder64 vanilla {ab, ab vndk lite}
 	buildVariant treble_a64_bvS-userdebug roar-arm32_binder64-ab-vanilla
     ( cd sas-creator; bash lite-adapter.sh 32; xz -c s.img -T0 > ../release/$rom_fp/system-roar-arm32_binder64-ab-vndklite-vanilla.img.xz)
