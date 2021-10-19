@@ -42,6 +42,7 @@ run_script 'for i in $(seq 0 24);do mknod /dev/loop$i b 7 $i;done'
 run_script 'export DEBIAN_FRONTEND=noninteractive && dpkg --add-architecture i386 && \
 	apt-get update && \
 	(yes "" | apt-get install -y -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" \
+		aapt \
 		build-essential \
 		imagemagick \
 		xorriso \
