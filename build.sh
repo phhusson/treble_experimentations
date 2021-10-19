@@ -28,6 +28,10 @@ elif [ "$1" == "android-11.0" ];then
     manifest_url="https://android.googlesource.com/platform/manifest"
     aosp="android-11.0.0_r48"
     phh="android-11.0"
+elif [ "$1" == "android-10.0" ];then
+    manifest_url="https://android.googlesource.com/platform/manifest"
+    aosp="android-12.0.0_r3"
+    phh="android-12.0"
 else
 	# guess android version from version number
 	rebuild_release="yes"
@@ -83,7 +87,11 @@ repo manifest -r > release/$rom_fp/manifest.xml
 bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
-if [ "$build_target" == "android-11.0" ];then
+if [ "$build_target" == "android-12.0" ];then
+	buildVariant treble_arm64_bvS-userdebug roar-arm64-ab-vanilla
+	buildVariant treble_arm64_bfS-userdebug roar-arm64-ab-floss
+	buildVariant treble_a64_bvS-userdebug roar-arm32_binder64-ab-vanilla
+elif [ "$build_target" == "android-11.0" ];then
     (
         git clone https://github.com/phhusson/sas-creator
         cd sas-creator
