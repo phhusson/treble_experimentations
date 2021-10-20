@@ -57,9 +57,9 @@ if [ "$release" == true ];then
 fi
 
 if [ -n "$rebuild_release" ];then
-	repo init -u "$tmp_manifest_source" -m manifest.xml
+	repo init -u "$tmp_manifest_source" -m manifest.xml --depth=1
 else
-	repo init -u "$manifest_url" -b $aosp
+	repo init -u "$manifest_url" -b $aosp --depth=1
 	if [ -d .repo/local_manifests ] ;then
 		( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
 	else
