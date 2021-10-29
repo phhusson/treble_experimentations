@@ -27,6 +27,8 @@ fi
 
 # check if this repo is modified (i.e. pulled from phh), exit/abort if not
 git remote get-url phh 2>/dev/null || exit 0
+git fetch --unshallow phh $REPO_RREV
+
 
 # if repo comes from phh, then get all the changes done against the "official" aosp source
 compact_remote="$(git remote get-url phh|cut -d / -f 5)"
