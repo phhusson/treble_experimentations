@@ -88,6 +88,13 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 if [ "$build_target" == "android-12.0" ];then
+    (
+        git clone https://github.com/phhusson/sas-creator
+        cd sas-creator
+
+        git clone https://github.com/phhusson/vendor_vndk -b android-10.0
+    )
+
 	buildVariant treble_arm64_bvS-userdebug squeak-arm64-ab-vanilla
     ( cd sas-creator; bash lite-adapter.sh 64; xz -c s.img -T0 > ../release/$rom_fp/system-squeak-arm64-ab-vndklite-vanilla.img.xz )
 
