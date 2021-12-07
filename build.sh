@@ -30,7 +30,7 @@ elif [ "$1" == "android-11.0" ];then
     phh="android-11.0"
 elif [ "$1" == "android-12.0" ];then
     manifest_url="https://android.googlesource.com/platform/manifest"
-    aosp="android-12.0.0_r11"
+    aosp="android-12.0.0_r16"
     phh="android-12.0"
 else
 	# guess android version from version number
