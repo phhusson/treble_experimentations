@@ -85,7 +85,7 @@ buildVariant() {
 
 repo manifest -r > release/$rom_fp/manifest.xml
 bash "$originFolder"/list-patches.sh
-cp patches.zip release/$rom_fp/patches.zip
+cp patches.zip release/$rom_fp/patches-for-developers.zip
 
 if [ "$build_target" == "android-12.0" ];then
     (
