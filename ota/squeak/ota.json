@@ -1,0 +1,11 @@
+{
+    "version": "v400.h",
+    "date": "1644083319",
+    "variants": [
+        {
+            "name": "treble_arm64_bvS",
+            "size": 0,
+            "url": "https://github.com/phhusson/treble_experimentations/releases/download/v400.h/system-squeak-arm64-ab-vanilla.img.xz"
+        }
+    ]
+}
