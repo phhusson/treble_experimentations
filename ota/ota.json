@@ -1,0 +1,25 @@
+{
+    "version": "v402",
+    "date": "1644320106",
+    "variants": [
+{ "name": "treble_a64_boS", "size": 711848, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm32_binder64-ab-gogapps.img.xz"},
+{ "name": "treble_a64_bvS", "size": 463396, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm32_binder64-ab-vanilla.img.xz"},
+{ "name": "treble_a64_boS-vndklite", "size": 741752, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm32_binder64-ab-vndklite-gogapps.img.xz"},
+{ "name": "treble_a64_boS-secure", "size": 741744, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm32_binder64-ab-vndklite-gogapps-secure.img.xz"},
+{ "name": "treble_a64_bvS-vndklite", "size": 500448, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm32_binder64-ab-vndklite-vanilla.img.xz"},
+{ "name": "treble_a64_bvS-secure", "size": 500460, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm32_binder64-ab-vndklite-vanilla-secure.img.xz"},
+{ "name": "treble_arm64_bfS", "size": 906900, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-floss.img.xz"},
+{ "name": "treble_arm64_bgS", "size": 906420, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-gapps.img.xz"},
+{ "name": "treble_arm64_boS", "size": 840872, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-gogapps.img.xz"},
+{ "name": "treble_arm64_bvS", "size": 586368, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vanilla.img.xz"},
+{ "name": "treble_arm64_bfS-vndklite", "size": 965476, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-floss.img.xz"},
+{ "name": "treble_arm64_bfS-secure", "size": 964964, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-floss-secure.img.xz"},
+{ "name": "treble_arm64_bgS-vndklite", "size": 971708, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-gapps.img.xz"},
+{ "name": "treble_arm64_bgS-secure", "size": 971128, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-gapps-secure.img.xz"},
+{ "name": "treble_arm64_boS-vndklite", "size": 919312, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-gogapps.img.xz"},
+{ "name": "treble_arm64_boS-secure", "size": 919016, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-gogapps-secure.img.xz"},
+{ "name": "treble_arm64_bvS-vndklite", "size": 657476, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-vanilla.img.xz"},
+{ "name": "treble_arm64_bvS-secure", "size": 657472, "url": "https://github.com/phhusson/treble_experimentations/releases/download/v402/system-squeak-arm64-ab-vndklite-vanilla-secure.img.xz"},
+{ "name": "useless", "size": 0, "url": "http://devnull.org"}
+    ]
+}
