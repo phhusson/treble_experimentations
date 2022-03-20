@@ -35,7 +35,9 @@ elif [ "$1" == "android-12.0" ];then
 else
 	# guess android version from version number
 	rebuild_release="yes"
-	if [ -n "$(echo $1 | grep -E '^v3..')" ];then
+	if [ -n "$(echo $1 | grep -E '^v4..')" ];then
+		build_target="android-12.0"
+	elif [ -n "$(echo $1 | grep -E '^v3..')" ];then
 		build_target="android-11.0"
 	elif [ -n "$(echo $1 | grep -E '^v2..')" ];then
 		build_target="android-10.0"
