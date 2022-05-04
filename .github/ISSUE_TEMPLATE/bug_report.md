@@ -27,8 +27,8 @@ Note: Please search to see if an issue already exists for the bug you encountere
 ### Expected behavior
 <!-- A clear and concise description of what you expected to happen. --> 
 
-### Screenshots
-<!-- If applicable, add screenshots to help explain your problem. --> 
+### Photos
+<!-- If applicable, add photos to help explain your problem. --> 
 
 ### Smartphone (please complete the following information):
  - Device: [e.g. Pixel6]
