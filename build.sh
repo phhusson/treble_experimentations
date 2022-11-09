@@ -75,6 +75,7 @@ repo forall -r '.*opengapps.*' -c 'git lfs fetch && git lfs checkout'
 (cd vendor/foss; git clean -fdx; bash update.sh)
 if [ "$build_target" == "android-12.0" ] && grep -q lottie packages/apps/Launcher3/Android.bp;then
     (cd vendor/partner_gms; git am $originFolder/0001-Fix-SearchLauncher-for-Android-12.1.patch || true)
+    (cd vendor/partner_gms; git am $originFolder/0001-Update-SetupWizard-to-A12.1-to-fix-fingerprint-enrol.patch || true)
 fi
 rm -f vendor/gapps/interfaces/wifi_ext/Android.bp
 
