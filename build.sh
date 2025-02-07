@@ -48,7 +48,7 @@ else
 	fi
 	# download manifest with the given version number
 	tmp_manifest_source=$(mktemp -d)
-	wget "https://github.com/phhusson/treble_experimentations/releases/download/$1/manifest.xml" -O $tmp_manifest_source/manifest.xml
+	wget "https://raw.githubusercontent.com/phhusson/treble_manifest/$1/manifest.xml" -O $tmp_manifest_source/manifest.xml
 	sed -i 's/<remote name="aosp" fetch=".." review="https:\/\/android-review.googlesource.com\/"\/>/<remote name="aosp" fetch="https:\/\/android.googlesource.com\/" review="https:\/\/android-review.googlesource.com\/"\/>/' $tmp_manifest_source/manifest.xml
 	(cd $tmp_manifest_source; git init; git add manifest.xml; git commit -m "$1")
 fi
