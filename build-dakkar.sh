@@ -94,7 +94,8 @@ function get_rom_type() {
         case "$1" in
             aosp80)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-vts-8.0_r4"
+                ver=`git ls-remote --heads $mainrepo | grep -o 'android-vts-8.0_r.*' | grep -o '_r.*' | grep -o '[0-9]*' | sort -n | sed '$!d'`
+                mainbranch="android-vts-8.0_r$ver"
                 localManifestBranch="master"
                 treble_generate=""
                 extra_make_options=""
@@ -102,7 +103,8 @@ function get_rom_type() {
                 ;;
             aosp81)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-8.1.0_r48"
+                ver=`git ls-remote --heads $mainrepo | grep -o 'android-8.1.0_r.*' | grep -o '_r.*' | grep -o '[0-9]*' | sort -n | sed '$!d'`
+                mainbranch="android-8.1.0_r$ver"
                 localManifestBranch="android-8.1"
                 treble_generate=""
                 extra_make_options=""
@@ -110,7 +112,8 @@ function get_rom_type() {
                 ;;
             aosp90)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-9.0.0_r21"
+                ver=`git ls-remote --heads $mainrepo | grep -o 'android-9.0.0_r.*' | grep -o '_r.*' | grep -o '[0-9]*' | sort -n | sed '$!d'`
+                mainbranch="android-9.0.0_r$ver"
                 localManifestBranch="android-9.0"
                 treble_generate=""
                 extra_make_options=""
